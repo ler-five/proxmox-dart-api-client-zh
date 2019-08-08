@@ -4,3 +4,4 @@
 library proxmox_api_client;
 
 export 'src/client.dart';
+export 'src/authenticate.dart';
