@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
-import 'package:proxmox_api_client/src/utils.dart';
-import 'package:proxmox_api_client/src/credentials.dart';
-import 'package:proxmox_api_client/src/expiration_exception.dart';
+import 'package:proxmox_dart_api_client/src/utils.dart';
+import 'package:proxmox_dart_api_client/src/credentials.dart';
+import 'package:proxmox_dart_api_client/src/expiration_exception.dart';
 
 class Client extends http.BaseClient {
   http.Client _httpClient;

@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
-import 'package:proxmox_api_client/src/handle_ticket_response.dart';
-import 'package:proxmox_api_client/src/utils.dart';
+import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
+import 'package:proxmox_dart_api_client/src/utils.dart';
 
 class Credentials {
   /// The URL of the authorization server

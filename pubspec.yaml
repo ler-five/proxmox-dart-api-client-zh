@@ -1,4 +1,4 @@
-name: proxmox_api_client
+name: proxmox_dart_api_client
 description: A client library for seamless interaction with various Proxmox products.
 # version: 1.0.0
 # homepage: https://www.example.com

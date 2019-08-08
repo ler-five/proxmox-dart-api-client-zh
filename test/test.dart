@@ -1,4 +1,4 @@
-import 'package:proxmox_api_client/proxmox_api_client.dart';
+import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
 import 'package:test/test.dart';
 
 void main() {

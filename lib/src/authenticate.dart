@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
-import 'package:proxmox_api_client/proxmox_api_client.dart';
-import 'package:proxmox_api_client/src/handle_ticket_response.dart';
+import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
+import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 
 import 'utils.dart';
 

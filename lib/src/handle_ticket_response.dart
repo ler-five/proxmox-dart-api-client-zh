@@ -1,4 +1,4 @@
-import 'package:proxmox_api_client/src/credentials.dart';
+import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
