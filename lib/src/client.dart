@@ -1,5 +1,7 @@
 import 'package:http/http.dart' as http;
-import 'package:proxmox_dart_api_client/src/utils.dart';
+import 'package:proxmox_dart_api_client/src/utils.dart'
+    if (dart.library.io) 'utils_native.dart'
+    if (dart.library.html) 'utils_web.dart';
 import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'package:proxmox_dart_api_client/src/expiration_exception.dart';
 

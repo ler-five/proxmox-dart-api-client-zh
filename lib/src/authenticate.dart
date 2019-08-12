@@ -2,8 +2,9 @@ import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 
-import 'utils.dart';
-
+import 'package:proxmox_dart_api_client/src/utils.dart'
+    if (dart.library.io) 'utils_native.dart'
+    if (dart.library.html) 'utils_web.dart';
 /// Returns an authenticated client to work with if successful.
 ///
 /// This is the function you are looking for if you want to interact with any

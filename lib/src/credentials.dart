@@ -1,8 +1,9 @@
 import 'package:http/http.dart' as http;
 
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
-import 'package:proxmox_dart_api_client/src/utils.dart';
-
+import 'package:proxmox_dart_api_client/src/utils.dart'
+    if (dart.library.io) 'utils_native.dart'
+    if (dart.library.html) 'utils_web.dart';
 class Credentials {
   /// The URL of the authorization server
   final Uri ticketEndpoint;
