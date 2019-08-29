@@ -20,7 +20,8 @@ class Client extends http.BaseClient {
       if (!credentials.canRefresh) throw ExpirationException(credentials);
       await refreshCredentials();
     }
-    request.headers['Cookie'] = 'PVEAuthCookie=${credentials.ticket}';
+    request.headers['Authorization'] = 'PVEAuthCookie ${credentials.ticket}';
+
     request.headers['CSRFPreventionToken'] = credentials.csrfToken;
     var response = await _httpClient.send(request);
 
