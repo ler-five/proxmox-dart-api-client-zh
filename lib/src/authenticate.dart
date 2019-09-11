@@ -13,9 +13,9 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
 /// boilerplate e.g. refresh ticket to prevent expiration.
 
 Future<Client> authenticate(
-  Uri authorizationEndpoint,
   String username,
   String password, {
+  Uri authorizationEndpoint,
   http.Client httpClient,
 }) async {
   if (httpClient == null) {
