@@ -5,6 +5,7 @@ import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 import 'package:proxmox_dart_api_client/src/utils.dart'
     if (dart.library.html) 'utils_web.dart'
     if (dart.library.io) 'utils_native.dart';
+
 /// Returns an authenticated client to work with if successful.
 ///
 /// This is the function you are looking for if you want to interact with any
@@ -26,8 +27,12 @@ Future<Client> authenticate(
   }
 
   if (authorizationEndpoint == null) {
-    throw ArgumentError(
-        "Can't authenticate without an authorization endpoint.");
+    try {
+      authorizationEndpoint = getPlatformHostname();
+    } on UnsupportedError catch (_) {
+      throw ArgumentError(
+          "Can't authenticate without an authorization endpoint.");
+    }
   }
 
   var startTime = DateTime.now();
