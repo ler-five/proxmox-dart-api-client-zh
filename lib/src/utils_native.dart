@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import'package:http/io_client.dart' as http_io;
+import 'package:http/io_client.dart' as http_io;
 import 'dart:io';
 
 http.Client getCustomIOHttpClient() {
@@ -14,3 +14,5 @@ http.Client getCustomIOHttpClient() {
 
   return http_io.IOClient(ioClient);
 }
+
+String getPlatformAwareOrigin() => throw UnimplementedError();

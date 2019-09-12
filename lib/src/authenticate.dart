@@ -28,7 +28,8 @@ Future<Client> authenticate(
 
   if (authorizationEndpoint == null) {
     try {
-      authorizationEndpoint = getPlatformHostname();
+      authorizationEndpoint =
+          Uri.parse(getPlatformAwareOrigin() + '/api2/json/access/ticket');
     } on UnsupportedError catch (_) {
       throw ArgumentError(
           "Can't authenticate without an authorization endpoint.");
