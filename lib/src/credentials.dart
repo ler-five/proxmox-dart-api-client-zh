@@ -32,12 +32,12 @@ class Credentials {
     final ticket = getTicketFromStorage();
     if (ticket == "") throw ArgumentError('Ticket not found');
 
-    final matches = RegExp(r"PVE:(?:(\S+):)?([A-Z0-9]{8})").firstMatch(ticket)?.groups([1,2]);
+    final matches = RegExp(r"PVE:(?:(\S+):)?([A-Z0-9]{8})").firstMatch(ticket);
 
-    final username = matches[1];
+    final username = matches.group(1);
     if (username == null) throw FormatException('No username - invalid cookie format');
 
-    final time = DateTime.fromMillisecondsSinceEpoch(int.parse(matches[2], radix: 16) * 1000);
+    final time = DateTime.fromMillisecondsSinceEpoch(int.parse(matches.group(2), radix: 16) * 1000);
     if (time == null) throw FormatException('No expiration time - invalid cookie format');
 
     return Credentials(endpoint, username, ticket: ticket, expiration: time);
