@@ -5,3 +5,6 @@ http.Client getCustomIOHttpClient() => throw UnsupportedError(
 
 String getPlatformAwareOrigin() =>
     throw UnsupportedError('Cannot get origin without dart:html');
+
+String getTicketFromStorage() =>
+    throw UnsupportedError('Cannot get ticket without dart:html or dart:io.');

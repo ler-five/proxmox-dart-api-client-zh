@@ -16,3 +16,5 @@ http.Client getCustomIOHttpClient() {
 }
 
 String getPlatformAwareOrigin() => throw UnimplementedError();
+
+String getTicketFromStorage() => throw UnimplementedError();
