@@ -8,3 +8,6 @@ String getPlatformAwareOrigin() =>
 
 String getTicketFromStorage() =>
     throw UnsupportedError('Cannot get ticket without dart:html or dart:io.');
+
+void storeTicket(String ticket) =>
+    throw UnsupportedError('Cannot store ticket without dart:html or dart:io.');
