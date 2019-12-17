@@ -5,7 +5,7 @@ description: A client library for seamless interaction with various Proxmox prod
 # author: Tim Marx <t.marx@proxmox.com>
 
 environment:
-  sdk: '>=2.4.0 <3.0.0'
+  sdk: '>=2.7.0-dev <3.0.0'
 
 dependencies:
   http: ^0.12.0+2
