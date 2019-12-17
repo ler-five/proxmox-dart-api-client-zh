@@ -1,15 +1,15 @@
-import 'package:proxmox_dart_api_client/src/credentials.dart';
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:proxmox_dart_api_client/src/credentials.dart';
+import 'package:proxmox_dart_api_client/src/extentions.dart';
 import 'package:proxmox_dart_api_client/src/utils.dart'
     if (dart.library.html) 'utils_web.dart'
     if (dart.library.io) 'utils_native.dart';
 Credentials handleAccessTicketResponse(
     http.Response response, String username, Uri ticketEndpoint, DateTime startTime) {
-  if (response.statusCode != 200) {
-    // TODO handle status codes != 200
-    throw "State not handled";
-  }
+
+  response.validate(false);
 
   final bodyJson = jsonDecode(response.body)['data'];
   final ticket = bodyJson['ticket'];
