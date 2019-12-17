@@ -58,13 +58,12 @@ class Credentials {
       throw ArgumentError(
           "Can't refresh credentials without a token endpoint.");
     }
-    var startTime = DateTime.now();
 
     var body = {'username': username, 'password': ticket};
 
     var response = await httpClient.post(ticketEndpoint, body: body);
     var credentials = await handleAccessTicketResponse(
-        response, username, ticketEndpoint, startTime);
+        response, username, ticketEndpoint);
 
     return credentials;
   }

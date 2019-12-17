@@ -36,13 +36,11 @@ Future<Client> authenticate(
     }
   }
 
-  var startTime = DateTime.now();
-
   var body = {'username': username, 'password': password};
   var response = await httpClient.post(authorizationEndpoint, body: body);
 
   var credentials = await handleAccessTicketResponse(
-      response, username, authorizationEndpoint, startTime);
+      response, username, authorizationEndpoint);
   return Client(
     credentials,
     httpClient: httpClient,
