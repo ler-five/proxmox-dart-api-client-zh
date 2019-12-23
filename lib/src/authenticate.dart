@@ -39,7 +39,7 @@ Future<Client> authenticate(
   var body = {'username': username, 'password': password};
   var response = await httpClient.post(authorizationEndpoint, body: body);
 
-  var credentials = await handleAccessTicketResponse(
+  var credentials = handleAccessTicketResponse(
       response, username, authorizationEndpoint);
   return Client(
     credentials,
