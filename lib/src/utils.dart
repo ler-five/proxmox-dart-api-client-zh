@@ -3,11 +3,14 @@ import 'package:http/http.dart' as http;
 http.Client getCustomIOHttpClient() => throw UnsupportedError(
     'Cannot create a client without dart:html or dart:io.');
 
-String getPlatformAwareOrigin() =>
-    throw UnsupportedError('Cannot get origin without dart:html');
+Future<String> getPlatformAwareOrigin() async =>
+    throw UnsupportedError('Cannot get origin without dart:html or dart:io.');
 
-String getTicketFromStorage() =>
+Future<void> storePlatformAwareOrigin(String origin) async =>
+    throw UnsupportedError('Cannot store origin without dart:html or dart:io.');
+
+Future<String> getTicketFromStorage() async =>
     throw UnsupportedError('Cannot get ticket without dart:html or dart:io.');
 
-void storeTicket(String ticket) =>
+Future<void> storeTicket(String ticket) async =>
     throw UnsupportedError('Cannot store ticket without dart:html or dart:io.');

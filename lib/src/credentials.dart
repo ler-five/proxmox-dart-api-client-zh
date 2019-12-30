@@ -26,11 +26,16 @@ class Credentials {
   Credentials(this.ticketEndpoint, this.username,
       {this.ticket, this.csrfToken, this.expiration});
 
-  factory Credentials.fromPlatformStorage() {
-    final endpoint =
-        Uri.parse(getPlatformAwareOrigin() + '/api2/json/access/ticket');
-    final ticket = getTicketFromStorage();
-    if (ticket == "") throw ArgumentError('Ticket not found');
+  // Factory constructors can't be async....
+  static Future<Credentials> fromPlatformStorage() async {
+
+    final origin = await getPlatformAwareOrigin();
+    if (origin.isEmpty) throw ArgumentError('Could not determine origin');
+
+    final ticketEndpoint = Uri.parse('$origin/api2/json/access/ticket');
+
+    final ticket = await getTicketFromStorage();
+    if (ticket.isEmpty) throw ArgumentError('Ticket not found');
 
     final matches = RegExp(r"PVE:(?:(\S+):)?([A-Z0-9]{8})").firstMatch(ticket);
 
@@ -40,7 +45,7 @@ class Credentials {
     final time = DateTime.fromMillisecondsSinceEpoch(int.parse(matches.group(2), radix: 16) * 1000);
     if (time == null) throw FormatException('No expiration time - invalid cookie format');
 
-    return Credentials(endpoint, username, ticket: ticket, expiration: time);
+    return Credentials(ticketEndpoint, username, ticket: ticket, expiration: time);
   }
 
   Future<Credentials> refresh({http.Client httpClient}) async {

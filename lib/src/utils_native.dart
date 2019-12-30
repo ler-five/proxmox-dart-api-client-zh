@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as http_io;
 import 'dart:io';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 http.Client getCustomIOHttpClient() {
   var ioClient = HttpClient()
     ..badCertificateCallback = ((X509Certificate cert, String host, int port) {
@@ -15,8 +17,22 @@ http.Client getCustomIOHttpClient() {
   return http_io.IOClient(ioClient);
 }
 
-String getPlatformAwareOrigin() => throw UnimplementedError();
+Future<String> getPlatformAwareOrigin() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('origin');
+}
 
-String getTicketFromStorage() => throw UnimplementedError();
+Future<void> storePlatformAwareOrigin(String origin) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.setString('origin', origin);
+}
 
-void storeTicket(String ticket) => throw UnimplementedError();
+Future<String> getTicketFromStorage() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString('ticket');
+}
+
+Future<void> storeTicket(String ticket) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('ticket', ticket);
+}

@@ -27,20 +27,21 @@ Future<Client> authenticate(
   }
 
   if (authorizationEndpoint == null) {
-    try {
-      authorizationEndpoint =
-          Uri.parse(getPlatformAwareOrigin() + '/api2/json/access/ticket');
-    } on UnsupportedError catch (_) {
+    final origin = await getPlatformAwareOrigin();
+
+    if (origin.isEmpty) {
       throw ArgumentError(
-          "Can't authenticate without an authorization endpoint.");
+          'Could not determine origin. You can manually assign a authorization endpoint to overcome this.');
     }
+
+    authorizationEndpoint = Uri.parse('$origin/api2/json/access/ticket');
   }
 
   var body = {'username': username, 'password': password};
   var response = await httpClient.post(authorizationEndpoint, body: body);
 
-  var credentials = handleAccessTicketResponse(
-      response, username, authorizationEndpoint);
+  var credentials =
+      handleAccessTicketResponse(response, username, authorizationEndpoint);
   return Client(
     credentials,
     httpClient: httpClient,
