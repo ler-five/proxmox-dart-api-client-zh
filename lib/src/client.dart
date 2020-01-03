@@ -8,14 +8,13 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
 import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'package:proxmox_dart_api_client/src/expiration_exception.dart';
 
-class Client extends http.BaseClient {
+class ProxmoxApiClient extends http.BaseClient {
   http.Client _httpClient;
 
   Credentials get credentials => _credentials;
   Credentials _credentials;
 
-  Client(this._credentials, {http.Client httpClient})
-      : _httpClient = httpClient == null ? getCustomIOHttpClient() : httpClient;
+  ProxmoxApiClient(this._credentials, {http.Client httpClient})
 
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     if (credentials.isExpired) {
@@ -30,7 +29,7 @@ class Client extends http.BaseClient {
     return response;
   }
 
-  Future<Client> refreshCredentials() async {
+  Future<ProxmoxApiClient> refreshCredentials() async {
     if (!credentials.canRefresh) {
       throw StateError("Credentials can't be refreshed.");
     }

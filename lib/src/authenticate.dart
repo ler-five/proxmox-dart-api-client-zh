@@ -12,15 +12,14 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
 /// Proxmox API. You'll get a client to work with which will handle auth related
 /// boilerplate e.g. refresh ticket to prevent expiration.
 
-Future<Client> authenticate(
+Future<ProxmoxApiClient> authenticate(
   String username,
   String password, {
   Uri authorizationEndpoint,
   http.Client httpClient,
 }) async {
-  if (httpClient == null) {
-    httpClient = getCustomIOHttpClient();
-  }
+
+  httpClient ??= getCustomIOHttpClient();
 
   if (username == null || password == null) {
     throw ArgumentError("Can't authenticate without username/password.");
@@ -42,7 +41,7 @@ Future<Client> authenticate(
 
   var credentials =
       handleAccessTicketResponse(response, username, authorizationEndpoint);
-  return Client(
+  return ProxmoxApiClient(
     credentials,
     httpClient: httpClient,
   );
