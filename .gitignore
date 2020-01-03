@@ -13,3 +13,6 @@ build/
 
 # Directory created by dartdoc
 doc/api/
+
+# avoid commiting generated files
+*.g.dart
