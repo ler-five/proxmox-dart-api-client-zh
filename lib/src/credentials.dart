@@ -49,7 +49,7 @@ class Credentials {
   }
 
   Future<Credentials> refresh({http.Client httpClient}) async {
-    if (httpClient == null) httpClient = getCustomIOHttpClient();
+    httpClient ??= getCustomIOHttpClient();
 
     if (ticket == null) {
       throw ArgumentError("Can't refresh credentials without valid ticket");
