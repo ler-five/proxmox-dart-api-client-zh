@@ -15,10 +15,10 @@ Credentials handleAccessTicketResponse(
   final ticket = bodyJson['ticket'];
   final csrfToken = bodyJson['CSRFPreventionToken'];
   final ticketRegex =
-      RegExp(r"PVE:(?:(\S+):)?([A-Z0-9]{8})::").firstMatch(bodyJson['ticket']);
+      RegExp(r"(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::").firstMatch(bodyJson['ticket']);
   final time = DateTime.fromMillisecondsSinceEpoch(
-      int.parse(ticketRegex.group(2), radix: 16) * 1000);
-  storeTicket(ticket);
+      int.parse(ticketRegex.group(3), radix: 16) * 1000);
+  storeTicket(ticket, ticketRegex.group(1));
   return Credentials(ticketEndpoint, username,
       ticket: ticket, csrfToken: csrfToken, expiration: time);
 }

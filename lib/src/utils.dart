@@ -9,8 +9,8 @@ Future<String> getPlatformAwareOrigin() async =>
 Future<void> storePlatformAwareOrigin(String origin) async =>
     throw UnsupportedError('Cannot store origin without dart:html or dart:io.');
 
-Future<String> getTicketFromStorage() async =>
+Future<String> getTicketFromStorage([String name]) async =>
     throw UnsupportedError('Cannot get ticket without dart:html or dart:io.');
 
-Future<void> storeTicket(String ticket) async =>
+Future<void> storeTicket(String ticket, [String name]) async =>
     throw UnsupportedError('Cannot store ticket without dart:html or dart:io.');

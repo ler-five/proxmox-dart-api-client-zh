@@ -27,12 +27,12 @@ Future<void> storePlatformAwareOrigin(String origin) async {
   return prefs.setString('origin', origin);
 }
 
-Future<String> getTicketFromStorage() async {
+Future<String> getTicketFromStorage([String name]) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString('ticket');
 }
 
-Future<void> storeTicket(String ticket) async {
+Future<void> storeTicket(String ticket, [String name]) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('ticket', ticket);
 }

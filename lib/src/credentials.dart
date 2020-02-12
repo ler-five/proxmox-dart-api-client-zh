@@ -27,7 +27,7 @@ class Credentials {
       {this.ticket, this.csrfToken, this.expiration});
 
   // Factory constructors can't be async....
-  static Future<Credentials> fromPlatformStorage() async {
+  static Future<Credentials> fromPlatformStorage([String name = 'PVE']) async {
 
     final origin = await getPlatformAwareOrigin();
     if (origin.isEmpty) throw ArgumentError('Could not determine origin');
@@ -37,7 +37,8 @@ class Credentials {
     final ticket = await getTicketFromStorage();
     if (ticket.isEmpty) throw ArgumentError('Ticket not found');
 
-    final matches = RegExp(r"PVE:(?:(\S+):)?([A-Z0-9]{8})").firstMatch(ticket);
+    final matches = RegExp(r"(?:PVE|PMG|PMGQUAR):(?:(\S+):)?([A-Z0-9]{8})").firstMatch(ticket);
+    if (matches == null) throw FormatException('invalid cookie format');
 
     final username = matches.group(1);
     if (username == null) throw FormatException('No username - invalid cookie format');

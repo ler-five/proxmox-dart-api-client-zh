@@ -9,14 +9,14 @@ Future<String> getPlatformAwareOrigin() async => window.location.origin;
 Future<void> storePlatformAwareOrigin(String origin) async =>
     throw UnimplementedError();
 
-Future<String> getTicketFromStorage() async {
+Future<String> getTicketFromStorage([String name = 'PVE']) async {
   return Uri.decodeFull(
-      RegExp(r'(?:(?:^|.*;\s*)PVEAuthCookie\s*\=\s*([^;]*).*$)|^.*$')
+      RegExp(r'(?:(?:^|.*;\s*)' + name + r'AuthCookie\s*\=\s*([^;]*).*$)|^.*$')
               .firstMatch(document.cookie)
               ?.group(1) ??
           "");
 }
 
-Future<void> storeTicket(String ticket) async {
-  document.cookie = 'PVEAuthCookie=$ticket';
+Future<void> storeTicket(String ticket, [String name = 'PVE']) async {
+  document.cookie = '${name}AuthCookie=$ticket';
 }
