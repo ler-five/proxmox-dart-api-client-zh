@@ -18,7 +18,6 @@ Future<ProxmoxApiClient> authenticate(
   Uri authorizationEndpoint,
   http.Client httpClient,
 }) async {
-
   httpClient ??= getCustomIOHttpClient();
 
   if (username == null || password == null) {
@@ -34,6 +33,11 @@ Future<ProxmoxApiClient> authenticate(
     }
 
     authorizationEndpoint = Uri.parse('$origin/api2/json/access/ticket');
+  }
+  try {
+    await storePlatformAwareOrigin(authorizationEndpoint.origin);
+  } on UnimplementedError {
+    print("couldn't store origin, due to platform implemention missing");
   }
 
   var body = {'username': username, 'password': password};
