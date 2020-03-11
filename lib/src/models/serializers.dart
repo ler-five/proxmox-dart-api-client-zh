@@ -3,13 +3,7 @@ import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_bool_serializer.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_cluster_resources_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_cluster_status_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_cluster_tasks_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_network_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_storage_content_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_storage_model.dart';
+import 'package:proxmox_dart_api_client/src/models/pve_datetime_from_epoch_serializer.dart';
 
 
 part 'serializers.g.dart';
@@ -24,5 +18,5 @@ part 'serializers.g.dart';
   PveClusterStatusModel
 ])
 final Serializers serializers =
-    (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())..add(PveBoolSerializer())).build();
+    (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())..add(PveBoolSerializer())..add(PveDateTimeFromEpoch())).build();
 
