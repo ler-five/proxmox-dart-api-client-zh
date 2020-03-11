@@ -215,4 +215,25 @@ class ProxmoxApiClient extends http.BaseClient {
     });
     return data.toList();
   }
+
+  Future<PveQemuStatusModel> getQemuStatusCurrent(
+      String targetNode, String guestId) async {
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/status/current';
+    final response = await _getWithValidation(path, null);
+    var data = json.decode(response.body)['data'];
+    return serializers.deserializeWith(PveQemuStatusModel.serializer, data);
+  }
+
+  Future<PveNodesQemuConfigModel> getQemuConfig(
+      String targetNode, String guestId,
+      {bool current, String snapshot}) async {
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/status/current';
+    var queryParameters = {
+      'current': serializers.serialize(current),
+      'snapshot': snapshot
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    var data = json.decode(response.body)['data'];
+    return serializers.deserializeWith(PveNodesQemuConfigModel.serializer, data);
+  }
 }
