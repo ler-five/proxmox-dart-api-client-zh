@@ -1,11 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:proxmox_dart_api_client/src/models/pve_cluster_resources_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_cluster_status_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_cluster_tasks_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_storage_content_model.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_storage_model.dart';
+import 'package:proxmox_dart_api_client/src/models/pve_models.dart';
 import 'package:proxmox_dart_api_client/src/models/serializers.dart';
 import 'package:proxmox_dart_api_client/src/utils.dart'
     if (dart.library.html) 'utils_web.dart'

@@ -4,6 +4,7 @@ import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_bool_serializer.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_datetime_from_epoch_serializer.dart';
+import 'package:proxmox_dart_api_client/src/models/pve_models.dart';
 
 
 part 'serializers.g.dart';
