@@ -15,6 +15,7 @@ part 'serializers.g.dart';
   PveNodesStorageModel,
   PveNodesStorageContentModel,
   PveNodeNetworkModel,
+  PveGuestRRDdataModel,
   PveClusterStatusModel
 ])
 final Serializers serializers =

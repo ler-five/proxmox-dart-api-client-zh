@@ -202,4 +202,17 @@ class ProxmoxApiClient extends http.BaseClient {
 
     return data.toList();
   }
+
+  Future<List<PveGuestRRDdataModel>> getNodeQemuRRDdata(
+      String targetNode, String guestId, PveRRDTimeframeType timeframe) async {
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/rrddata';
+    var queryParameters = {
+      'timeframe': timeframe.name,
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveGuestRRDdataModel.serializer, f);
+    });
+    return data.toList();
+  }
 }
