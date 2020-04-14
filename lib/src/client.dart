@@ -332,4 +332,31 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = json.decode(response.body)['data'];
     return serializers.deserializeWith(PveNodesQemuMigrate.serializer, data);
   }
+
+  Future<String> qemuMigrate(
+    String targetNode,
+    String guestId,
+    String migrationTarget, {
+    String bandwidthLimit,
+    bool force = false,
+    String migrationNetwork,
+    bool online = false,
+    String targetStorage,
+    bool withLocalDisks = false,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/migrate';
+    var queryParameters = {
+      'target': migrationTarget,
+      'bwlimit': bandwidthLimit,
+      'force': force ? '1' : '0',
+      'migration_network': migrationNetwork,
+      'online': online ? '1' : '0',
+      'targetstorage': targetStorage,
+      'with-local-disks': withLocalDisks ? '1' : '0',
+    };
+    final response = await _postWithValidation(path, queryParameters,
+        extensiveResponseValidation: true);
+    return json.decode(response.body)['data'];
+  }
+
 }
