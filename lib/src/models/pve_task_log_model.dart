@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
-import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:proxmox_dart_api_client/src/models/serializers.dart';
 
@@ -73,7 +72,6 @@ abstract class PveTaskLogStatus
 }
 
 class PveTaskLogStatusType extends EnumClass {
-
   static const PveTaskLogStatusType running = _$running;
   static const PveTaskLogStatusType stopped = _$stopped;
 
