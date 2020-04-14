@@ -406,4 +406,11 @@ class ProxmoxApiClient extends http.BaseClient {
     return json.decode(response.body)['data'];
   }
 
+  Future<PveNodeStatusModel> getNodeStatus(String targetNode) async {
+    final path = '/api2/json/nodes/$targetNode/status';
+    final response = await _getWithValidation(path, null);
+    var data = json.decode(response.body)['data'];
+    return serializers.deserializeWith(PveNodeStatusModel.serializer, data);
+  }
+
 }
