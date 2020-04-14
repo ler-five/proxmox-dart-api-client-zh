@@ -452,4 +452,20 @@ class ProxmoxApiClient extends http.BaseClient {
     return data.toList();
   }
 
+  Future<List<PveNodesDisksListModel>> getNodeDisksList(
+    String targetNode, {
+    bool skipsmart = false,
+    PveNodesDiskListType type,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/disks/list';
+    var queryParameters = {
+      'skipsmart': skipsmart ? '1' : '0',
+      'type': type != null ? serializers.serialize(type) : null
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveNodesDisksListModel.serializer, f);
+    });
+    return data.toList();
+  }
 }

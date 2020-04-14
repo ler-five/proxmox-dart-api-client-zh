@@ -32,6 +32,8 @@ part 'serializers.g.dart';
   PveNodeRRDDataModel,
   PveNodeServicesModel,
   PveNodesAptUpdateModel,
+  PveNodesDisksListModel,
+  PveNodesDiskListType
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())..add(PveBoolSerializer())..add(PveDateTimeFromEpoch())).build();
