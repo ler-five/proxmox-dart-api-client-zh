@@ -427,4 +427,16 @@ class ProxmoxApiClient extends http.BaseClient {
     });
     return data.toList();
   }
+
+  Future<List<PveNodeServicesModel>> getNodeServices(
+    String targetNode,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/services';
+
+    final response = await _getWithValidation(path, null);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveNodeServicesModel.serializer, f);
+    });
+    return data.toList();
+  }
 }

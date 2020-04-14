@@ -15,3 +15,4 @@ export 'package:proxmox_dart_api_client/src/models/pve_nodes_lxc_config_model.da
 export 'package:proxmox_dart_api_client/src/models/pve_nodes_lxc_status_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_node_status_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_node_rrddata_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_node_services_model.dart';
