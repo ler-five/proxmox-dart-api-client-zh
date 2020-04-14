@@ -381,4 +381,29 @@ class ProxmoxApiClient extends http.BaseClient {
     return serializers.deserializeWith(PveNodesLxcStatusModel.serializer, data);
   }
 
+  Future<String> lxcMigrate(
+    String targetNode,
+    String guestId,
+    String migrationTarget, {
+    String bandwidthLimit,
+    String migrationNetwork,
+    bool online = false,
+    bool restart = false,
+    bool withLocalDisks = false,
+    int timeout,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/lxc/$guestId/migrate';
+    var queryParameters = {
+      'target': migrationTarget,
+      'bwlimit': bandwidthLimit,
+      'migration_network': migrationNetwork,
+      'online': online ? '1' : '0',
+      'restart': restart ? '1' : '0',
+      'timeout': timeout
+    };
+    final response = await _postWithValidation(path, queryParameters,
+        extensiveResponseValidation: true);
+    return json.decode(response.body)['data'];
+  }
+
 }
