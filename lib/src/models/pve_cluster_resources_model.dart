@@ -10,13 +10,15 @@ abstract class PveClusterResourcesModel
   static Serializer<PveClusterResourcesModel> get serializer =>
       _$pveClusterResourcesModelSerializer;
 
+  String get id;
+  String get type;
+
   @nullable
   double get cpu;
   @nullable
   int get disk;
   @nullable
   String get hastate;
-  String get id;
   @nullable
   String get level;
   @nullable
@@ -39,7 +41,6 @@ abstract class PveClusterResourcesModel
   bool get shared;
   @nullable
   String get storage;
-  String get type;
   @nullable
   int get uptime;
   @nullable
