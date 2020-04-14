@@ -44,7 +44,7 @@ Future<ProxmoxApiClient> authenticate(
   var response = await httpClient.post(authorizationEndpoint, body: body);
 
   var credentials =
-      handleAccessTicketResponse(response, username, authorizationEndpoint);
+      await handleAccessTicketResponse(response, username, authorizationEndpoint);
   return ProxmoxApiClient(
     credentials,
     httpClient: httpClient,

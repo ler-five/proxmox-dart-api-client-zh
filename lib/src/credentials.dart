@@ -68,7 +68,7 @@ class Credentials {
     var body = {'username': username, 'password': ticket};
 
     var response = await httpClient.post(ticketEndpoint, body: body);
-    var credentials = handleAccessTicketResponse(
+    var credentials = await handleAccessTicketResponse(
         response, username, ticketEndpoint);
 
     return credentials;
