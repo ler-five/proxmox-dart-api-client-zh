@@ -93,6 +93,8 @@ abstract class PveNodesQemuConfigModel
   @BuiltValueField(wireName: 'spice_enhancements')
   String get spiceEnhancements;
   @nullable
+  String get startdate;
+  @nullable
   String get startup;
   @nullable
   bool get tablet;
