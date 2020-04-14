@@ -439,4 +439,17 @@ class ProxmoxApiClient extends http.BaseClient {
     });
     return data.toList();
   }
+
+  Future<List<PveNodesAptUpdateModel>> getNodeAptUpdate(
+    String targetNode,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/apt/update';
+
+    final response = await _getWithValidation(path, null);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveNodesAptUpdateModel.serializer, f);
+    });
+    return data.toList();
+  }
+
 }
