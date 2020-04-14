@@ -196,9 +196,9 @@ class ScsiControllerModel extends EnumClass {
 
   static const ScsiControllerModel lsi = _$lsi;
   static const ScsiControllerModel lsi53c810 = _$lsi53c810;
-  @BuiltValueField(wireName: 'virtio-scsi-pci')
+  @BuiltValueEnumConst(wireName: 'virtio-scsi-pci')
   static const ScsiControllerModel virtioScsiPci = _$virtioScsiPci;
-  @BuiltValueField(wireName: 'virtio-scsi-single')
+  @BuiltValueEnumConst(wireName: 'virtio-scsi-single')
   static const ScsiControllerModel virtioScsiSingle = _$virtioScsiSingle;
   static const ScsiControllerModel megasas = _$megasas;
   static const ScsiControllerModel pvscsi = _$pvscsi;
@@ -225,7 +225,9 @@ class CdType extends EnumClass {
 @BuiltValueEnum(wireName: 'hugepages')
 class Hugepages extends EnumClass {
   static const Hugepages any = _$any;
+  @BuiltValueEnumConst(wireName: '2')
   static const Hugepages h2 = _$h2;
+  @BuiltValueEnumConst(wireName: '1024')
   static const Hugepages h1024 = _$h1024;
 
   const Hugepages._(String name) : super(name);
@@ -244,7 +246,7 @@ class LockType extends EnumClass {
   static const LockType migrate = _$migrate;
   static const LockType rollback = _$rollback;
   static const LockType snapshot = _$snapshot;
-  @BuiltValueField(wireName: 'snapshot-create')
+  @BuiltValueEnumConst(wireName: 'snapshot-create')
   static const LockType snapshotDelete = _$snapshotDelete;
   static const LockType suspending = _$suspending;
   static const LockType suspended = _$suspended;

@@ -249,4 +249,29 @@ class ProxmoxApiClient extends http.BaseClient {
     return serializers.deserializeWith(
         PveNodesQemuConfigModel.serializer, data);
   }
+
+  Future<void> doResourceAction(String targetNode, String guestId, String type,
+      PveClusterResourceAction action,
+      {Map<String, String> parameters}) async {
+    String url;
+
+    switch (type) {
+      case 'qemu':
+        url =
+            '/api2/json/nodes/$targetNode/$type/$guestId/status/${action.name}';
+        break;
+      case 'lxc':
+        url =
+            '/api2/json/nodes/$targetNode/$type/$guestId/status/${action.name}';
+        break;
+      case 'node':
+        url = '/api2/json/nodes/$targetNode/status/?command=${action.name}';
+        break;
+      default:
+        throw ArgumentError.value(
+            type, 'name', 'Only qemu, lxc and node are valid types');
+    }
+
+    await _postWithValidation(url, parameters);
+  }
 }

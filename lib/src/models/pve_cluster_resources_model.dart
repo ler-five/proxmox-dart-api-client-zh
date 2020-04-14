@@ -81,3 +81,21 @@ class PveClusterResourceType extends EnumClass {
   static BuiltSet<PveClusterResourceType> get values => _$pcrtValues;
   static PveClusterResourceType valueOf(String name) => _$pcrtValueOf(name);
 }
+
+class PveClusterResourceAction extends EnumClass {
+  static const PveClusterResourceAction start = _$start;
+  static const PveClusterResourceAction stop = _$stop;
+  static const PveClusterResourceAction shutdown = _$shutdown;
+  static const PveClusterResourceAction resume = _$resume;
+  static const PveClusterResourceAction reboot = _$reboot;
+  static const PveClusterResourceAction suspend = _$suspend;
+  static const PveClusterResourceAction reset = _$reset;
+  static const PveClusterResourceAction hibernate = _$hibernate;
+
+  const PveClusterResourceAction._(String name) : super(name);
+
+  static BuiltSet<PveClusterResourceAction> get values =>
+      _$pveClusterResourceActionValues;
+  static PveClusterResourceAction valueOf(String name) =>
+      _$pveClusterResourceActionValueOf(name);
+}

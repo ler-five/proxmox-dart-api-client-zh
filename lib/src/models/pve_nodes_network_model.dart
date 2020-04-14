@@ -57,13 +57,13 @@ class InterfaceType extends EnumClass {
   static const InterfaceType eth = _$eth;
   static const InterfaceType alias = _$alias;
   static const InterfaceType vlan = _$vlan;
-  @BuiltValueField(wireName: 'OVSBridge')
+  @BuiltValueEnumConst(wireName: 'OVSBridge')
   static const InterfaceType ovsBridge = _$ovsBridge;
-  @BuiltValueField(wireName: 'OVSBond')
+  @BuiltValueEnumConst(wireName: 'OVSBond')
   static const InterfaceType ovsBond = _$ovsBond;
-  @BuiltValueField(wireName: 'OVSPort')
+  @BuiltValueEnumConst(wireName: 'OVSPort')
   static const InterfaceType ovsPort = _$ovsPort;
-  @BuiltValueField(wireName: 'OVSIntPort')
+  @BuiltValueEnumConst(wireName: 'OVSIntPort')
   static const InterfaceType ovsIntPort = _$ovsIntPort;
 
   const InterfaceType._(String name) : super(name);
