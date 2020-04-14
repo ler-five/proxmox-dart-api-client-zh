@@ -45,6 +45,8 @@ abstract class PveClusterResourcesModel
   int get uptime;
   @nullable
   int get vmid;
+  @nullable
+  String get lock;
 
   factory PveClusterResourcesModel(
           [void Function(PveClusterResourcesModelBuilder) updates]) =
@@ -67,15 +69,31 @@ abstract class PveClusterResourcesModel
         return id;
     }
   }
+
+  PveResourceStatusType getStatus() {
+    if (status == 'running' || status == 'available' || status == 'online') {
+      if (lock == 'suspending') {
+        return PveResourceStatusType.suspending;
+      }
+      return PveResourceStatusType.running;
+    }
+
+    if (status == 'stopped' || status == 'offline') {
+      if (lock == 'suspended') {
+        return PveResourceStatusType.suspended;
+      }
+      return PveResourceStatusType.stopped;
+    }
+
+    return PveResourceStatusType.unkown;
+  }
 }
 
 class PveClusterResourceType extends EnumClass {
-
   static const PveClusterResourceType vm = _$vm;
   static const PveClusterResourceType storage = _$storage;
   static const PveClusterResourceType node = _$node;
   static const PveClusterResourceType sdn = _$sdn;
-
 
   const PveClusterResourceType._(String name) : super(name);
 
@@ -99,4 +117,21 @@ class PveClusterResourceAction extends EnumClass {
       _$pveClusterResourceActionValues;
   static PveClusterResourceAction valueOf(String name) =>
       _$pveClusterResourceActionValueOf(name);
+}
+
+class PveResourceStatusType extends EnumClass {
+  static const PveResourceStatusType stopped = _$stopped;
+  static const PveResourceStatusType running = _$running;
+  static const PveResourceStatusType paused = _$paused;
+  static const PveResourceStatusType suspending = _$suspending;
+  static const PveResourceStatusType suspended = _$suspended;
+  static const PveResourceStatusType unkown = _$unkown;
+
+  const PveResourceStatusType._(String name) : super(name);
+
+  static BuiltSet<PveResourceStatusType> get values => _$pqsTValues;
+  static PveResourceStatusType valueOf(String name) => _$pqsTValueOf(name);
+
+  static Serializer<PveResourceStatusType> get serializer =>
+      _$pveResourceStatusTypeSerializer;
 }
