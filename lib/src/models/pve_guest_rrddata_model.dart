@@ -43,13 +43,13 @@ abstract class PveGuestRRDdataModel
   @nullable
   double get mem;
   @nullable
-  int get maxmem;
+  double get maxmem;
   @nullable
-  int get maxdisk;
+  double get maxdisk;
   @nullable
-  int get maxcpu;
+  double get maxcpu;
   @nullable
-  int get disk;
+  double get disk;
 
   PveGuestRRDdataModel._();
   factory PveGuestRRDdataModel(
