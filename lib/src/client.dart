@@ -359,4 +359,15 @@ class ProxmoxApiClient extends http.BaseClient {
     return json.decode(response.body)['data'];
   }
 
+  Future<PveNodesLxcConfigModel> getLxcConfig(String targetNode, String guestId,
+      {bool current, String snapshot}) async {
+    final path = '/api2/json/nodes/$targetNode/lxc/$guestId/config';
+    var queryParameters = {
+      'current': current ? '1' : '0',
+      'snapshot': snapshot
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    var data = json.decode(response.body)['data'];
+    return serializers.deserializeWith(PveNodesLxcConfigModel.serializer, data);
+  }
 }

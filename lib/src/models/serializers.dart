@@ -26,6 +26,7 @@ part 'serializers.g.dart';
   PveTaskLogStatus,
   PveTaskLogStatusType,
   PveNodesQemuMigrate,
+  PveNodesLxcConfigModel,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())..add(PveBoolSerializer())..add(PveDateTimeFromEpoch())).build();
