@@ -12,6 +12,7 @@ import 'package:proxmox_dart_api_client/src/extentions.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_nodes_network_model.dart';
 
 import 'package:proxmox_dart_api_client/src/models/pve_nodes_model.dart';
+import 'package:retry/retry.dart';
 
 class ProxmoxApiClient extends http.BaseClient {
   http.Client _httpClient;
@@ -85,7 +86,11 @@ class ProxmoxApiClient extends http.BaseClient {
 
     var url = baseUrl.replace(path: path, queryParameters: queryParameters);
 
-    return (await this.get(url)).validate(extensiveResponseValidation);
+    return (await retry(
+      () => get(url),
+      retryIf: (e) => e is http.ClientException,
+    ))
+        .validate(extensiveResponseValidation);
   }
 
   Future<String> getNextFreeID({String id}) async {
