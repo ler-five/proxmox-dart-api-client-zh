@@ -93,6 +93,21 @@ class ProxmoxApiClient extends http.BaseClient {
         .validate(extensiveResponseValidation);
   }
 
+  Future<http.Response> _postWithValidation(
+      String path, Map<String, dynamic> queryParameters,
+      {bool extensiveResponseValidation = false}) async {
+    if (!path.startsWith("/api2/json")) {
+      path = "/api2/json" + path;
+    }
+    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+
+    queryParameters?.removeWhere((key, value) => value == null);
+
+    var url = baseUrl.replace(path: path, queryParameters: queryParameters);
+
+    return (await post(url)).validate(extensiveResponseValidation);
+  }
+
   Future<String> getNextFreeID({String id}) async {
     final path = '/api2/json/cluster/nextid';
     var queryParameters = {'vmid': id};
