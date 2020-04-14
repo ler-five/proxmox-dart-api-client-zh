@@ -274,4 +274,53 @@ class ProxmoxApiClient extends http.BaseClient {
 
     await _postWithValidation(url, parameters);
   }
+
+  Future<NodeTasksResponse> getNodeTasks(
+    String targetNode, {
+    String guestId,
+    bool errors = false,
+    String limit,
+    String start,
+    String source,
+    String typefilter,
+    String userfilter,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/tasks';
+    var queryParameters = {
+      'vmid': guestId,
+      'errors': errors ? '1' : '0',
+      'limit': limit,
+      'start': start,
+      'source': source,
+      'typefilter': typefilter,
+      'userfilter': userfilter
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    final decoded = json.decode(response.body);
+
+    var data = (decoded['data'] as List).map((f) {
+      return serializers.deserializeWith(PveClusterTasksModel.serializer, f);
+    });
+    return NodeTasksResponse(
+        total: decoded['total'] ?? 0, tasks: data.toList());
+  }
+
+  Future<PveTaskLogResponse> getNodeTaskLog(String targetNode, String upid,
+      {String limit, String start}) async {
+    final path = '/api2/json/nodes/$targetNode/tasks/$upid/log';
+    var queryParameters = {
+      'limit': limit,
+      'start': start,
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    return PveTaskLogResponse.fromJson(response.body);
+  }
+
+  Future<PveTaskLogStatus> getNodeTaskStatus(
+      String targetNode, String upid) async {
+    final path = '/api2/json/nodes/$targetNode/tasks/$upid/status';
+    final response = await _getWithValidation(path, null);
+    return PveTaskLogStatus.fromJson(response.body);
+  }
+
 }

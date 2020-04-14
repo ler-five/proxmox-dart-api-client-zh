@@ -9,3 +9,4 @@ export 'package:proxmox_dart_api_client/src/models/pve_nodes_qemu_config_model.d
 export 'package:proxmox_dart_api_client/src/models/pve_nodes_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_nodes_network_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_ha_manger_service_status_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_task_log_model.dart';
