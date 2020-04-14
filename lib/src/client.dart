@@ -148,10 +148,6 @@ class ProxmoxApiClient extends http.BaseClient {
     var path = '/api2/json/cluster/tasks';
     final response = await _getWithValidation(path, null);
     var data = (json.decode(response.body)['data'] as List).map((f) {
-      f['starttime'] = f['starttime'] * 1000 * 1000;
-      if (f['endtime'] != null) {
-        f['endtime'] = f['endtime'] * 1000 * 1000;
-      }
       return serializers.deserializeWith(PveClusterTasksModel.serializer, f);
     }).toList();
     return data;
