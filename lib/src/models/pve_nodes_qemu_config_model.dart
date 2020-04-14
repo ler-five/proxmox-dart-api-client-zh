@@ -166,6 +166,27 @@ class OSType extends EnumClass {
 
   static BuiltSet<OSType> get values => _$osValues;
   static OSType valueOf(String name) => _$osValueOf(name);
+
+  static Map<OSType, Map<String, String>> osChoices = {
+    l26: {'desc': '5.x - 2.6 Kernel', 'type': 'Linux'},
+    l24: {'desc': '2.4 Kernel', 'type': 'Linux'},
+    win10: {'desc': '10/2016/2019', 'type': 'Microsoft Windows'},
+    win8: {'desc': '8.x/2012/2012r2', 'type': 'Microsoft Windows'},
+    win7: {'desc': '7/2008r2', 'type': 'Microsoft Windows'},
+    w2k8: {'desc': 'Vista/2008', 'type': 'Microsoft Windows'},
+    wxp: {'desc': 'XP/2003', 'type': 'Microsoft Windows'},
+    w2k: {'desc': '2000', 'type': 'Microsoft Windows'},
+    solaris: {'desc': '-', 'type': 'Solaris Kernel'},
+    other: {'desc': '-', 'type': 'Other'},
+  };
+
+  String get description {
+    return osChoices[this]['desc'];
+  }
+
+  String get type {
+    return osChoices[this]['type'];
+  }
 }
 
 @BuiltValueEnum(wireName: 'scsihw')
