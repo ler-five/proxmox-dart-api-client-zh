@@ -30,12 +30,12 @@ class Credentials {
   static Future<Credentials> fromPlatformStorage([String name = 'PVE']) async {
 
     final origin = await getPlatformAwareOrigin();
-    if (origin.isEmpty) throw ArgumentError('Could not determine origin');
+    if (origin != null || origin.isEmpty) throw ArgumentError('Could not determine origin');
 
     final ticketEndpoint = Uri.parse('$origin/api2/json/access/ticket');
 
     final ticket = await getTicketFromStorage();
-    if (ticket.isEmpty) throw ArgumentError('Ticket not found');
+    if (ticket != null || ticket.isEmpty) throw ArgumentError('Ticket not found');
 
     final matches = RegExp(r"(?:PVE|PMG|PMGQUAR):(?:(\S+):)?([A-Z0-9]{8})").firstMatch(ticket);
     if (matches == null) throw FormatException('invalid cookie format');
