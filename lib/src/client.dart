@@ -239,13 +239,14 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<PveNodesQemuConfigModel> getQemuConfig(
       String targetNode, String guestId,
       {bool current, String snapshot}) async {
-    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/status/current';
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/config';
     var queryParameters = {
-      'current': serializers.serialize(current),
+      'current': current ? '1' : '0',
       'snapshot': snapshot
     };
     final response = await _getWithValidation(path, queryParameters);
     var data = json.decode(response.body)['data'];
-    return serializers.deserializeWith(PveNodesQemuConfigModel.serializer, data);
+    return serializers.deserializeWith(
+        PveNodesQemuConfigModel.serializer, data);
   }
 }
