@@ -323,4 +323,13 @@ class ProxmoxApiClient extends http.BaseClient {
     return PveTaskLogStatus.fromJson(response.body);
   }
 
+  Future<PveNodesQemuMigrate> getMigratePreconditions(
+      String targetNode, String guestId,
+      {String migrationTarget}) async {
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/migrate';
+    var queryParameters = {'target': migrationTarget};
+    final response = await _getWithValidation(path, queryParameters);
+    var data = json.decode(response.body)['data'];
+    return serializers.deserializeWith(PveNodesQemuMigrate.serializer, data);
+  }
 }
