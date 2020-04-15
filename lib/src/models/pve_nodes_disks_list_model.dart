@@ -11,8 +11,6 @@ abstract class PveNodesDisksListModel
   @BuiltValueField(wireName: 'devpath')
   String get devPath;
   bool get gpt;
-  @BuiltValueField(wireName: 'osdid')
-  int get osdId;
   int get size;
 
   @nullable
