@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
@@ -41,12 +43,18 @@ Future<ProxmoxApiClient> authenticate(
   }
 
   var body = {'username': username, 'password': password};
-  var response = await httpClient.post(authorizationEndpoint, body: body);
-
-  var credentials =
-      await handleAccessTicketResponse(response, username, authorizationEndpoint);
-  return ProxmoxApiClient(
-    credentials,
-    httpClient: httpClient,
-  );
+  try {
+    var response = await httpClient
+        .post(authorizationEndpoint, body: body)
+        .timeout(Duration(seconds: 5));
+    var credentials = await handleAccessTicketResponse(
+        response, username, authorizationEndpoint);
+    return ProxmoxApiClient(
+      credentials,
+      httpClient: httpClient,
+    );
+  } on TimeoutException catch (e) {
+    throw ProxmoxApiException(
+        'Authentication did take too long, check network connection', 408);
+  }
 }
