@@ -28,7 +28,7 @@ abstract class PveNodesDisksListModel
   @nullable
   String get wwn;
   @nullable
-  String get wearout;
+  JsonObject get wearout;
 
   PveNodesDisksListModel._();
 
