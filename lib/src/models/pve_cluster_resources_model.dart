@@ -58,9 +58,9 @@ abstract class PveClusterResourcesModel
       case "node":
         return node;
       case "qemu":
-        return "$vmid $name";
+        return "$vmid ${name ?? ''}";
       case "lxc":
-        return "$vmid $name";
+        return "$vmid ${name ?? ''}";
       case "storage":
         return storage;
       case "pool":
