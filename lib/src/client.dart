@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:proxmox_dart_api_client/src/models/pve_access_user_model.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_models.dart';
 import 'package:proxmox_dart_api_client/src/models/serializers.dart';
 import 'package:proxmox_dart_api_client/src/utils.dart'
@@ -503,6 +504,47 @@ class ProxmoxApiClient extends http.BaseClient {
     final response = await _getWithValidation(path, queryParameters);
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveNodesDisksListModel.serializer, f);
+    });
+    return data.toList();
+  }
+
+  Future<List<PveAccessUserModel>> getAccessUsersList({
+    bool full = false,
+  }) async {
+    final path = '/api2/json/access/users';
+    var queryParameters = {
+      'full': full ? '1' : '0',
+    };
+    final response = await _getWithValidation(path, queryParameters);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveAccessUserModel.serializer, f);
+    });
+    return data.toList();
+  }
+
+  Future<List<PveAccessGroupModel>> getAccessGroupsList() async {
+    final path = '/api2/json/access/groups';
+    final response = await _getWithValidation(path, null);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveAccessGroupModel.serializer, f);
+    });
+    return data.toList();
+  }
+
+  Future<List<PveAccessRoleModel>> getAccessRolesList() async {
+    final path = '/api2/json/access/roles';
+    final response = await _getWithValidation(path, null);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveAccessRoleModel.serializer, f);
+    });
+    return data.toList();
+  }
+
+  Future<List<PveAccessDomainModel>> getAccessDomainsList() async {
+    final path = '/api2/json/access/domains';
+    final response = await _getWithValidation(path, null);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
     });
     return data.toList();
   }

@@ -32,7 +32,11 @@ part 'serializers.g.dart';
   PveNodeServicesModel,
   PveNodesAptUpdateModel,
   PveNodesDisksListModel,
-  PveNodesDiskListType
+  PveNodesDiskListType,
+  PveAccessUserModel,
+  PveAccessGroupModel,
+  PveAccessRoleModel,
+  PveAccessDomainModel
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..addPlugin(StandardJsonPlugin())

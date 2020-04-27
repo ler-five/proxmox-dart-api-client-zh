@@ -18,3 +18,7 @@ export 'package:proxmox_dart_api_client/src/models/pve_node_rrddata_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_node_services_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_nodes_apt_update_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_nodes_disks_list_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_access_user_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_access_group_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_access_role_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_access_domain_model.dart';
