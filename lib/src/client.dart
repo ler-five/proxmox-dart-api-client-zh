@@ -77,6 +77,16 @@ class ProxmoxApiClient extends http.BaseClient {
     return this;
   }
 
+  Future<ProxmoxApiClient> finishTfaChallenge(String code) async {
+    if (!credentials.tfa) {
+      throw StateError("No tfa challange expected");
+    }
+
+    _credentials = await credentials.tfaChallenge(code, httpClient: this);
+
+    return this;
+  }
+
   /// Closes this client and its underlying HTTP client.
   @override
   void close() {

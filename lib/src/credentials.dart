@@ -17,6 +17,8 @@ class Credentials {
 
   final DateTime expiration;
 
+  bool tfa;
+
   bool get canRefresh => ticket != null && ticketEndpoint != null;
 
   bool get isExpired =>
@@ -24,7 +26,7 @@ class Credentials {
       DateTime.now().isAfter(expiration.add(Duration(hours: 1)));
 
   Credentials(this.ticketEndpoint, this.username,
-      {this.ticket, this.csrfToken, this.expiration});
+      {this.ticket, this.csrfToken, this.expiration, this.tfa = false});
 
   // Factory constructors can't be async....
   static Future<Credentials> fromPlatformStorage([String name = 'PVE']) async {
@@ -77,6 +79,18 @@ class Credentials {
     var credentials =
         await handleAccessTicketResponse(response, username, ticketEndpoint);
 
+    return credentials;
+  }
+
+  Future<Credentials> tfaChallenge(String code,
+      {http.Client httpClient}) async {
+    httpClient ??= getCustomIOHttpClient();
+    final origin = await getPlatformAwareOrigin();
+
+    final body = {'response': code};
+    final response =
+        await httpClient.post(origin + "/api2/json/access/tfa", body: body);
+    final credentials = await handleTfaChallengeResponse(response, this);
     return credentials;
   }
 }
