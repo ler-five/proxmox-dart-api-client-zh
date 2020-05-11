@@ -1,5 +1,7 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:proxmox_dart_api_client/src/models/pve_access_user_token_model.dart';
 
 part 'pve_access_user_model.g.dart';
 
@@ -27,6 +29,8 @@ abstract class PveAccessUserModel
   String get groups;
   @nullable
   String get keys;
+  @nullable
+  BuiltList<PveAccessUserTokenModel> get tokens;
 
   PveAccessUserModel._();
 
