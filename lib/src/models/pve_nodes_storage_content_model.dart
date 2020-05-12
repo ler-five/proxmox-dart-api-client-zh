@@ -22,6 +22,9 @@ abstract class PveNodesStorageContentModel
 
   String get volid;
 
+  @nullable
+  PveStorageContentType get content;
+
   static Serializer<PveNodesStorageContentModel> get serializer =>
       _$pveNodesStorageContentModelSerializer;
 
@@ -38,9 +41,14 @@ class PveStorageContentType extends EnumClass {
   static const PveStorageContentType iso = _$iso;
   static const PveStorageContentType backup = _$backup;
   static const PveStorageContentType snippets = _$snippets;
+  @BuiltValueEnumConst(fallback: true)
+  static const PveStorageContentType unknown = _$unknown;
 
   const PveStorageContentType._(String name) : super(name);
 
   static BuiltSet<PveStorageContentType> get values => _$psctValues;
   static PveStorageContentType valueOf(String name) => _$psctValueOf(name);
+
+  static Serializer<PveStorageContentType> get serializer =>
+      _$pveStorageContentTypeSerializer;
 }
