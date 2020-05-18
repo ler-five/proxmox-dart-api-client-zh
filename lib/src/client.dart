@@ -279,8 +279,9 @@ class ProxmoxApiClient extends http.BaseClient {
     };
     final response = await _getWithValidation(path, queryParameters);
     var data = json.decode(response.body)['data'];
-    return serializers.deserializeWith(
-        PveNodesQemuConfigModel.serializer, data);
+    var model =
+        serializers.deserializeWith(PveNodesQemuConfigModel.serializer, data);
+    return model.postProcessEnumeratedJsonFields(data);
   }
 
   Future<void> doResourceAction(
@@ -417,7 +418,9 @@ class ProxmoxApiClient extends http.BaseClient {
     };
     final response = await _getWithValidation(path, queryParameters);
     var data = json.decode(response.body)['data'];
-    return serializers.deserializeWith(PveNodesLxcConfigModel.serializer, data);
+    final model =
+        serializers.deserializeWith(PveNodesLxcConfigModel.serializer, data);
+    return model.postProcessEnumeratedJsonFields(data);
   }
 
   Future<PveNodesLxcStatusModel> getLxcStatusCurrent(

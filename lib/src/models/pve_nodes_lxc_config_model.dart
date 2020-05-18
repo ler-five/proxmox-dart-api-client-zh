@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
+import 'package:proxmox_dart_api_client/src/utils.dart';
 
 part 'pve_nodes_lxc_config_model.g.dart';
 
@@ -34,14 +35,10 @@ abstract class PveNodesLxcConfigModel
   BuiltList<String> get lxc;
   @nullable
   int get memory;
-  //TODO generator
-  @nullable
-  String get mp0;
+  BuiltList<String> get mp;
   @nullable
   String get nameserver;
-  //TODO generator
-  @nullable
-  String get net0;
+  BuiltList<String> get net;
   @nullable
   bool get onboot;
   @nullable
@@ -64,9 +61,7 @@ abstract class PveNodesLxcConfigModel
   int get tty;
   @nullable
   bool get unprivileged;
-  //TODO generator
-  @nullable
-  String get unused0;
+  BuiltList<String> get unused;
 
   PveNodesLxcConfigModel._();
 
@@ -76,6 +71,16 @@ abstract class PveNodesLxcConfigModel
 
   static Serializer<PveNodesLxcConfigModel> get serializer =>
       _$pveNodesLxcConfigModelSerializer;
+  PveNodesLxcConfigModel postProcessEnumeratedJsonFields(dynamic object) {
+    final map = object as Map<String, dynamic>;
+
+    List<String> mp = matchEnumJsonFields('mp', 256, map);
+    List<String> net = matchEnumJsonFields('net', 10, map);
+    List<String> unused = matchEnumJsonFields('unused', 256, map);
+
+    return rebuild(
+        (b) => b..mp.replace(mp)..unused.replace(unused)..net.replace(net));
+  }
 }
 
 @BuiltValueEnum(wireName: 'arch')

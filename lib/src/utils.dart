@@ -14,3 +14,15 @@ Future<String> getTicketFromStorage([String name]) async =>
 
 Future<void> storeTicket(String ticket, [String name]) async =>
     throw UnsupportedError('Cannot store ticket without dart:html or dart:io.');
+
+// Match for example scsi0 etc.
+List<String> matchEnumJsonFields(
+    String field, int max, Map<String, dynamic> map) {
+  List<String> l = [];
+  for (var i = 0; i < max; i++) {
+    if (map.containsKey('$field$i')) {
+      l.add(map['$field$i']);
+    }
+  }
+  return l;
+}

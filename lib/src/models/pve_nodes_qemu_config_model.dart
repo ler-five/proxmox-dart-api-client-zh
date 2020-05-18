@@ -1,6 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
+import 'package:proxmox_dart_api_client/src/utils.dart';
 
 part 'pve_nodes_qemu_config_model.g.dart';
 
@@ -38,16 +40,12 @@ abstract class PveNodesQemuConfigModel
   @nullable
   bool get freeze;
   @nullable
-  //TODO add generator
-  @nullable
-  String get hostpci0;
+  BuiltList<String> get hostpci;
   @nullable
   String get hotplug;
   @nullable
   Hugepages get hugepages;
-  //TODO add generator
-  @nullable
-  String get ide0;
+  BuiltList<String> get ide;
   @nullable
   bool get kvm;
   @nullable
@@ -60,9 +58,7 @@ abstract class PveNodesQemuConfigModel
   int get memory;
   @nullable
   String get name;
-  //TODO add generator
-  @nullable
-  String get net0;
+  BuiltList<String> get net;
   @nullable
   bool get numa;
   @nullable
@@ -73,12 +69,8 @@ abstract class PveNodesQemuConfigModel
   bool get protection;
   @nullable
   bool get reboot;
-  //TODO add generator
-  @nullable
-  String get sata0;
-  //TODO add generator
-  @nullable
-  String get scsi0;
+  BuiltList<String> get sata;
+  BuiltList<String> get scsi;
   @nullable
   ScsiControllerModel get scsihw;
   @nullable
@@ -100,23 +92,41 @@ abstract class PveNodesQemuConfigModel
   bool get tablet;
   @nullable
   String get tags;
-  //TODO add generator
-  @nullable
-  String get unused0;
-  //TODO add generator
-  @nullable
-  String get usb0;
+  BuiltList<String> get unused;
+  BuiltList<String> get usb;
   @nullable
   int get vcpus;
-  //TODO add generator
-  @nullable
-  String get virtio0;
+  BuiltList<String> get virtio;
   @nullable
   String get vmgenid;
   @nullable
   String get vmstatestorage;
   @nullable
   String get watchdog;
+
+  PveNodesQemuConfigModel postProcessEnumeratedJsonFields(dynamic object) {
+    final map = object as Map<String, dynamic>;
+
+    List<String> hostpci = matchEnumJsonFields('hostpci', 16, map);
+    List<String> net = matchEnumJsonFields('net', 32, map);
+    List<String> usb = matchEnumJsonFields('usb', 5, map);
+
+    List<String> ide = matchEnumJsonFields('ide', 4, map);
+    List<String> sata = matchEnumJsonFields('sata', 6, map);
+    List<String> scsi = matchEnumJsonFields('scsi', 31, map);
+    List<String> unused = matchEnumJsonFields('unused', 256, map);
+    List<String> virtio = matchEnumJsonFields('virtio', 16, map);
+
+    return rebuild((b) => b
+      ..hostpci.replace(hostpci)
+      ..ide.replace(ide)
+      ..net.replace(net)
+      ..sata.replace(sata)
+      ..scsi.replace(scsi)
+      ..unused.replace(unused)
+      ..usb.replace(usb)
+      ..virtio.replace(virtio));
+  }
 }
 
 @BuiltValueEnum(wireName: 'arch')
