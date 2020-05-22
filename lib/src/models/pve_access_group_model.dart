@@ -9,7 +9,9 @@ abstract class PveAccessGroupModel
     implements Built<PveAccessGroupModel, PveAccessGroupModelBuilder> {
   // Fields
   String get groupid;
+  @nullable
   String get comment;
+  @nullable
   String get users;
 
   PveAccessGroupModel._();
