@@ -283,6 +283,19 @@ class ProxmoxApiClient extends http.BaseClient {
     return serializers.deserializeWith(PveQemuStatusModel.serializer, data);
   }
 
+  Future<Map<String, dynamic>> getQemuPendingConfig(
+    String targetNode,
+    String guestId,
+  ) async {
+    var response = await _getWithValidation(
+        '/nodes/$targetNode/qemu/$guestId/pending', null);
+    final jsonList = (jsonDecode(response.body)['data'] as List);
+    final pConfigMap = {
+      for (var e in jsonList) '${e['key']}': e,
+    };
+    return pConfigMap;
+  }
+
   Future<PveNodesQemuConfigModel> getQemuConfig(
     String targetNode,
     String guestId, {
@@ -298,6 +311,8 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = json.decode(response.body)['data'];
     var model =
         serializers.deserializeWith(PveNodesQemuConfigModel.serializer, data);
+    final pending = await getQemuPendingConfig(targetNode, guestId);
+    model = model.rebuild((b) => b..pending = pending);
     return model.postProcessEnumeratedJsonFields(data);
   }
 

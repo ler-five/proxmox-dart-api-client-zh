@@ -103,6 +103,17 @@ abstract class PveNodesQemuConfigModel
   String get vmstatestorage;
   @nullable
   String get watchdog;
+  @nullable
+  Map<String, dynamic> get pending;
+
+  dynamic getPending(String field) {
+    if (pending == null || pending.isEmpty)
+      throw StateError('No pending values available');
+    if (pending[field] != null && pending[field]['pending'] != null) {
+      return pending[field]['pending'];
+    }
+    return null;
+  }
 
   PveNodesQemuConfigModel postProcessEnumeratedJsonFields(dynamic object) {
     final map = object as Map<String, dynamic>;
