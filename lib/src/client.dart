@@ -111,6 +111,9 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<http.Response> _getWithValidation(
       String path, Map<String, dynamic> queryParameters,
       {bool extensiveResponseValidation = false}) async {
+    if (!path.startsWith("/api2/json")) {
+      path = "/api2/json" + path;
+    }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
 
     queryParameters?.removeWhere((key, value) => value == null);
