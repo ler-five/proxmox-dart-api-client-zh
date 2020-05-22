@@ -9,6 +9,8 @@ part 'pve_nodes_lxc_config_model.g.dart';
 abstract class PveNodesLxcConfigModel
     implements Built<PveNodesLxcConfigModel, PveNodesLxcConfigModelBuilder> {
   // Fields
+  String get digest;
+
   @nullable
   LxcProcessorArch get arch;
   @nullable
@@ -62,6 +64,18 @@ abstract class PveNodesLxcConfigModel
   @nullable
   bool get unprivileged;
   BuiltList<String> get unused;
+
+  @nullable
+  Map<String, dynamic> get pending;
+
+  dynamic getPending(String field) {
+    if (pending == null || pending.isEmpty)
+      throw StateError('No pending values available');
+    if (pending[field] != null && pending[field]['pending'] != null) {
+      return pending[field]['pending'];
+    }
+    return null;
+  }
 
   PveNodesLxcConfigModel._();
 

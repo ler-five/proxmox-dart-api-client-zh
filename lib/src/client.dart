@@ -437,6 +437,19 @@ class ProxmoxApiClient extends http.BaseClient {
     return json.decode(response.body)['data'];
   }
 
+  Future<Map<String, dynamic>> getLxcPendingConfig(
+    String targetNode,
+    String guestId,
+  ) async {
+    var response = await _getWithValidation(
+        '/nodes/$targetNode/lxc/$guestId/pending', null);
+    final jsonList = (jsonDecode(response.body)['data'] as List);
+    final pConfigMap = {
+      for (var e in jsonList) '${e['key']}': e,
+    };
+    return pConfigMap;
+  }
+
   Future<PveNodesLxcConfigModel> getLxcConfig(
     String targetNode,
     String guestId, {
@@ -450,8 +463,10 @@ class ProxmoxApiClient extends http.BaseClient {
     };
     final response = await _getWithValidation(path, queryParameters);
     var data = json.decode(response.body)['data'];
-    final model =
+    var model =
         serializers.deserializeWith(PveNodesLxcConfigModel.serializer, data);
+    final pending = await getLxcPendingConfig(targetNode, guestId);
+    model = model.rebuild((b) => b..pending = pending);
     return model.postProcessEnumeratedJsonFields(data);
   }
 
