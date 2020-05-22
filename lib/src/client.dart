@@ -53,6 +53,20 @@ class ProxmoxApiClient extends http.BaseClient {
     return this.post(url, body: parameters);
   }
 
+  Future<http.Response> putRequest(
+    String path, [
+    Map<String, String> parameters,
+  ]) async {
+    if (!path.startsWith("/api2/json")) {
+      path = "/api2/json" + path;
+    }
+    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    parameters?.removeWhere((key, value) => value == null);
+    var url = baseUrl.replace(path: path);
+
+    return put(url, body: parameters);
+  }
+
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     if (credentials.isExpired) {
