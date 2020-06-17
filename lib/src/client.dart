@@ -595,6 +595,15 @@ class ProxmoxApiClient extends http.BaseClient {
     return data.toList();
   }
 
+  Future<String> getNodesVZDumpExtractConfig(
+      String targetNode, String volume) async {
+    final path = '/api2/json/nodes/$targetNode/vzdump/extractconfig';
+    var queryParameters = {'volume': volume};
+    final response = await _getWithValidation(path, queryParameters);
+    final data = json.decode(response.body)['data'];
+    return data;
+  }
+
   Future<List<PveAccessUserModel>> getAccessUsersList({
     bool full = false,
   }) async {
