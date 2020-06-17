@@ -142,6 +142,21 @@ class ProxmoxApiClient extends http.BaseClient {
     return (await post(url)).validate(extensiveResponseValidation);
   }
 
+  Future<http.Response> _deleteWithValidation(
+      String path, Map<String, dynamic> queryParameters,
+      {bool extensiveResponseValidation = false}) async {
+    if (!path.startsWith("/api2/json")) {
+      path = "/api2/json" + path;
+    }
+    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+
+    queryParameters?.removeWhere((key, value) => value == null);
+
+    var url = baseUrl.replace(path: path, queryParameters: queryParameters);
+
+    return (await delete(url)).validate(extensiveResponseValidation);
+  }
+
   Future<String> getNextFreeID({String id}) async {
     final path = '/api2/json/cluster/nextid';
     var queryParameters = {'vmid': id};
@@ -255,6 +270,18 @@ class ProxmoxApiClient extends http.BaseClient {
     });
 
     return data.toList();
+  }
+
+  Future<void> deleteNodeStorageContent(
+    String targetNode,
+    String storageId,
+    String volume, {
+    int delay,
+  }) async {
+    final path =
+        '/api2/json/nodes/$targetNode/storage/$storageId/content/$volume';
+    var queryParameters = {'delay': delay?.toString()};
+    await _deleteWithValidation(path, queryParameters);
   }
 
   Future<List<PveGuestRRDdataModel>> getNodeQemuRRDdata(
