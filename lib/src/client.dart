@@ -604,6 +604,29 @@ class ProxmoxApiClient extends http.BaseClient {
     return data;
   }
 
+  Future<String> nodesVZDumpCreateBackup(
+    String targetNode,
+    String storage,
+    String guestId, {
+    bool remove = false,
+    PveVZDumpCompressionType compressionType,
+    PveVZDumpModeType mode,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/vzdump';
+    var queryParameters = {
+      'storage': storage,
+      'vmid': guestId,
+      'remove': remove ? '1' : '0',
+      'compress': compressionType != PveVZDumpCompressionType.none
+          ? compressionType.name
+          : null,
+      'mode': mode.name
+    };
+    final response = await _postWithValidation(path, queryParameters);
+    final data = json.decode(response.body)['data'];
+    return data;
+  }
+
   Future<List<PveAccessUserModel>> getAccessUsersList({
     bool full = false,
   }) async {

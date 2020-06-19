@@ -24,3 +24,4 @@ export 'package:proxmox_dart_api_client/src/models/pve_access_role_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_access_domain_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_access_user_token_model.dart';
 export 'package:proxmox_dart_api_client/src/models/pve_nodes_lxc_migrate_model.dart';
+export 'package:proxmox_dart_api_client/src/models/pve_cluster_backup_model.dart';
