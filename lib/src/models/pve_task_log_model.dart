@@ -56,6 +56,17 @@ abstract class PveTaskLogStatus
   // Fields
   int get pid;
   PveTaskLogStatusType get status;
+  String get upid;
+  String get user;
+  String get node;
+  @BuiltValueField(wireName: 'starttime')
+  DateTime get startTime;
+
+  @nullable
+  String get type;
+  @BuiltValueField(wireName: 'exitstatus')
+  @nullable
+  String get exitStatus;
 
   PveTaskLogStatus._();
 
@@ -69,6 +80,9 @@ abstract class PveTaskLogStatus
 
   static Serializer<PveTaskLogStatus> get serializer =>
       _$pveTaskLogStatusSerializer;
+
+  bool get failed =>
+      exitStatus != 'OK' && status == PveTaskLogStatusType.stopped;
 }
 
 class PveTaskLogStatusType extends EnumClass {
