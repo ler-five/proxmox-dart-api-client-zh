@@ -32,7 +32,8 @@ class ProxmoxApiClient extends http.BaseClient {
       path = "/api2/json" + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
-    queryParameters?.removeWhere((key, value) => value == null);
+    queryParameters
+        ?.removeWhere((key, value) => value == null || value.isEmpty);
 
     var url = baseUrl.replace(path: path, queryParameters: queryParameters);
 
@@ -47,7 +48,7 @@ class ProxmoxApiClient extends http.BaseClient {
       path = "/api2/json" + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
-    parameters?.removeWhere((key, value) => value == null);
+    parameters?.removeWhere((key, value) => value == null || value.isEmpty);
     var url = baseUrl.replace(path: path);
 
     return this.post(url, body: parameters);
@@ -61,7 +62,7 @@ class ProxmoxApiClient extends http.BaseClient {
       path = "/api2/json" + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
-    parameters?.removeWhere((key, value) => value == null);
+    parameters?.removeWhere((key, value) => value == null || value.isEmpty);
     var url = baseUrl.replace(path: path);
 
     return put(url, body: parameters);
@@ -116,7 +117,8 @@ class ProxmoxApiClient extends http.BaseClient {
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
 
-    queryParameters?.removeWhere((key, value) => value == null);
+    queryParameters
+        ?.removeWhere((key, value) => value == null || value.isEmpty);
 
     var url = baseUrl.replace(path: path, queryParameters: queryParameters);
 
@@ -135,7 +137,8 @@ class ProxmoxApiClient extends http.BaseClient {
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
 
-    queryParameters?.removeWhere((key, value) => value == null);
+    queryParameters
+        ?.removeWhere((key, value) => value == null || value.isEmpty);
 
     var url = baseUrl.replace(path: path, queryParameters: queryParameters);
 
