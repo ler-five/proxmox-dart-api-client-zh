@@ -55,6 +55,6 @@ Future<ProxmoxApiClient> authenticate(
     );
   } on TimeoutException catch (_) {
     throw ProxmoxApiException(
-        'Authentication did take too long, check network connection', 408);
+        'Authentication takes unusually long, check network connection', 408);
   }
 }
