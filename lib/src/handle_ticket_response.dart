@@ -40,5 +40,4 @@ Future<Credentials> handleTfaChallengeResponse(
       csrfToken: credentials.csrfToken,
       expiration: time,
       tfa: false);
-  ;
 }
