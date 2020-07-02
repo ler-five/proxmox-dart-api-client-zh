@@ -37,7 +37,7 @@ class ProxmoxApiClient extends http.BaseClient {
 
     var url = baseUrl.replace(path: path, queryParameters: queryParameters);
 
-    return this.get(url);
+    return get(url);
   }
 
   Future<http.Response> postRequest(
@@ -51,7 +51,7 @@ class ProxmoxApiClient extends http.BaseClient {
     parameters?.removeWhere((key, value) => value == null || value.isEmpty);
     var url = baseUrl.replace(path: path);
 
-    return this.post(url, body: parameters);
+    return post(url, body: parameters);
   }
 
   Future<http.Response> putRequest(
