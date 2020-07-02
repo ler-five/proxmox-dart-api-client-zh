@@ -13,7 +13,7 @@ Future<Credentials> handleAccessTicketResponse(
   final bodyJson = jsonDecode(response.body)['data'];
   final ticket = bodyJson['ticket'];
   final csrfToken = bodyJson['CSRFPreventionToken'];
-  final ticketRegex = RegExp(r"(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::")
+  final ticketRegex = RegExp(r'(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::')
       .firstMatch(bodyJson['ticket']);
   final time = DateTime.fromMillisecondsSinceEpoch(
       int.parse(ticketRegex.group(3), radix: 16) * 1000);
@@ -30,7 +30,7 @@ Future<Credentials> handleTfaChallengeResponse(
   print(response.body);
   final bodyJson = jsonDecode(response.body)['data'];
   final ticket = bodyJson['ticket'];
-  final ticketRegex = RegExp(r"(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::")
+  final ticketRegex = RegExp(r'(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::')
       .firstMatch(bodyJson['ticket']);
   final time = DateTime.fromMillisecondsSinceEpoch(
       int.parse(ticketRegex.group(3), radix: 16) * 1000);

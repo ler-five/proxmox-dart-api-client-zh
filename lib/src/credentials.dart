@@ -40,7 +40,7 @@ class Credentials {
     if (ticket == null || ticket.isEmpty)
       throw ArgumentError('Ticket not found');
 
-    final matches = RegExp(r"(?:PVE|PMG|PMGQUAR):(?:(\S+):)?([A-Z0-9]{8})")
+    final matches = RegExp(r'(?:PVE|PMG|PMGQUAR):(?:(\S+):)?([A-Z0-9]{8})')
         .firstMatch(ticket);
     if (matches == null) throw FormatException('invalid cookie format');
 
@@ -91,7 +91,7 @@ class Credentials {
 
     final body = {'response': code};
     final response =
-        await httpClient.post(origin + "/api2/json/access/tfa", body: body);
+        await httpClient.post(origin + '/api2/json/access/tfa', body: body);
     final credentials = await handleTfaChallengeResponse(response, this);
     return credentials;
   }

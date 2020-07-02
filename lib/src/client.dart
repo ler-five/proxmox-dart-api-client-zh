@@ -28,8 +28,8 @@ class ProxmoxApiClient extends http.BaseClient {
     String path, [
     Map<String, String> queryParameters,
   ]) async {
-    if (!path.startsWith("/api2/json")) {
-      path = "/api2/json" + path;
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json' + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
     queryParameters
@@ -44,8 +44,8 @@ class ProxmoxApiClient extends http.BaseClient {
     String path, [
     Map<String, String> parameters,
   ]) async {
-    if (!path.startsWith("/api2/json")) {
-      path = "/api2/json" + path;
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json' + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
     parameters?.removeWhere((key, value) => value == null || value.isEmpty);
@@ -58,8 +58,8 @@ class ProxmoxApiClient extends http.BaseClient {
     String path, [
     Map<String, String> parameters,
   ]) async {
-    if (!path.startsWith("/api2/json")) {
-      path = "/api2/json" + path;
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json' + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
     parameters?.removeWhere((key, value) => value == null || value.isEmpty);
@@ -94,7 +94,7 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<ProxmoxApiClient> finishTfaChallenge(String code) async {
     if (!credentials.tfa) {
-      throw StateError("No tfa challange expected");
+      throw StateError('No tfa challange expected');
     }
 
     _credentials = await credentials.tfaChallenge(code, httpClient: this);
@@ -112,8 +112,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<http.Response> _getWithValidation(
       String path, Map<String, dynamic> queryParameters,
       {bool extensiveResponseValidation = false}) async {
-    if (!path.startsWith("/api2/json")) {
-      path = "/api2/json" + path;
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json' + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
 
@@ -132,8 +132,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<http.Response> _postWithValidation(
       String path, Map<String, dynamic> queryParameters,
       {bool extensiveResponseValidation = false}) async {
-    if (!path.startsWith("/api2/json")) {
-      path = "/api2/json" + path;
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json' + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
 
@@ -148,8 +148,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<http.Response> _deleteWithValidation(
       String path, Map<String, dynamic> queryParameters,
       {bool extensiveResponseValidation = false}) async {
-    if (!path.startsWith("/api2/json")) {
-      path = "/api2/json" + path;
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json' + path;
     }
     final baseUrl = Uri.parse(await getPlatformAwareOrigin());
 

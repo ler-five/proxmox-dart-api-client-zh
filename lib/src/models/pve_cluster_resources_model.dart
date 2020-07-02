@@ -55,15 +55,15 @@ abstract class PveClusterResourcesModel
 
   String get displayName {
     switch (type) {
-      case "node":
+      case 'node':
         return node;
-      case "qemu":
+      case 'qemu':
         return "$vmid ${name ?? ''}";
-      case "lxc":
+      case 'lxc':
         return "$vmid ${name ?? ''}";
-      case "storage":
+      case 'storage':
         return storage;
-      case "pool":
+      case 'pool':
         return pool;
       default:
         return id;

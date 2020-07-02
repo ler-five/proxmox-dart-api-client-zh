@@ -14,7 +14,7 @@ Future<String> getTicketFromStorage([String name = 'PVE']) async {
       RegExp(r'(?:(?:^|.*;\s*)' + name + r'AuthCookie\s*\=\s*([^;]*).*$)|^.*$')
               .firstMatch(document.cookie)
               ?.group(1) ??
-          "");
+          '');
 }
 
 Future<void> storeTicket(String ticket, [String name = 'PVE']) async {
