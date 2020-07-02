@@ -78,5 +78,6 @@ abstract class PveQemuStatusModel
       }
       return PveResourceStatusType.stopped;
     }
+    return PveResourceStatusType.unkown;
   }
 }

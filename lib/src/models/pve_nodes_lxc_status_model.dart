@@ -55,6 +55,7 @@ abstract class PveNodesLxcStatusModel
       }
       return PveResourceStatusType.stopped;
     }
+    return PveResourceStatusType.unkown;
   }
 }
 
