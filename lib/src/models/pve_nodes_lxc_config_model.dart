@@ -69,8 +69,9 @@ abstract class PveNodesLxcConfigModel
   Map<String, dynamic> get pending;
 
   dynamic getPending(String field) {
-    if (pending == null || pending.isEmpty)
+    if (pending == null || pending.isEmpty) {
       throw StateError('No pending values available');
+    }
     if (pending[field] != null && pending[field]['pending'] != null) {
       return pending[field]['pending'];
     }
