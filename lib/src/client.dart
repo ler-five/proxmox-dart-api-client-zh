@@ -18,11 +18,12 @@ import 'package:retry/retry.dart';
 class ProxmoxApiClient extends http.BaseClient {
   http.Client _httpClient;
 
-  Credentials get credentials => _credentials;
-  Credentials _credentials;
+  Credentials credentials;
 
-  ProxmoxApiClient(this._credentials, {http.Client httpClient})
-      : _httpClient = httpClient ?? getCustomIOHttpClient();
+  ProxmoxApiClient(
+    this.credentials, {
+    http.Client httpClient,
+  }) : _httpClient = httpClient ?? getCustomIOHttpClient();
 
   Future<http.Response> getRequest(
     String path, [
@@ -31,7 +32,7 @@ class ProxmoxApiClient extends http.BaseClient {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
     }
-    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    final baseUrl = credentials.apiBaseUrl;
     queryParameters
         ?.removeWhere((key, value) => value == null || value.isEmpty);
 
@@ -47,7 +48,7 @@ class ProxmoxApiClient extends http.BaseClient {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
     }
-    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    final baseUrl = credentials.apiBaseUrl;
     parameters?.removeWhere((key, value) => value == null || value.isEmpty);
     var url = baseUrl.replace(path: path);
 
@@ -61,7 +62,7 @@ class ProxmoxApiClient extends http.BaseClient {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
     }
-    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    final baseUrl = credentials.apiBaseUrl;
     parameters?.removeWhere((key, value) => value == null || value.isEmpty);
     var url = baseUrl.replace(path: path);
 
@@ -87,7 +88,7 @@ class ProxmoxApiClient extends http.BaseClient {
       throw StateError("Credentials can't be refreshed.");
     }
 
-    _credentials = await credentials.refresh(httpClient: _httpClient);
+    credentials = await credentials.refresh(httpClient: _httpClient);
 
     return this;
   }
@@ -97,7 +98,7 @@ class ProxmoxApiClient extends http.BaseClient {
       throw StateError('No tfa challange expected');
     }
 
-    _credentials = await credentials.tfaChallenge(code, httpClient: this);
+    credentials = await credentials.tfaChallenge(code, httpClient: this);
 
     return this;
   }
@@ -115,7 +116,7 @@ class ProxmoxApiClient extends http.BaseClient {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
     }
-    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    final baseUrl = credentials.apiBaseUrl;
 
     queryParameters
         ?.removeWhere((key, value) => value == null || value.isEmpty);
@@ -135,7 +136,7 @@ class ProxmoxApiClient extends http.BaseClient {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
     }
-    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    final baseUrl = credentials.apiBaseUrl;
 
     queryParameters
         ?.removeWhere((key, value) => value == null || value.isEmpty);
@@ -151,7 +152,7 @@ class ProxmoxApiClient extends http.BaseClient {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
     }
-    final baseUrl = Uri.parse(await getPlatformAwareOrigin());
+    final baseUrl = credentials.apiBaseUrl;
 
     queryParameters?.removeWhere((key, value) => value == null);
 

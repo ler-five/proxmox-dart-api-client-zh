@@ -16,39 +16,32 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
 
 Future<ProxmoxApiClient> authenticate(
   String username,
-  String password, {
-  Uri authorizationEndpoint,
+  String password,
+  Uri apiBaseUrl,
+  bool validateSSL, {
   http.Client httpClient,
 }) async {
-  httpClient ??= getCustomIOHttpClient();
+  httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 
   if (username == null || password == null) {
     throw ArgumentError("Can't authenticate without username/password.");
   }
 
-  if (authorizationEndpoint == null) {
-    final origin = await getPlatformAwareOrigin();
-
-    if (origin.isEmpty) {
-      throw ArgumentError(
-          'Could not determine origin. You can manually assign a authorization endpoint to overcome this.');
-    }
-
-    authorizationEndpoint = Uri.parse('$origin/api2/json/access/ticket');
-  }
-  try {
-    await storePlatformAwareOrigin(authorizationEndpoint.origin);
-  } on UnimplementedError {
-    print("couldn't store origin, due to platform implemention missing");
+  if (apiBaseUrl == null) {
+    throw ArgumentError("Can't authenticate without apiBaseUrl");
   }
 
   var body = {'username': username, 'password': password};
+
   try {
+    var credentials = Credentials(apiBaseUrl, username);
+
     var response = await httpClient
-        .post(authorizationEndpoint, body: body)
+        .post(credentials.ticketUrl, body: body)
         .timeout(Duration(seconds: 5));
-    var credentials = await handleAccessTicketResponse(
-        response, username, authorizationEndpoint);
+
+    credentials = handleAccessTicketResponse(response, credentials);
+
     return ProxmoxApiClient(
       credentials,
       httpClient: httpClient,

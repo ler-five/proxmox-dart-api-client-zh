@@ -5,9 +5,12 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
     if (dart.library.html) 'utils_web.dart'
     if (dart.library.io) 'utils_native.dart';
 
+const String ticketPath = '/api2/json/access/ticket';
+const String tfaPath = '/api2/json/access/tfa';
+
 class Credentials {
   /// The URL of the authorization server
-  final Uri ticketEndpoint;
+  final Uri apiBaseUrl;
 
   final String username;
 
@@ -19,47 +22,24 @@ class Credentials {
 
   bool tfa;
 
-  bool get canRefresh => ticket != null && ticketEndpoint != null;
+  bool get canRefresh => ticket != null && apiBaseUrl != null;
 
   bool get isExpired =>
       expiration != null &&
       DateTime.now().isAfter(expiration.add(Duration(hours: 1)));
 
-  Credentials(this.ticketEndpoint, this.username,
-      {this.ticket, this.csrfToken, this.expiration, this.tfa = false});
+  Uri get ticketUrl => apiBaseUrl.replace(path: ticketPath);
 
-  // Factory constructors can't be async....
-  static Future<Credentials> fromPlatformStorage([String name = 'PVE']) async {
-    final origin = await getPlatformAwareOrigin();
-    if (origin == null || origin.isEmpty) {
-      throw ArgumentError('Could not determine origin');
-    }
+  Uri get tfaUrl => apiBaseUrl.replace(path: tfaPath);
 
-    final ticketEndpoint = Uri.parse('$origin/api2/json/access/ticket');
-
-    final ticket = await getTicketFromStorage();
-    if (ticket == null || ticket.isEmpty) {
-      throw ArgumentError('Ticket not found');
-    }
-
-    final matches = RegExp(r'(?:PVE|PMG|PMGQUAR):(?:(\S+):)?([A-Z0-9]{8})')
-        .firstMatch(ticket);
-    if (matches == null) throw FormatException('invalid cookie format');
-
-    final username = matches.group(1);
-    if (username == null) {
-      throw FormatException('No username - invalid cookie format');
-    }
-
-    final time = DateTime.fromMillisecondsSinceEpoch(
-        int.parse(matches.group(2), radix: 16) * 1000);
-    if (time == null) {
-      throw FormatException('No expiration time - invalid cookie format');
-    }
-
-    return Credentials(ticketEndpoint, username,
-        ticket: ticket, expiration: time);
-  }
+  Credentials(
+    this.apiBaseUrl,
+    this.username, {
+    this.ticket,
+    this.csrfToken,
+    this.expiration,
+    this.tfa = false,
+  });
 
   Future<Credentials> refresh({http.Client httpClient}) async {
     httpClient ??= getCustomIOHttpClient();
@@ -72,18 +52,17 @@ class Credentials {
       throw ArgumentError("Can't refresh credentials without valid ticket");
     }
 
-    if (ticketEndpoint == null) {
-      throw ArgumentError(
-          "Can't refresh credentials without a token endpoint.");
+    if (apiBaseUrl == null) {
+      throw ArgumentError("Can't refresh credentials without API base url.");
     }
 
     var body = {'username': username, 'password': ticket};
 
     var response = await httpClient
-        .post(ticketEndpoint, body: body)
+        .post(ticketUrl, body: body)
         .timeout(Duration(seconds: 5));
-    var credentials =
-        await handleAccessTicketResponse(response, username, ticketEndpoint);
+
+    var credentials = handleAccessTicketResponse(response, this);
 
     return credentials;
   }
@@ -91,12 +70,13 @@ class Credentials {
   Future<Credentials> tfaChallenge(String code,
       {http.Client httpClient}) async {
     httpClient ??= getCustomIOHttpClient();
-    final origin = await getPlatformAwareOrigin();
 
     final body = {'response': code};
-    final response =
-        await httpClient.post(origin + '/api2/json/access/tfa', body: body);
-    final credentials = await handleTfaChallengeResponse(response, this);
+
+    final response = await httpClient.post(tfaUrl, body: body);
+
+    final credentials = handleTfaChallengeResponse(response, this);
+
     return credentials;
   }
 }
