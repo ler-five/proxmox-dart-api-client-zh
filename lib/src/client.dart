@@ -615,6 +615,7 @@ class ProxmoxApiClient extends http.BaseClient {
     bool remove = false,
     PveVZDumpCompressionType compressionType,
     PveVZDumpModeType mode,
+    String mailTo,
   }) async {
     final path = '/api2/json/nodes/$targetNode/vzdump';
     var queryParameters = {
@@ -624,7 +625,8 @@ class ProxmoxApiClient extends http.BaseClient {
       'compress': compressionType != PveVZDumpCompressionType.none
           ? compressionType.name
           : null,
-      'mode': mode.name
+      'mode': mode.name,
+      'mailto': mailTo,
     };
     final response = await _postWithValidation(path, queryParameters);
     final data = json.decode(response.body)['data'];
