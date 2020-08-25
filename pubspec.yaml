@@ -1,8 +1,7 @@
 name: proxmox_dart_api_client
 description: A client library for seamless interaction with various Proxmox products.
-# version: 1.0.0
-# homepage: https://www.example.com
-# author: Tim Marx <t.marx@proxmox.com>
+version: 1.0.0
+author: Tim Marx <t.marx@proxmox.com>
 
 environment:
   sdk: '>=2.7.0-1 <3.0.0'
