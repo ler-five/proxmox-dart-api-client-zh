@@ -3,13 +3,14 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_cluster_resources_model.dart';
+import 'package:proxmox_dart_api_client/src/models/pve_ha_manger_service_status_model.dart';
 
 part 'pve_nodes_lxc_status_model.g.dart';
 
 abstract class PveNodesLxcStatusModel
     implements Built<PveNodesLxcStatusModel, PveNodesLxcStatusModelBuilder> {
   // Fields
-  JsonObject get ha;
+  PveHAMangerServiceStatusModel get ha;
   LxcStatusType get status;
   String get vmid;
   @nullable
