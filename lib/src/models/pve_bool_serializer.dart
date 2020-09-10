@@ -17,6 +17,9 @@ class PveBoolSerializer implements PrimitiveSerializer<bool> {
   @override
   bool deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
+    if (serialized is String) {
+      return serialized.isEmpty ? false : true;
+    }
     return serialized == 0 ? false : true;
   }
 }
