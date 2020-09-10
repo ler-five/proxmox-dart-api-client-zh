@@ -47,6 +47,8 @@ abstract class PveClusterResourcesModel
   int get vmid;
   @nullable
   String get lock;
+  @nullable
+  bool get template;
 
   factory PveClusterResourcesModel(
           [void Function(PveClusterResourcesModelBuilder) updates]) =

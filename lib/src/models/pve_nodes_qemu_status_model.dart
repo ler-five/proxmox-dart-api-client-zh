@@ -45,7 +45,7 @@ abstract class PveQemuStatusModel
   @nullable
   String get lock;
   @nullable
-  String get template;
+  bool get template;
 
   PveQemuStatusModel._();
   factory PveQemuStatusModel(

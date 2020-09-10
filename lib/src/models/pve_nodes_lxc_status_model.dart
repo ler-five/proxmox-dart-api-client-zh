@@ -29,6 +29,8 @@ abstract class PveNodesLxcStatusModel
   String get tags;
   @nullable
   Duration get uptime;
+  @nullable
+  bool get template;
 
   PveNodesLxcStatusModel._();
 
