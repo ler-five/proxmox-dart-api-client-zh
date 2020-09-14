@@ -46,6 +46,8 @@ abstract class PveQemuStatusModel
   String get lock;
   @nullable
   bool get template;
+  @nullable
+  bool get spice;
 
   PveQemuStatusModel._();
   factory PveQemuStatusModel(
