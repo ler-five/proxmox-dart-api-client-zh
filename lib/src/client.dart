@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/src/models/pve_access_user_model.dart';
@@ -125,7 +126,7 @@ class ProxmoxApiClient extends http.BaseClient {
 
     return (await retry(
       () => get(url),
-      retryIf: (e) => e is http.ClientException,
+      retryIf: (e) => e is http.ClientException || e is SocketException,
     ))
         .validate(extensiveResponseValidation);
   }
