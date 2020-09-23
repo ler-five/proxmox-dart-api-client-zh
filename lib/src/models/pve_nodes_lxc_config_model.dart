@@ -20,15 +20,11 @@ abstract class PveNodesLxcConfigModel
   @nullable
   int get cores;
   @nullable
-  num get cpulimit;
-  @nullable
   int get cpuunits;
   @nullable
   String get description;
   @nullable
   JsonObject get features;
-  @nullable
-  String get hookscript;
   @nullable
   String get hostname;
   @nullable
