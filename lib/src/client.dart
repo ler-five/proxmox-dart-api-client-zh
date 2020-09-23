@@ -509,6 +509,10 @@ class ProxmoxApiClient extends http.BaseClient {
     final path = '/api2/json/nodes/$targetNode/lxc/$guestId/status/current';
     final response = await _getWithValidation(path, null);
     var data = json.decode(response.body)['data'];
+    //TODO: remove when fixed in API
+    if (data['cpus'] is String) {
+      data['cpus'] = num.tryParse(data['cpus']);
+    }
     return serializers.deserializeWith(PveNodesLxcStatusModel.serializer, data);
   }
 
