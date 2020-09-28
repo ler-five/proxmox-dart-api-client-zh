@@ -30,7 +30,7 @@ abstract class PveNodesLxcConfigModel
   @nullable
   LxcLockType get lock;
   @nullable
-  BuiltList<String> get lxc;
+  BuiltList<BuiltList<String>> get lxc;
   @nullable
   int get memory;
   BuiltList<String> get mp;
