@@ -14,10 +14,10 @@ Credentials handleAccessTicketResponse(
   final csrfToken = bodyJson['CSRFPreventionToken'];
 
   final ticketRegex = RegExp(r'(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::')
-      .firstMatch(bodyJson['ticket']);
+      .firstMatch(bodyJson['ticket'])!;
 
   final time = DateTime.fromMillisecondsSinceEpoch(
-      int.parse(ticketRegex.group(3), radix: 16) * 1000);
+      int.parse(ticketRegex.group(3)!, radix: 16) * 1000);
 
   final tfa =
       bodyJson['NeedTFA'] != null && bodyJson['NeedTFA'] == 1 ? true : false;
@@ -41,10 +41,10 @@ Credentials handleTfaChallengeResponse(
   final ticket = bodyJson['ticket'];
 
   final ticketRegex = RegExp(r'(PVE|PMG)(?:QUAR)?:(?:(\S+):)?([A-Z0-9]{8})::')
-      .firstMatch(bodyJson['ticket']);
+      .firstMatch(bodyJson['ticket'])!;
 
   final time = DateTime.fromMillisecondsSinceEpoch(
-      int.parse(ticketRegex.group(3), radix: 16) * 1000);
+      int.parse(ticketRegex.group(3)!, radix: 16) * 1000);
 
   return Credentials(
     pendingTfaCredentials.apiBaseUrl,

@@ -11,13 +11,13 @@ abstract class PveTaskLogModel
     implements Built<PveTaskLogModel, PveTaskLogModelBuilder> {
   // Fields
   @BuiltValueField(wireName: 'n')
-  int get lineNumber;
+  int? get lineNumber;
   @BuiltValueField(wireName: 't')
-  String get lineText;
+  String? get lineText;
 
   PveTaskLogModel._();
 
-  factory PveTaskLogModel([void Function(PveTaskLogModelBuilder) updates]) =
+  factory PveTaskLogModel([void Function(PveTaskLogModelBuilder)? updates]) =
       _$PveTaskLogModel;
 
   static PveTaskLogModel fromJson(String jsonString) {
@@ -33,14 +33,14 @@ abstract class PveTaskLogResponse
     implements Built<PveTaskLogResponse, PveTaskLogResponseBuilder> {
   // Fields
   @BuiltValueField(wireName: 'data')
-  BuiltList<PveTaskLogModel> get lines;
+  BuiltList<PveTaskLogModel>? get lines;
 
-  int get total;
+  int? get total;
 
   PveTaskLogResponse._();
 
   factory PveTaskLogResponse(
-          [void Function(PveTaskLogResponseBuilder) updates]) =
+          [void Function(PveTaskLogResponseBuilder)? updates]) =
       _$PveTaskLogResponse;
 
   static Serializer<PveTaskLogResponse> get serializer =>
@@ -54,23 +54,21 @@ abstract class PveTaskLogResponse
 abstract class PveTaskLogStatus
     implements Built<PveTaskLogStatus, PveTaskLogStatusBuilder> {
   // Fields
-  int get pid;
-  PveTaskLogStatusType get status;
-  String get upid;
-  String get user;
-  String get node;
+  int? get pid;
+  PveTaskLogStatusType? get status;
+  String? get upid;
+  String? get user;
+  String? get node;
   @BuiltValueField(wireName: 'starttime')
-  DateTime get startTime;
+  DateTime? get startTime;
 
-  @nullable
-  String get type;
+  String? get type;
   @BuiltValueField(wireName: 'exitstatus')
-  @nullable
-  String get exitStatus;
+  String? get exitStatus;
 
   PveTaskLogStatus._();
 
-  factory PveTaskLogStatus([void Function(PveTaskLogStatusBuilder) updates]) =
+  factory PveTaskLogStatus([void Function(PveTaskLogStatusBuilder)? updates]) =
       _$PveTaskLogStatus;
 
   static PveTaskLogStatus fromJson(String jsonString) {

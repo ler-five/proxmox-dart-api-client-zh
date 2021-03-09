@@ -7,30 +7,26 @@ part 'pve_nodes_storage_content_model.g.dart';
 abstract class PveNodesStorageContentModel
     implements
         Built<PveNodesStorageContentModel, PveNodesStorageContentModelBuilder> {
-  String get format;
+  String? get format;
 
-  @nullable
-  String get parent;
+  String? get parent;
 
-  int get size;
+  int? get size;
 
-  @nullable
-  int get used;
+  int? get used;
 
-  @nullable
-  int get vmid;
+  int? get vmid;
 
-  String get volid;
+  String? get volid;
 
-  @nullable
-  PveStorageContentType get content;
+  PveStorageContentType? get content;
 
   static Serializer<PveNodesStorageContentModel> get serializer =>
       _$pveNodesStorageContentModelSerializer;
 
   PveNodesStorageContentModel._();
   factory PveNodesStorageContentModel(
-          [void Function(PveNodesStorageContentModelBuilder) updates]) =
+          [void Function(PveNodesStorageContentModelBuilder)? updates]) =
       _$PveNodesStorageContentModel;
 }
 

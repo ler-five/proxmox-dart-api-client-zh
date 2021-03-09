@@ -11,30 +11,20 @@ abstract class PveAccessUserModel
       _$pveAccessUserModelSerializer;
 
   // Fields
-  @nullable
-  String get userid;
-  @nullable
-  String get comment;
-  @nullable
-  String get email;
-  @nullable
-  bool get enable;
-  @nullable
-  int get expire;
-  @nullable
-  String get firstname;
-  @nullable
-  String get lastname;
-  @nullable
-  String get groups;
-  @nullable
-  String get keys;
-  @nullable
-  BuiltList<PveAccessUserTokenModel> get tokens;
+  String? get userid;
+  String? get comment;
+  String? get email;
+  bool? get enable;
+  int? get expire;
+  String? get firstname;
+  String? get lastname;
+  String? get groups;
+  String? get keys;
+  BuiltList<PveAccessUserTokenModel>? get tokens;
 
   PveAccessUserModel._();
 
   factory PveAccessUserModel(
-          [void Function(PveAccessUserModelBuilder) updates]) =
+          [void Function(PveAccessUserModelBuilder)? updates]) =
       _$PveAccessUserModel;
 }

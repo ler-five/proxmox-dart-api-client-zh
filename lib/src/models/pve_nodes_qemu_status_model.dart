@@ -10,48 +10,30 @@ abstract class PveQemuStatusModel
   static Serializer<PveQemuStatusModel> get serializer =>
       _$pveQemuStatusModelSerializer;
 
-  PveHAMangerServiceStatusModel get ha;
-  String get status;
-  @nullable
-  bool get agent;
-  @nullable
-  String get name;
-  @nullable
-  String get pid;
-  @nullable
-  Duration get uptime;
-  @nullable
-  double get cpus;
-  @nullable
-  double get diskread;
-  @nullable
-  double get diskwrite;
-  @nullable
-  double get netin;
-  @nullable
-  double get netout;
-  @nullable
-  double get mem;
-  @nullable
-  int get maxmem;
-  @nullable
-  int get maxdisk;
-  @nullable
-  int get maxcpu;
-  @nullable
-  int get disk;
-  @nullable
-  String get qmpstatus;
-  @nullable
-  String get lock;
-  @nullable
-  bool get template;
-  @nullable
-  bool get spice;
+  PveHAMangerServiceStatusModel? get ha;
+  String? get status;
+  bool? get agent;
+  String? get name;
+  String? get pid;
+  Duration? get uptime;
+  double? get cpus;
+  double? get diskread;
+  double? get diskwrite;
+  double? get netin;
+  double? get netout;
+  double? get mem;
+  int? get maxmem;
+  int? get maxdisk;
+  int? get maxcpu;
+  int? get disk;
+  String? get qmpstatus;
+  String? get lock;
+  bool? get template;
+  bool? get spice;
 
   PveQemuStatusModel._();
   factory PveQemuStatusModel(
-          [void Function(PveQemuStatusModelBuilder) updates]) =
+          [void Function(PveQemuStatusModelBuilder)? updates]) =
       _$PveQemuStatusModel;
 
   PveResourceStatusType getQemuStatus() {

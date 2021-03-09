@@ -7,39 +7,32 @@ abstract class PveNodesStorageModel
     implements Built<PveNodesStorageModel, PveNodesStorageModelBuilder> {
   static Serializer<PveNodesStorageModel> get serializer => _$pveNodesStorageModelSerializer;
 
-  @nullable
-  bool get active;
+  bool? get active;
 
   @BuiltValueField(wireName: 'avail')
-  @nullable
-  int get freeSpace;
+  int? get freeSpace;
 
-  String get content;
+  String? get content;
 
-  @nullable
-  bool get enabled;
+  bool? get enabled;
 
-  @nullable
-  bool get shared;
+  bool? get shared;
 
   @BuiltValueField(wireName: 'storage')
-  String get id;
+  String? get id;
 
   @BuiltValueField(wireName: 'total')
-  @nullable
-  int get totalSpace;
+  int? get totalSpace;
 
-  String get type;
+  String? get type;
 
   @BuiltValueField(wireName: 'used')
-  @nullable
-  int get usedSpace;
+  int? get usedSpace;
 
   @BuiltValueField(wireName: 'used_fraction')
-  @nullable
-  double get usedPercent;
+  double? get usedPercent;
 
-  factory PveNodesStorageModel([void Function(PveNodesStorageModelBuilder) updates]) =
+  factory PveNodesStorageModel([void Function(PveNodesStorageModelBuilder)? updates]) =
       _$PveNodesStorageModel;
   PveNodesStorageModel._();
 

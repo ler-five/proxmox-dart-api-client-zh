@@ -5,18 +5,16 @@ part 'pve_access_user_token_model.g.dart';
 
 abstract class PveAccessUserTokenModel
     implements Built<PveAccessUserTokenModel, PveAccessUserTokenModelBuilder> {
-  @nullable
-  String get userid;
-  @nullable
-  DateTime get expire;
+  String? get userid;
+  DateTime? get expire;
 
-  bool get privsep;
+  bool? get privsep;
 
-  String get tokenid;
+  String? get tokenid;
 
   PveAccessUserTokenModel._();
   factory PveAccessUserTokenModel(
-          [void Function(PveAccessUserTokenModelBuilder) updates]) =
+          [void Function(PveAccessUserTokenModelBuilder)? updates]) =
       _$PveAccessUserTokenModel;
 
   static Serializer<PveAccessUserTokenModel> get serializer =>

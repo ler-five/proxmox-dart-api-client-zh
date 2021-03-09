@@ -10,32 +10,23 @@ part 'pve_nodes_lxc_status_model.g.dart';
 abstract class PveNodesLxcStatusModel
     implements Built<PveNodesLxcStatusModel, PveNodesLxcStatusModelBuilder> {
   // Fields
-  PveHAMangerServiceStatusModel get ha;
-  LxcStatusType get status;
-  String get vmid;
-  @nullable
-  num get cpus;
-  @nullable
-  String get lock;
-  @nullable
-  int get integer;
-  @nullable
-  int get maxmem;
-  @nullable
-  int get maxswap;
-  @nullable
-  String get name;
-  @nullable
-  String get tags;
-  @nullable
-  Duration get uptime;
-  @nullable
-  bool get template;
+  PveHAMangerServiceStatusModel? get ha;
+  LxcStatusType? get status;
+  String? get vmid;
+  num? get cpus;
+  String? get lock;
+  int? get integer;
+  int? get maxmem;
+  int? get maxswap;
+  String? get name;
+  String? get tags;
+  Duration? get uptime;
+  bool? get template;
 
   PveNodesLxcStatusModel._();
 
   factory PveNodesLxcStatusModel(
-          [void Function(PveNodesLxcStatusModelBuilder) updates]) =
+          [void Function(PveNodesLxcStatusModelBuilder)? updates]) =
       _$PveNodesLxcStatusModel;
 
   static Serializer<PveNodesLxcStatusModel> get serializer =>

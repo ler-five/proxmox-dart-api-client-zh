@@ -21,7 +21,7 @@ Future<ProxmoxApiClient> authenticate(
   String password,
   Uri apiBaseUrl,
   bool validateSSL, {
-  http.Client httpClient,
+  http.Client? httpClient,
 }) async {
   httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 
@@ -57,7 +57,7 @@ Future<ProxmoxApiClient> authenticate(
 Future<List<PveAccessDomainModel>> accessDomains(
   Uri apiBaseUrl,
   bool validateSSL, {
-  http.Client httpClient,
+  http.Client? httpClient,
 }) async {
   httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 

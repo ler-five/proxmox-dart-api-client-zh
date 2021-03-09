@@ -6,16 +6,14 @@ part 'pve_access_role_model.g.dart';
 abstract class PveAccessRoleModel
     implements Built<PveAccessRoleModel, PveAccessRoleModelBuilder> {
   // Fields
-  String get roleid;
-  @nullable
-  String get privs;
-  @nullable
-  bool get special;
+  String? get roleid;
+  String? get privs;
+  bool? get special;
 
   PveAccessRoleModel._();
 
   factory PveAccessRoleModel(
-          [void Function(PveAccessRoleModelBuilder) updates]) =
+          [void Function(PveAccessRoleModelBuilder)? updates]) =
       _$PveAccessRoleModel;
 
   static Serializer<PveAccessRoleModel> get serializer =>

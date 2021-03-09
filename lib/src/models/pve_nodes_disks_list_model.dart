@@ -9,31 +9,23 @@ abstract class PveNodesDisksListModel
     implements Built<PveNodesDisksListModel, PveNodesDisksListModelBuilder> {
   // Fields
   @BuiltValueField(wireName: 'devpath')
-  String get devPath;
-  bool get gpt;
-  int get size;
+  String? get devPath;
+  bool? get gpt;
+  int? get size;
 
-  @nullable
-  String get health;
-  @nullable
-  String get type;
-  @nullable
-  String get model;
-  @nullable
-  String get serial;
-  @nullable
-  String get used;
-  @nullable
-  String get vendor;
-  @nullable
-  String get wwn;
-  @nullable
-  JsonObject get wearout;
+  String? get health;
+  String? get type;
+  String? get model;
+  String? get serial;
+  String? get used;
+  String? get vendor;
+  String? get wwn;
+  JsonObject? get wearout;
 
   PveNodesDisksListModel._();
 
   factory PveNodesDisksListModel(
-          [void Function(PveNodesDisksListModelBuilder) updates]) =
+          [void Function(PveNodesDisksListModelBuilder)? updates]) =
       _$PveNodesDisksListModel;
 
   static Serializer<PveNodesDisksListModel> get serializer =>

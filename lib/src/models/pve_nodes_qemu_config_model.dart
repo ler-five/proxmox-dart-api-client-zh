@@ -11,106 +11,66 @@ abstract class PveNodesQemuConfigModel
   static Serializer<PveNodesQemuConfigModel> get serializer =>
       _$pveNodesQemuConfigModelSerializer;
   factory PveNodesQemuConfigModel(
-          [void Function(PveNodesQemuConfigModelBuilder) updates]) =
+          [void Function(PveNodesQemuConfigModelBuilder)? updates]) =
       _$PveNodesQemuConfigModel;
 
-  String get digest;
-  @nullable
-  bool get acpi;
-  @nullable
-  String get agent;
-  @nullable
-  ProcessorArch get arch;
+  String? get digest;
+  bool? get acpi;
+  String? get agent;
+  ProcessorArch? get arch;
   //bool get autostart;
-  @nullable
-  int get balloon;
-  @nullable
-  Bios get bios;
-  @nullable
-  String get boot;
-  @nullable
-  String get cdrom;
-  @nullable
-  int get cores;
-  @nullable
-  String get cpu;
-  @nullable
-  String get description;
-  @nullable
-  bool get freeze;
-  @nullable
-  BuiltList<String> get hostpci;
-  @nullable
-  String get hotplug;
-  @nullable
-  Hugepages get hugepages;
-  BuiltList<String> get ide;
-  @nullable
-  bool get kvm;
-  @nullable
-  bool get localtime;
-  @nullable
-  LockType get lock;
-  @nullable
-  String get machine;
-  @nullable
-  int get memory;
-  @nullable
-  String get name;
-  BuiltList<String> get net;
-  @nullable
-  bool get numa;
-  @nullable
-  bool get onboot;
-  @nullable
-  OSType get ostype;
-  @nullable
-  bool get protection;
-  @nullable
-  bool get reboot;
-  BuiltList<String> get sata;
-  BuiltList<String> get scsi;
-  @nullable
-  ScsiControllerModel get scsihw;
-  @nullable
-  String get serial0;
-  @nullable
-  int get shares;
-  @nullable
-  String get smbios1;
-  @nullable
-  int get sockets;
-  @nullable
+  int? get balloon;
+  Bios? get bios;
+  String? get boot;
+  String? get cdrom;
+  int? get cores;
+  String? get cpu;
+  String? get description;
+  bool? get freeze;
+  BuiltList<String>? get hostpci;
+  String? get hotplug;
+  Hugepages? get hugepages;
+  BuiltList<String>? get ide;
+  bool? get kvm;
+  bool? get localtime;
+  LockType? get lock;
+  String? get machine;
+  int? get memory;
+  String? get name;
+  BuiltList<String>? get net;
+  bool? get numa;
+  bool? get onboot;
+  OSType? get ostype;
+  bool? get protection;
+  bool? get reboot;
+  BuiltList<String>? get sata;
+  BuiltList<String>? get scsi;
+  ScsiControllerModel? get scsihw;
+  String? get serial0;
+  int? get shares;
+  String? get smbios1;
+  int? get sockets;
   @BuiltValueField(wireName: 'spice_enhancements')
-  String get spiceEnhancements;
-  @nullable
-  String get startdate;
-  @nullable
-  String get startup;
-  @nullable
-  bool get tablet;
-  @nullable
-  String get tags;
-  BuiltList<String> get unused;
-  BuiltList<String> get usb;
-  @nullable
-  int get vcpus;
-  BuiltList<String> get virtio;
-  @nullable
-  String get vmgenid;
-  @nullable
-  String get vmstatestorage;
-  @nullable
-  String get watchdog;
-  @nullable
-  Map<String, dynamic> get pending;
+  String? get spiceEnhancements;
+  String? get startdate;
+  String? get startup;
+  bool? get tablet;
+  String? get tags;
+  BuiltList<String>? get unused;
+  BuiltList<String>? get usb;
+  int? get vcpus;
+  BuiltList<String>? get virtio;
+  String? get vmgenid;
+  String? get vmstatestorage;
+  String? get watchdog;
+  Map<String, dynamic>? get pending;
 
   dynamic getPending(String field) {
-    if (pending == null || pending.isEmpty) {
+    if (pending == null || pending!.isEmpty) {
       throw StateError('No pending values available');
     }
-    if (pending[field] != null && pending[field]['pending'] != null) {
-      return pending[field]['pending'];
+    if (pending![field] != null && pending![field]['pending'] != null) {
+      return pending![field]['pending'];
     }
     return null;
   }
@@ -118,15 +78,15 @@ abstract class PveNodesQemuConfigModel
   PveNodesQemuConfigModel postProcessEnumeratedJsonFields(dynamic object) {
     final map = object as Map<String, dynamic>;
 
-    List<String> hostpci = matchEnumJsonFields('hostpci', 16, map);
-    List<String> net = matchEnumJsonFields('net', 32, map);
-    List<String> usb = matchEnumJsonFields('usb', 5, map);
+    List<String?> hostpci = matchEnumJsonFields('hostpci', 16, map);
+    List<String?> net = matchEnumJsonFields('net', 32, map);
+    List<String?> usb = matchEnumJsonFields('usb', 5, map);
 
-    List<String> ide = matchEnumJsonFields('ide', 4, map);
-    List<String> sata = matchEnumJsonFields('sata', 6, map);
-    List<String> scsi = matchEnumJsonFields('scsi', 31, map);
-    List<String> unused = matchEnumJsonFields('unused', 256, map);
-    List<String> virtio = matchEnumJsonFields('virtio', 16, map);
+    List<String?> ide = matchEnumJsonFields('ide', 4, map);
+    List<String?> sata = matchEnumJsonFields('sata', 6, map);
+    List<String?> scsi = matchEnumJsonFields('scsi', 31, map);
+    List<String?> unused = matchEnumJsonFields('unused', 256, map);
+    List<String?> virtio = matchEnumJsonFields('virtio', 16, map);
 
     return rebuild((b) => b
       ..hostpci.replace(hostpci)
@@ -201,12 +161,12 @@ class OSType extends EnumClass {
     other: {'desc': '-', 'type': 'Other'},
   };
 
-  String get description {
-    return osChoices[this]['desc'];
+  String? get description {
+    return osChoices[this]!['desc'];
   }
 
-  String get type {
-    return osChoices[this]['type'];
+  String? get type {
+    return osChoices[this]!['type'];
   }
 }
 

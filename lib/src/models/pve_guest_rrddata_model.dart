@@ -28,32 +28,22 @@ abstract class PveGuestRRDdataModel
   static Serializer<PveGuestRRDdataModel> get serializer =>
       _$pveGuestRRDdataModelSerializer;
 
-  DateTime get time;
+  DateTime? get time;
 
-  @nullable
-  double get cpu;
-  @nullable
-  double get diskread;
-  @nullable
-  double get diskwrite;
-  @nullable
-  double get netin;
-  @nullable
-  double get netout;
-  @nullable
-  double get mem;
-  @nullable
-  double get maxmem;
-  @nullable
-  double get maxdisk;
-  @nullable
-  double get maxcpu;
-  @nullable
-  double get disk;
+  double? get cpu;
+  double? get diskread;
+  double? get diskwrite;
+  double? get netin;
+  double? get netout;
+  double? get mem;
+  double? get maxmem;
+  double? get maxdisk;
+  double? get maxcpu;
+  double? get disk;
 
   PveGuestRRDdataModel._();
   factory PveGuestRRDdataModel(
-          [void Function(PveGuestRRDdataModelBuilder) updates]) =
+          [void Function(PveGuestRRDdataModelBuilder)? updates]) =
       _$PveGuestRRDdataModel;
 }
 

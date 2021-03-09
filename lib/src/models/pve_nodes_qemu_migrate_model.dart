@@ -9,21 +9,19 @@ abstract class PveNodesQemuMigrate
     implements Built<PveNodesQemuMigrate, PveNodesQemuMigrateBuilder> {
   // Fields
   @BuiltValueField(wireName: 'local_disks')
-  BuiltSet<JsonObject> get localDisks;
+  BuiltSet<JsonObject>? get localDisks;
   @BuiltValueField(wireName: 'local_resources')
-  BuiltSet<JsonObject> get localResources;
-  bool get running;
-  @nullable
+  BuiltSet<JsonObject>? get localResources;
+  bool? get running;
   @BuiltValueField(wireName: 'allowed_nodes')
-  BuiltSet<String> get allowedNodes;
-  @nullable
+  BuiltSet<String>? get allowedNodes;
   @BuiltValueField(wireName: 'not_allowed_nodes')
-  BuiltMap<String,JsonObject> get notAllowedNodes;
+  BuiltMap<String,JsonObject>? get notAllowedNodes;
 
   PveNodesQemuMigrate._();
 
   factory PveNodesQemuMigrate(
-          [void Function(PveNodesQemuMigrateBuilder) updates]) =
+          [void Function(PveNodesQemuMigrateBuilder)? updates]) =
       _$PveNodesQemuMigrate;
 
   static Serializer<PveNodesQemuMigrate> get serializer =>

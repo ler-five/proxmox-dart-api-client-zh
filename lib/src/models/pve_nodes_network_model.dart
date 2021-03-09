@@ -11,41 +11,27 @@ abstract class PveNodeNetworkModel
 
   PveNodeNetworkModel._();
   factory PveNodeNetworkModel(
-          [void Function(PveNodeNetworkModelBuilder) updates]) =
+          [void Function(PveNodeNetworkModelBuilder)? updates]) =
       _$PveNodeNetworkModel;
 
-  bool get active;
-  @nullable
-  String get address;
-  @nullable
-  bool get autostart;
+  bool? get active;
+  String? get address;
+  bool? get autostart;
   @BuiltValueField(wireName: 'bridge_fd')
-  @nullable
-  String get bridgeForwardDelay;
+  String? get bridgeForwardDelay;
   @BuiltValueField(wireName: 'bridge_ports')
-  @nullable
-  String get bridgePorts;
+  String? get bridgePorts;
   @BuiltValueField(wireName: 'bridge_stp')
-  @nullable
-  String get bridgeStp;
-  @nullable
-  String get cidr;
-  @nullable
-  String get gateway;
-  @nullable
-  String get iface;
-  @nullable
-  String get method;
-  @nullable
-  String get method6;
-  @nullable
-  String get netmask;
-  @nullable
-  int get priority;
-  @nullable
-  InterfaceType get type;
-  @nullable
-  String get comment;
+  String? get bridgeStp;
+  String? get cidr;
+  String? get gateway;
+  String? get iface;
+  String? get method;
+  String? get method6;
+  String? get netmask;
+  int? get priority;
+  InterfaceType? get type;
+  String? get comment;
 }
 
 @BuiltValueEnum(wireName: 'type')

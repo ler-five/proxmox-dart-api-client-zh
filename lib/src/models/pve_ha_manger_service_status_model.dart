@@ -7,15 +7,13 @@ abstract class PveHAMangerServiceStatusModel
     implements
         Built<PveHAMangerServiceStatusModel,
             PveHAMangerServiceStatusModelBuilder> {
-  bool get managed;
-  @nullable
-  String get group;
-  @nullable
-  String get state;
+  bool? get managed;
+  String? get group;
+  String? get state;
 
   PveHAMangerServiceStatusModel._();
   factory PveHAMangerServiceStatusModel(
-          [void Function(PveHAMangerServiceStatusModelBuilder) updates]) =
+          [void Function(PveHAMangerServiceStatusModelBuilder)? updates]) =
       _$PveHAMangerServiceStatusModel;
   static Serializer<PveHAMangerServiceStatusModel> get serializer =>
       _$pveHAMangerServiceStatusModelSerializer;

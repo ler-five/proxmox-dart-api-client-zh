@@ -17,18 +17,18 @@ import 'package:proxmox_dart_api_client/src/models/pve_nodes_model.dart';
 import 'package:retry/retry.dart';
 
 class ProxmoxApiClient extends http.BaseClient {
-  http.Client _httpClient;
+  http.Client? _httpClient;
 
   Credentials credentials;
 
   ProxmoxApiClient(
     this.credentials, {
-    http.Client httpClient,
+    http.Client? httpClient,
   }) : _httpClient = httpClient ?? getCustomIOHttpClient();
 
   Future<http.Response> getRequest(
     String path, [
-    Map<String, String> queryParameters,
+    Map<String, String>? queryParameters,
   ]) async {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
@@ -44,7 +44,7 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<http.Response> postRequest(
     String path, [
-    Map<String, String> parameters,
+    Map<String, String>? parameters,
   ]) async {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
@@ -58,7 +58,7 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<http.Response> putRequest(
     String path, [
-    Map<String, String> parameters,
+    Map<String, String>? parameters,
   ]) async {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
@@ -78,8 +78,8 @@ class ProxmoxApiClient extends http.BaseClient {
     }
     request.headers['Authorization'] = 'PVEAuthCookie ${credentials.ticket}';
 
-    request.headers['CSRFPreventionToken'] = credentials.csrfToken;
-    var response = await _httpClient.send(request);
+    request.headers['CSRFPreventionToken'] = credentials.csrfToken!;
+    var response = await _httpClient!.send(request);
 
     return response;
   }
@@ -107,12 +107,12 @@ class ProxmoxApiClient extends http.BaseClient {
   /// Closes this client and its underlying HTTP client.
   @override
   void close() {
-    if (_httpClient != null) _httpClient.close();
+    if (_httpClient != null) _httpClient!.close();
     _httpClient = null;
   }
 
   Future<http.Response> _getWithValidation(
-      String path, Map<String, dynamic> queryParameters,
+      String path, Map<String, dynamic>? queryParameters,
       {bool extensiveResponseValidation = false}) async {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
@@ -132,7 +132,7 @@ class ProxmoxApiClient extends http.BaseClient {
   }
 
   Future<http.Response> _postWithValidation(
-      String path, Map<String, dynamic> queryParameters,
+      String path, Map<String, dynamic>? queryParameters,
       {bool extensiveResponseValidation = false}) async {
     if (!path.startsWith('/api2/json')) {
       path = '/api2/json' + path;
@@ -162,7 +162,7 @@ class ProxmoxApiClient extends http.BaseClient {
     return (await delete(url)).validate(extensiveResponseValidation);
   }
 
-  Future<String> getNextFreeID({String id}) async {
+  Future<String?> getNextFreeID({String? id}) async {
     final path = '/api2/json/cluster/nextid';
     var queryParameters = {'vmid': id};
     final response = await _getWithValidation(path, queryParameters,
@@ -173,7 +173,7 @@ class ProxmoxApiClient extends http.BaseClient {
   }
 
   Future<List<PveClusterResourcesModel>> getResources(
-      {PveClusterResourceType type}) async {
+      {PveClusterResourceType? type}) async {
     var path = '/api2/json/cluster/resources';
     var queryParameters = {'type': type?.name};
 
@@ -220,8 +220,8 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<List<PveNodeNetworkModel>> getNodeNetwork(
     String targetNode, {
-    InterfaceType type,
-    bool extensiveResponseValidation,
+    InterfaceType? type,
+    bool? extensiveResponseValidation,
   }) async {
     final path = '/api2/json/nodes/$targetNode/network';
     var queryParameters = {'type': type?.name};
@@ -235,11 +235,11 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<List<PveNodesStorageModel>> getNodeStorage(
     String targetNode, {
-    PveStorageContentType content,
+    PveStorageContentType? content,
     bool enabled = false,
     bool format = false,
-    String storageId,
-    String target,
+    String? storageId,
+    String? target,
   }) async {
     var path = '/api2/json/nodes/$targetNode/storage';
     var queryParameters = {
@@ -262,8 +262,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<List<PveNodesStorageContentModel>> getNodeStorageContent(
     String targetNode,
     String storageId, {
-    PveStorageContentType content,
-    int vmid,
+    PveStorageContentType? content,
+    int? vmid,
   }) async {
     final path = '/api2/json/nodes/$targetNode/storage/$storageId/content';
     var queryParameters = {'content': content?.name, 'vmid': vmid?.toString()};
@@ -281,7 +281,7 @@ class ProxmoxApiClient extends http.BaseClient {
     String targetNode,
     String storageId,
     String volume, {
-    int delay,
+    int? delay,
   }) async {
     final path =
         '/api2/json/nodes/$targetNode/storage/$storageId/content/$volume';
@@ -331,8 +331,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<PveNodesQemuConfigModel> getQemuConfig(
     String targetNode,
     String guestId, {
-    bool current,
-    String snapshot,
+    required bool current,
+    String? snapshot,
   }) async {
     final path = '/api2/json/nodes/$targetNode/qemu/$guestId/config';
     var queryParameters = {
@@ -353,7 +353,7 @@ class ProxmoxApiClient extends http.BaseClient {
     String guestId,
     String type,
     PveClusterResourceAction action, {
-    Map<String, String> parameters,
+    Map<String, String>? parameters,
   }) async {
     String url;
 
@@ -379,13 +379,13 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<NodeTasksResponse> getNodeTasks(
     String targetNode, {
-    String guestId,
+    String? guestId,
     bool errors = false,
-    String limit,
-    String start,
-    String source,
-    String typefilter,
-    String userfilter,
+    String? limit,
+    String? start,
+    String? source,
+    String? typefilter,
+    String? userfilter,
   }) async {
     final path = '/api2/json/nodes/$targetNode/tasks';
     var queryParameters = {
@@ -410,8 +410,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<PveTaskLogResponse> getNodeTaskLog(
     String targetNode,
     String upid, {
-    String limit,
-    String start,
+    String? limit,
+    String? start,
   }) async {
     final path = '/api2/json/nodes/$targetNode/tasks/$upid/log';
     var queryParameters = {
@@ -434,7 +434,7 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<PveNodesQemuMigrate> getMigratePreconditions(
     String targetNode,
     String guestId, {
-    String migrationTarget,
+    String? migrationTarget,
   }) async {
     final path = '/api2/json/nodes/$targetNode/qemu/$guestId/migrate';
     var queryParameters = {'target': migrationTarget};
@@ -443,15 +443,15 @@ class ProxmoxApiClient extends http.BaseClient {
     return serializers.deserializeWith(PveNodesQemuMigrate.serializer, data);
   }
 
-  Future<String> qemuMigrate(
+  Future<String?> qemuMigrate(
     String targetNode,
     String guestId,
     String migrationTarget, {
-    String bandwidthLimit,
+    String? bandwidthLimit,
     bool force = false,
-    String migrationNetwork,
+    String? migrationNetwork,
     bool online = false,
-    String targetStorage,
+    String? targetStorage,
     bool withLocalDisks = false,
   }) async {
     final path = '/api2/json/nodes/$targetNode/qemu/$guestId/migrate';
@@ -485,8 +485,8 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<PveNodesLxcConfigModel> getLxcConfig(
     String targetNode,
     String guestId, {
-    bool current,
-    String snapshot,
+    required bool current,
+    String? snapshot,
   }) async {
     final path = '/api2/json/nodes/$targetNode/lxc/$guestId/config';
     var queryParameters = {
@@ -516,16 +516,16 @@ class ProxmoxApiClient extends http.BaseClient {
     return serializers.deserializeWith(PveNodesLxcStatusModel.serializer, data);
   }
 
-  Future<String> lxcMigrate(
+  Future<String?> lxcMigrate(
     String targetNode,
     String guestId,
     String migrationTarget, {
-    String bandwidthLimit,
-    String migrationNetwork,
+    String? bandwidthLimit,
+    String? migrationNetwork,
     bool online = false,
     bool restart = false,
     bool withLocalDisks = false,
-    int timeout,
+    int? timeout,
   }) async {
     final path = '/api2/json/nodes/$targetNode/lxc/$guestId/migrate';
     var queryParameters = {
@@ -590,7 +590,7 @@ class ProxmoxApiClient extends http.BaseClient {
   Future<List<PveNodesDisksListModel>> getNodeDisksList(
     String targetNode, {
     bool skipsmart = false,
-    PveNodesDiskListType type,
+    PveNodesDiskListType? type,
   }) async {
     final path = '/api2/json/nodes/$targetNode/disks/list';
     var queryParameters = {
@@ -604,7 +604,7 @@ class ProxmoxApiClient extends http.BaseClient {
     return data.toList();
   }
 
-  Future<String> getNodesVZDumpExtractConfig(
+  Future<String?> getNodesVZDumpExtractConfig(
       String targetNode, String volume) async {
     final path = '/api2/json/nodes/$targetNode/vzdump/extractconfig';
     var queryParameters = {'volume': volume};
@@ -613,14 +613,14 @@ class ProxmoxApiClient extends http.BaseClient {
     return data;
   }
 
-  Future<String> nodesVZDumpCreateBackup(
+  Future<String?> nodesVZDumpCreateBackup(
     String targetNode,
     String storage,
     String guestId, {
     bool remove = false,
-    PveVZDumpCompressionType compressionType,
-    PveVZDumpModeType mode,
-    String mailTo,
+    PveVZDumpCompressionType? compressionType,
+    required PveVZDumpModeType mode,
+    String? mailTo,
   }) async {
     final path = '/api2/json/nodes/$targetNode/vzdump';
     var queryParameters = {
@@ -628,7 +628,7 @@ class ProxmoxApiClient extends http.BaseClient {
       'vmid': guestId,
       'remove': remove ? '1' : '0',
       'compress': compressionType != PveVZDumpCompressionType.none
-          ? compressionType.name
+          ? compressionType!.name
           : null,
       'mode': mode.name,
       'mailto': mailTo,

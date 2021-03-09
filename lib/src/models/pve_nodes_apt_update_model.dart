@@ -6,41 +6,31 @@ part 'pve_nodes_apt_update_model.g.dart';
 abstract class PveNodesAptUpdateModel
     implements Built<PveNodesAptUpdateModel, PveNodesAptUpdateModelBuilder> {
   // Fields
-  @nullable
   @BuiltValueField(wireName: 'Title')
-  String get title;
-  @nullable
+  String? get title;
   @BuiltValueField(wireName: 'Version')
-  String get version;
-  @nullable
+  String? get version;
   @BuiltValueField(wireName: 'Section')
-  String get section;
-  @nullable
+  String? get section;
   @BuiltValueField(wireName: 'Arch')
-  String get arch;
-  @nullable
+  String? get arch;
   @BuiltValueField(wireName: 'Priority')
-  String get priority;
-  @nullable
+  String? get priority;
   @BuiltValueField(wireName: 'OldVersion')
-  String get oldVersion;
-  @nullable
+  String? get oldVersion;
   @BuiltValueField(wireName: 'Description')
-  String get description;
-  @nullable
+  String? get description;
   @BuiltValueField(wireName: 'ChangeLogUrl')
-  String get changeLogUrl;
-  @nullable
+  String? get changeLogUrl;
   @BuiltValueField(wireName: 'Origin')
-  String get origin;
-  @nullable
+  String? get origin;
   @BuiltValueField(wireName: 'Package')
-  String get package;
+  String? get package;
 
   PveNodesAptUpdateModel._();
 
   factory PveNodesAptUpdateModel(
-          [void Function(PveNodesAptUpdateModelBuilder) updates]) =
+          [void Function(PveNodesAptUpdateModelBuilder)? updates]) =
       _$PveNodesAptUpdateModel;
 
   static Serializer<PveNodesAptUpdateModel> get serializer =>

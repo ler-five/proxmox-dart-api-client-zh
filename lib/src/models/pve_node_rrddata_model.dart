@@ -20,36 +20,24 @@ part 'pve_node_rrddata_model.g.dart';
 abstract class PveNodeRRDDataModel
     implements Built<PveNodeRRDDataModel, PveNodeRRDDataModelBuilder> {
   // Fields
-  DateTime get time;
-  @nullable
-  double get iowait;
-  @nullable
-  double get netin;
-  @nullable
-  double get netout;
-  @nullable
-  double get memused;
-  @nullable
-  double get memtotal;
-  @nullable
-  double get swapused;
-  @nullable
-  double get swaptotal;
-  @nullable
-  double get roottotal;
-  @nullable
-  double get rootused;
-  @nullable
-  double get cpu;
-  @nullable
-  double get maxcpu;
-  @nullable
-  double get loadavg;
+  DateTime? get time;
+  double? get iowait;
+  double? get netin;
+  double? get netout;
+  double? get memused;
+  double? get memtotal;
+  double? get swapused;
+  double? get swaptotal;
+  double? get roottotal;
+  double? get rootused;
+  double? get cpu;
+  double? get maxcpu;
+  double? get loadavg;
 
   PveNodeRRDDataModel._();
 
   factory PveNodeRRDDataModel(
-          [void Function(PveNodeRRDDataModelBuilder) updates]) =
+          [void Function(PveNodeRRDDataModelBuilder)? updates]) =
       _$PveNodeRRDDataModel;
 
   static Serializer<PveNodeRRDDataModel> get serializer =>

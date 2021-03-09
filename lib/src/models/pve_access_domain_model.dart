@@ -6,15 +6,13 @@ part 'pve_access_domain_model.g.dart';
 abstract class PveAccessDomainModel
     implements Built<PveAccessDomainModel, PveAccessDomainModelBuilder> {
   // Fields
-  String get realm;
-  @nullable
-  String get comment;
-  @nullable
-  String get tfa;
+  String? get realm;
+  String? get comment;
+  String? get tfa;
   PveAccessDomainModel._();
 
   factory PveAccessDomainModel(
-          [void Function(PveAccessDomainModelBuilder) updates]) =
+          [void Function(PveAccessDomainModelBuilder)? updates]) =
       _$PveAccessDomainModel;
 
   static Serializer<PveAccessDomainModel> get serializer =>

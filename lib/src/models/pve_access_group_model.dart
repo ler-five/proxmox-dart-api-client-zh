@@ -6,16 +6,14 @@ part 'pve_access_group_model.g.dart';
 abstract class PveAccessGroupModel
     implements Built<PveAccessGroupModel, PveAccessGroupModelBuilder> {
   // Fields
-  String get groupid;
-  @nullable
-  String get comment;
-  @nullable
-  String get users;
+  String? get groupid;
+  String? get comment;
+  String? get users;
 
   PveAccessGroupModel._();
 
   factory PveAccessGroupModel(
-          [void Function(PveAccessGroupModelBuilder) updates]) =
+          [void Function(PveAccessGroupModelBuilder)? updates]) =
       _$PveAccessGroupModel;
 
   static Serializer<PveAccessGroupModel> get serializer =>

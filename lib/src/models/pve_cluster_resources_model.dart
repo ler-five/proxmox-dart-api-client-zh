@@ -10,52 +10,34 @@ abstract class PveClusterResourcesModel
   static Serializer<PveClusterResourcesModel> get serializer =>
       _$pveClusterResourcesModelSerializer;
 
-  String get id;
-  String get type;
+  String? get id;
+  String? get type;
 
-  @nullable
-  double get cpu;
-  @nullable
-  int get disk;
-  @nullable
-  String get hastate;
-  @nullable
-  String get level;
-  @nullable
-  double get maxcpu;
-  @nullable
-  int get maxdisk;
-  @nullable
-  int get maxmem;
-  @nullable
-  int get mem;
-  @nullable
-  String get name;
-  @nullable
-  String get node;
-  @nullable
-  String get pool;
-  @nullable
-  String get status;
-  @nullable
-  bool get shared;
-  @nullable
-  String get storage;
-  @nullable
-  int get uptime;
-  @nullable
-  int get vmid;
-  @nullable
-  String get lock;
-  @nullable
-  bool get template;
+  double? get cpu;
+  int? get disk;
+  String? get hastate;
+  String? get level;
+  double? get maxcpu;
+  int? get maxdisk;
+  int? get maxmem;
+  int? get mem;
+  String? get name;
+  String? get node;
+  String? get pool;
+  String? get status;
+  bool? get shared;
+  String? get storage;
+  int? get uptime;
+  int? get vmid;
+  String? get lock;
+  bool? get template;
 
   factory PveClusterResourcesModel(
-          [void Function(PveClusterResourcesModelBuilder) updates]) =
+          [void Function(PveClusterResourcesModelBuilder)? updates]) =
       _$PveClusterResourcesModel;
   PveClusterResourcesModel._();
 
-  String get displayName {
+  String? get displayName {
     switch (type) {
       case 'node':
         return node;

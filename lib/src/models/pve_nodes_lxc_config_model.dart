@@ -9,67 +9,43 @@ part 'pve_nodes_lxc_config_model.g.dart';
 abstract class PveNodesLxcConfigModel
     implements Built<PveNodesLxcConfigModel, PveNodesLxcConfigModelBuilder> {
   // Fields
-  String get digest;
+  String? get digest;
 
-  @nullable
-  LxcProcessorArch get arch;
-  @nullable
-  LxcConsoleMode get cmode;
-  @nullable
-  bool get console;
-  @nullable
-  int get cores;
-  @nullable
-  int get cpuunits;
-  @nullable
-  String get description;
-  @nullable
-  JsonObject get features;
-  @nullable
-  String get hostname;
-  @nullable
-  LxcLockType get lock;
-  @nullable
-  BuiltList<BuiltList<String>> get lxc;
-  @nullable
-  int get memory;
-  BuiltList<String> get mp;
-  @nullable
-  String get nameserver;
-  BuiltList<String> get net;
-  @nullable
-  bool get onboot;
-  @nullable
-  LxcOsType get ostype;
-  @nullable
-  bool get protection;
-  @nullable
-  JsonObject get rootfs;
-  @nullable
-  String get searchdomain;
-  @nullable
-  String get startup;
-  @nullable
-  int get swap;
-  @nullable
-  String get tags;
-  @nullable
-  bool get template;
-  @nullable
-  int get tty;
-  @nullable
-  bool get unprivileged;
-  BuiltList<String> get unused;
+  LxcProcessorArch? get arch;
+  LxcConsoleMode? get cmode;
+  bool? get console;
+  int? get cores;
+  int? get cpuunits;
+  String? get description;
+  JsonObject? get features;
+  String? get hostname;
+  LxcLockType? get lock;
+  BuiltList<BuiltList<String>>? get lxc;
+  int? get memory;
+  BuiltList<String>? get mp;
+  String? get nameserver;
+  BuiltList<String>? get net;
+  bool? get onboot;
+  LxcOsType? get ostype;
+  bool? get protection;
+  JsonObject? get rootfs;
+  String? get searchdomain;
+  String? get startup;
+  int? get swap;
+  String? get tags;
+  bool? get template;
+  int? get tty;
+  bool? get unprivileged;
+  BuiltList<String>? get unused;
 
-  @nullable
-  Map<String, dynamic> get pending;
+  Map<String, dynamic>? get pending;
 
   dynamic getPending(String field) {
-    if (pending == null || pending.isEmpty) {
+    if (pending == null || pending!.isEmpty) {
       throw StateError('No pending values available');
     }
-    if (pending[field] != null && pending[field]['pending'] != null) {
-      return pending[field]['pending'];
+    if (pending![field] != null && pending![field]['pending'] != null) {
+      return pending![field]['pending'];
     }
     return null;
   }
@@ -77,7 +53,7 @@ abstract class PveNodesLxcConfigModel
   PveNodesLxcConfigModel._();
 
   factory PveNodesLxcConfigModel(
-          [void Function(PveNodesLxcConfigModelBuilder) updates]) =
+          [void Function(PveNodesLxcConfigModelBuilder)? updates]) =
       _$PveNodesLxcConfigModel;
 
   static Serializer<PveNodesLxcConfigModel> get serializer =>
@@ -85,9 +61,9 @@ abstract class PveNodesLxcConfigModel
   PveNodesLxcConfigModel postProcessEnumeratedJsonFields(dynamic object) {
     final map = object as Map<String, dynamic>;
 
-    List<String> mp = matchEnumJsonFields('mp', 256, map);
-    List<String> net = matchEnumJsonFields('net', 10, map);
-    List<String> unused = matchEnumJsonFields('unused', 256, map);
+    List<String?> mp = matchEnumJsonFields('mp', 256, map);
+    List<String?> net = matchEnumJsonFields('net', 10, map);
+    List<String?> unused = matchEnumJsonFields('unused', 256, map);
 
     return rebuild(
         (b) => b..mp.replace(mp)..unused.replace(unused)..net.replace(net));

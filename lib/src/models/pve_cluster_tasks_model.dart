@@ -9,29 +9,27 @@ abstract class PveClusterTasksModel
   static Serializer<PveClusterTasksModel> get serializer => _$pveClusterTasksModelSerializer;
 
   @BuiltValueField(wireName: 'starttime')
-  DateTime get startTime;
+  DateTime? get startTime;
 
   @BuiltValueField(wireName: 'endtime')
-  @nullable
-  DateTime get endTime;
+  DateTime? get endTime;
 
-  @nullable
-  String get status;
+  String? get status;
 
-  String get type;
-  String get upid;
-  String get user;
-  String get node;
+  String? get type;
+  String? get upid;
+  String? get user;
+  String? get node;
 
-  factory PveClusterTasksModel([void Function(PveClusterTasksModelBuilder) updates]) =
+  factory PveClusterTasksModel([void Function(PveClusterTasksModelBuilder)? updates]) =
       _$PveClusterTasksModel;
   PveClusterTasksModel._();
 
 }
 
 class NodeTasksResponse {
-  final List<PveClusterTasksModel> tasks;
-  final int total;
+  final List<PveClusterTasksModel>? tasks;
+  final int? total;
 
   NodeTasksResponse({this.tasks, this.total});
 

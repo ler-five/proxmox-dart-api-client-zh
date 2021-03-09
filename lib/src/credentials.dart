@@ -14,11 +14,11 @@ class Credentials {
 
   final String username;
 
-  final String ticket;
+  final String? ticket;
 
-  final String csrfToken;
+  final String? csrfToken;
 
-  final DateTime expiration;
+  final DateTime? expiration;
 
   bool tfa;
 
@@ -26,7 +26,7 @@ class Credentials {
 
   bool get isExpired =>
       expiration != null &&
-      DateTime.now().isAfter(expiration.add(Duration(hours: 1)));
+      DateTime.now().isAfter(expiration!.add(Duration(hours: 1)));
 
   Uri get ticketUrl => apiBaseUrl.replace(path: ticketPath);
 
@@ -41,7 +41,7 @@ class Credentials {
     this.tfa = false,
   });
 
-  Future<Credentials> refresh({http.Client httpClient}) async {
+  Future<Credentials> refresh({http.Client? httpClient}) async {
     httpClient ??= getCustomIOHttpClient();
 
     if (ticket == null) {
@@ -68,7 +68,7 @@ class Credentials {
   }
 
   Future<Credentials> tfaChallenge(String code,
-      {http.Client httpClient}) async {
+      {http.Client? httpClient}) async {
     httpClient ??= getCustomIOHttpClient();
 
     final body = {'response': code};
