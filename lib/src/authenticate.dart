@@ -25,14 +25,6 @@ Future<ProxmoxApiClient> authenticate(
 }) async {
   httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 
-  if (username == null || password == null) {
-    throw ArgumentError("Can't authenticate without username/password.");
-  }
-
-  if (apiBaseUrl == null) {
-    throw ArgumentError("Can't authenticate without apiBaseUrl");
-  }
-
   var body = {'username': username, 'password': password};
 
   try {
@@ -54,7 +46,7 @@ Future<ProxmoxApiClient> authenticate(
   }
 }
 
-Future<List<PveAccessDomainModel>> accessDomains(
+Future<List<PveAccessDomainModel?>> accessDomains(
   Uri apiBaseUrl,
   bool validateSSL, {
   http.Client? httpClient,

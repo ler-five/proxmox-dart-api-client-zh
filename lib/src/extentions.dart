@@ -5,10 +5,10 @@ import 'package:proxmox_dart_api_client/src/proxmox_api_exception.dart';
 extension ResponseValidation on http.Response {
   http.Response validate(bool extensive) {
     if (statusCode < 400) return this;
-    var message = 'Request failed with status ${statusCode}';
+    var message = 'Request failed with status $statusCode';
 
     if (reasonPhrase != null) {
-      message = '${statusCode}: ${reasonPhrase}';
+      message = '$statusCode: $reasonPhrase';
     }
     var decodedErrors;
 

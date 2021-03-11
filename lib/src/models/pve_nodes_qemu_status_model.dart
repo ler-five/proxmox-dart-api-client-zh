@@ -41,10 +41,8 @@ abstract class PveQemuStatusModel
       switch (qmpstatus) {
         case 'running':
           return PveResourceStatusType.running;
-          break;
         case 'paused':
           return PveResourceStatusType.paused;
-          break;
         default:
           if (lock == 'suspending') {
             return PveResourceStatusType.suspending;

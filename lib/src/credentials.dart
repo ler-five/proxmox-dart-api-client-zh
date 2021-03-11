@@ -22,7 +22,7 @@ class Credentials {
 
   bool tfa;
 
-  bool get canRefresh => ticket != null && apiBaseUrl != null;
+  bool get canRefresh => ticket != null;
 
   bool get isExpired =>
       expiration != null &&
@@ -46,14 +46,6 @@ class Credentials {
 
     if (ticket == null) {
       throw ArgumentError("Can't refresh credentials without valid ticket");
-    }
-
-    if (username == null) {
-      throw ArgumentError("Can't refresh credentials without valid ticket");
-    }
-
-    if (apiBaseUrl == null) {
-      throw ArgumentError("Can't refresh credentials without API base url.");
     }
 
     var body = {'username': username, 'password': ticket};

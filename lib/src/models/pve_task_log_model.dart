@@ -20,7 +20,7 @@ abstract class PveTaskLogModel
   factory PveTaskLogModel([void Function(PveTaskLogModelBuilder)? updates]) =
       _$PveTaskLogModel;
 
-  static PveTaskLogModel fromJson(String jsonString) {
+  static PveTaskLogModel? fromJson(String jsonString) {
     return serializers.deserializeWith(
         PveTaskLogModel.serializer, json.decode(jsonString));
   }
@@ -45,7 +45,7 @@ abstract class PveTaskLogResponse
 
   static Serializer<PveTaskLogResponse> get serializer =>
       _$pveTaskLogResponseSerializer;
-  static PveTaskLogResponse fromJson(String jsonString) {
+  static PveTaskLogResponse? fromJson(String jsonString) {
     return serializers.deserializeWith(
         PveTaskLogResponse.serializer, json.decode(jsonString));
   }
@@ -71,7 +71,7 @@ abstract class PveTaskLogStatus
   factory PveTaskLogStatus([void Function(PveTaskLogStatusBuilder)? updates]) =
       _$PveTaskLogStatus;
 
-  static PveTaskLogStatus fromJson(String jsonString) {
+  static PveTaskLogStatus? fromJson(String jsonString) {
     return serializers.deserializeWith(
         PveTaskLogStatus.serializer, json.decode(jsonString)['data']);
   }

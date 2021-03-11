@@ -1,12 +1,12 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
-
 part 'pve_cluster_tasks_model.g.dart';
 
 abstract class PveClusterTasksModel
     implements Built<PveClusterTasksModel, PveClusterTasksModelBuilder> {
-  static Serializer<PveClusterTasksModel> get serializer => _$pveClusterTasksModelSerializer;
+  static Serializer<PveClusterTasksModel> get serializer =>
+      _$pveClusterTasksModelSerializer;
 
   @BuiltValueField(wireName: 'starttime')
   DateTime? get startTime;
@@ -21,16 +21,15 @@ abstract class PveClusterTasksModel
   String? get user;
   String? get node;
 
-  factory PveClusterTasksModel([void Function(PveClusterTasksModelBuilder)? updates]) =
+  factory PveClusterTasksModel(
+          [void Function(PveClusterTasksModelBuilder)? updates]) =
       _$PveClusterTasksModel;
   PveClusterTasksModel._();
-
 }
 
 class NodeTasksResponse {
-  final List<PveClusterTasksModel>? tasks;
+  final List<PveClusterTasksModel?>? tasks;
   final int? total;
 
   NodeTasksResponse({this.tasks, this.total});
-
 }
