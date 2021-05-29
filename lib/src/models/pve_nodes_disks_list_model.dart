@@ -25,8 +25,7 @@ abstract class PveNodesDisksListModel
   String get wearout_percentage {
     try {
       return "${(100 - double.parse(wearout.toString()))}%";
-    }
-    catch(e) {
+    } catch (e) {
       return wearout.toString();
     }
   }
