@@ -139,6 +139,7 @@ class OSType extends EnumClass {
   static const OSType win7 = _$win7;
   static const OSType win8 = _$win8;
   static const OSType win10 = _$win10;
+  static const OSType win11 = _$win11;
   static const OSType l24 = _$l24;
   static const OSType l26 = _$l26;
   static const OSType solaris = _$solaris;
@@ -152,6 +153,7 @@ class OSType extends EnumClass {
     l26: {'desc': '5.x - 2.6 Kernel', 'type': 'Linux'},
     l24: {'desc': '2.4 Kernel', 'type': 'Linux'},
     win10: {'desc': '10/2016/2019', 'type': 'Microsoft Windows'},
+    win11: {'desc': '11/2022', 'type': 'Microsoft Windows'},
     win8: {'desc': '8.x/2012/2012r2', 'type': 'Microsoft Windows'},
     win7: {'desc': '7/2008r2', 'type': 'Microsoft Windows'},
     w2k8: {'desc': 'Vista/2008', 'type': 'Microsoft Windows'},
