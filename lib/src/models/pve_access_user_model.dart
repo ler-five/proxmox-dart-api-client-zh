@@ -25,6 +25,6 @@ abstract class PveAccessUserModel
   PveAccessUserModel._();
 
   factory PveAccessUserModel(
-          [void Function(PveAccessUserModelBuilder)? updates]) =
+          [void Function(PveAccessUserModelBuilder) updates]) =
       _$PveAccessUserModel;
 }

@@ -11,7 +11,7 @@ abstract class PveQemuStatusModel
       _$pveQemuStatusModelSerializer;
 
   PveHAMangerServiceStatusModel? get ha;
-  String? get status;
+  String get status;
   bool? get agent;
   String? get name;
   String? get pid;

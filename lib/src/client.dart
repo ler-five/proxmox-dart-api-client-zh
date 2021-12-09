@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
-import 'package:proxmox_dart_api_client/src/models/pve_access_user_model.dart';
+//import 'package:proxmox_dart_api_client/src/models/pve_access_user_model.dart';
 import 'package:proxmox_dart_api_client/src/models/pve_models.dart';
 import 'package:proxmox_dart_api_client/src/models/serializers.dart';
 import 'package:proxmox_dart_api_client/src/utils.dart'
@@ -11,9 +11,8 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
 import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'package:proxmox_dart_api_client/src/expiration_exception.dart';
 import 'package:proxmox_dart_api_client/src/extentions.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_network_model.dart';
-
-import 'package:proxmox_dart_api_client/src/models/pve_nodes_model.dart';
+//import 'package:proxmox_dart_api_client/src/models/pve_nodes_network_model.dart';
+//import 'package:proxmox_dart_api_client/src/models/pve_nodes_model.dart';
 import 'package:retry/retry.dart';
 
 class ProxmoxApiClient extends http.BaseClient {
@@ -171,7 +170,7 @@ class ProxmoxApiClient extends http.BaseClient {
     return jsonBody['data'];
   }
 
-  Future<List<PveClusterResourcesModel?>> getResources(
+  Future<List<PveClusterResourcesModel>> getResources(
       {PveClusterResourceType? type}) async {
     var path = '/api2/json/cluster/resources';
     var queryParameters = {'type': type?.name};
@@ -183,10 +182,10 @@ class ProxmoxApiClient extends http.BaseClient {
           PveClusterResourcesModel.serializer, f);
     });
 
-    return data.toList();
+    return data.whereType<PveClusterResourcesModel>().toList();
   }
 
-  Future<List<PveClusterStatusModel?>> getClusterStatus() async {
+  Future<List<PveClusterStatusModel>> getClusterStatus() async {
     final path = '/api2/json/cluster/status';
     final response = await _getWithValidation(path, null);
 
@@ -194,19 +193,19 @@ class ProxmoxApiClient extends http.BaseClient {
       return serializers.deserializeWith(PveClusterStatusModel.serializer, f);
     });
 
-    return data.toList();
+    return data.whereType<PveClusterStatusModel>().toList();
   }
 
-  Future<List<PveClusterTasksModel?>> getClusterTasks() async {
+  Future<List<PveClusterTasksModel>> getClusterTasks() async {
     var path = '/api2/json/cluster/tasks';
     final response = await _getWithValidation(path, null);
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveClusterTasksModel.serializer, f);
-    }).toList();
-    return data;
+    });
+    return data.whereType<PveClusterTasksModel>().toList();
   }
 
-  Future<List<PveNodesModel?>> getNodes() async {
+  Future<List<PveNodesModel>> getNodes() async {
     final path = '/api2/json/nodes';
     final response = await _getWithValidation(path, null);
 
@@ -214,10 +213,10 @@ class ProxmoxApiClient extends http.BaseClient {
       return serializers.deserializeWith(PveNodesModel.serializer, f);
     });
 
-    return data.toList();
+    return data.whereType<PveNodesModel>().toList();
   }
 
-  Future<List<PveNodeNetworkModel?>> getNodeNetwork(
+  Future<List<PveNodeNetworkModel>> getNodeNetwork(
     String targetNode, {
     InterfaceType? type,
     bool? extensiveResponseValidation,
@@ -229,10 +228,10 @@ class ProxmoxApiClient extends http.BaseClient {
       return serializers.deserializeWith(PveNodeNetworkModel.serializer, f);
     });
 
-    return data.toList();
+    return data.whereType<PveNodeNetworkModel>().toList();
   }
 
-  Future<List<PveNodesStorageModel?>> getNodeStorage(
+  Future<List<PveNodesStorageModel>> getNodeStorage(
     String targetNode, {
     PveStorageContentType? content,
     bool enabled = false,
@@ -255,10 +254,10 @@ class ProxmoxApiClient extends http.BaseClient {
       return serializers.deserializeWith(PveNodesStorageModel.serializer, f);
     });
 
-    return data.toList();
+    return data.whereType<PveNodesStorageModel>().toList();
   }
 
-  Future<List<PveNodesStorageContentModel?>> getNodeStorageContent(
+  Future<List<PveNodesStorageContentModel>> getNodeStorageContent(
     String targetNode,
     String storageId, {
     PveStorageContentType? content,
@@ -273,7 +272,7 @@ class ProxmoxApiClient extends http.BaseClient {
           PveNodesStorageContentModel.serializer, f);
     });
 
-    return data.toList();
+    return data.whereType<PveNodesStorageContentModel>().toList();
   }
 
   Future<void> deleteNodeStorageContent(
@@ -288,7 +287,7 @@ class ProxmoxApiClient extends http.BaseClient {
     await _deleteWithValidation(path, queryParameters);
   }
 
-  Future<List<PveGuestRRDdataModel?>> getNodeQemuRRDdata(
+  Future<List<PveGuestRRDdataModel>> getNodeQemuRRDdata(
     String targetNode,
     String guestId,
     PveRRDTimeframeType timeframe,
@@ -301,7 +300,7 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveGuestRRDdataModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveGuestRRDdataModel>().toList();
   }
 
   Future<PveQemuStatusModel?> getQemuStatusCurrent(
@@ -540,14 +539,14 @@ class ProxmoxApiClient extends http.BaseClient {
     return json.decode(response.body)['data'];
   }
 
-  Future<PveNodeStatusModel?> getNodeStatus(String targetNode) async {
+  Future<PveNodeStatusModel> getNodeStatus(String targetNode) async {
     final path = '/api2/json/nodes/$targetNode/status';
     final response = await _getWithValidation(path, null);
     var data = json.decode(response.body)['data'];
-    return serializers.deserializeWith(PveNodeStatusModel.serializer, data);
+    return serializers.deserializeWith(PveNodeStatusModel.serializer, data)!;
   }
 
-  Future<List<PveNodeRRDDataModel?>> getNodeRRDdata(
+  Future<List<PveNodeRRDDataModel>> getNodeRRDdata(
     String targetNode,
     PveRRDTimeframeType timeframe,
   ) async {
@@ -559,10 +558,10 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveNodeRRDDataModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveNodeRRDDataModel>().toList();
   }
 
-  Future<List<PveNodeServicesModel?>> getNodeServices(
+  Future<List<PveNodeServicesModel>> getNodeServices(
     String targetNode,
   ) async {
     final path = '/api2/json/nodes/$targetNode/services';
@@ -571,10 +570,10 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveNodeServicesModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveNodeServicesModel>().toList();
   }
 
-  Future<List<PveNodesAptUpdateModel?>> getNodeAptUpdate(
+  Future<List<PveNodesAptUpdateModel>> getNodeAptUpdate(
     String targetNode,
   ) async {
     final path = '/api2/json/nodes/$targetNode/apt/update';
@@ -583,10 +582,10 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveNodesAptUpdateModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveNodesAptUpdateModel>().toList();
   }
 
-  Future<List<PveNodesDisksListModel?>> getNodeDisksList(
+  Future<List<PveNodesDisksListModel>> getNodeDisksList(
     String targetNode, {
     bool skipsmart = false,
     PveNodesDiskListType? type,
@@ -600,7 +599,7 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveNodesDisksListModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveNodesDisksListModel>().toList();
   }
 
   Future<String?> getNodesVZDumpExtractConfig(
@@ -637,7 +636,7 @@ class ProxmoxApiClient extends http.BaseClient {
     return data;
   }
 
-  Future<List<PveAccessUserModel?>> getAccessUsersList({
+  Future<List<PveAccessUserModel>> getAccessUsersList({
     bool full = false,
   }) async {
     final path = '/api2/json/access/users';
@@ -648,33 +647,33 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveAccessUserModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveAccessUserModel>().toList();
   }
 
-  Future<List<PveAccessGroupModel?>> getAccessGroupsList() async {
+  Future<List<PveAccessGroupModel>> getAccessGroupsList() async {
     final path = '/api2/json/access/groups';
     final response = await _getWithValidation(path, null);
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveAccessGroupModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveAccessGroupModel>().toList();
   }
 
-  Future<List<PveAccessRoleModel?>> getAccessRolesList() async {
+  Future<List<PveAccessRoleModel>> getAccessRolesList() async {
     final path = '/api2/json/access/roles';
     final response = await _getWithValidation(path, null);
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveAccessRoleModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveAccessRoleModel>().toList();
   }
 
-  Future<List<PveAccessDomainModel?>> getAccessDomainsList() async {
+  Future<List<PveAccessDomainModel>> getAccessDomainsList() async {
     final path = '/api2/json/access/domains';
     final response = await _getWithValidation(path, null);
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
     });
-    return data.toList();
+    return data.whereType<PveAccessDomainModel>().toList();
   }
 }

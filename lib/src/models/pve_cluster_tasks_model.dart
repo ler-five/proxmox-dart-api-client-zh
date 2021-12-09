@@ -9,17 +9,17 @@ abstract class PveClusterTasksModel
       _$pveClusterTasksModelSerializer;
 
   @BuiltValueField(wireName: 'starttime')
-  DateTime? get startTime;
+  DateTime get startTime;
 
   @BuiltValueField(wireName: 'endtime')
   DateTime? get endTime;
 
-  String? get status;
+  String get status;
 
-  String? get type;
-  String? get upid;
-  String? get user;
-  String? get node;
+  String get type;
+  String get upid;
+  String get user;
+  String get node;
 
   factory PveClusterTasksModel(
           [void Function(PveClusterTasksModelBuilder)? updates]) =

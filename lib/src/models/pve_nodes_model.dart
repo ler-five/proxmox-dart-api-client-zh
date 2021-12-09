@@ -23,12 +23,12 @@ abstract class PveNodesModel
   int? get memoryUsage;
 
   @BuiltValueField(wireName: 'node')
-  String? get nodeName;
+  String get nodeName;
 
   @BuiltValueField(wireName: 'ssl_fingerprint')
   String? get sslFingerprint;
 
-  String? get status;
+  String get status;
 
   Duration? get uptime;
 

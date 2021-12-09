@@ -10,8 +10,8 @@ abstract class PveClusterResourcesModel
   static Serializer<PveClusterResourcesModel> get serializer =>
       _$pveClusterResourcesModelSerializer;
 
-  String? get id;
-  String? get type;
+  String get id;
+  String get type;
 
   double? get cpu;
   int? get disk;
@@ -37,18 +37,18 @@ abstract class PveClusterResourcesModel
       _$PveClusterResourcesModel;
   PveClusterResourcesModel._();
 
-  String? get displayName {
+  String get displayName {
     switch (type) {
       case 'node':
-        return node;
+        return node!;
       case 'qemu':
         return "$vmid ${name ?? ''}";
       case 'lxc':
         return "$vmid ${name ?? ''}";
       case 'storage':
-        return storage;
+        return storage!;
       case 'pool':
-        return pool;
+        return pool!;
       default:
         return id;
     }

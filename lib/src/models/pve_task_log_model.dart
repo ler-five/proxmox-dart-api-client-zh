@@ -54,15 +54,15 @@ abstract class PveTaskLogResponse
 abstract class PveTaskLogStatus
     implements Built<PveTaskLogStatus, PveTaskLogStatusBuilder> {
   // Fields
-  int? get pid;
-  PveTaskLogStatusType? get status;
-  String? get upid;
-  String? get user;
-  String? get node;
+  int get pid;
+  PveTaskLogStatusType get status;
+  String get upid;
+  String get user;
+  String get node;
   @BuiltValueField(wireName: 'starttime')
-  DateTime? get startTime;
+  DateTime get startTime;
 
-  String? get type;
+  String get type;
   @BuiltValueField(wireName: 'exitstatus')
   String? get exitStatus;
 

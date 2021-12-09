@@ -11,9 +11,9 @@ abstract class PveClusterStatusModel
   static Serializer<PveClusterStatusModel> get serializer =>
       _$pveClusterStatusModelSerializer;
 
-  String? get id;
-  String? get name;
-  String? get type;
+  String get id;
+  String get name;
+  String get type;
   String? get ip;
   String? get level;
   bool? get local;

@@ -5,26 +5,27 @@ part 'pve_nodes_storage_model.g.dart';
 
 abstract class PveNodesStorageModel
     implements Built<PveNodesStorageModel, PveNodesStorageModelBuilder> {
-  static Serializer<PveNodesStorageModel> get serializer => _$pveNodesStorageModelSerializer;
+  static Serializer<PveNodesStorageModel> get serializer =>
+      _$pveNodesStorageModelSerializer;
 
   bool? get active;
 
   @BuiltValueField(wireName: 'avail')
   int? get freeSpace;
 
-  String? get content;
+  String get content;
 
   bool? get enabled;
 
   bool? get shared;
 
   @BuiltValueField(wireName: 'storage')
-  String? get id;
+  String get id;
 
   @BuiltValueField(wireName: 'total')
   int? get totalSpace;
 
-  String? get type;
+  String get type;
 
   @BuiltValueField(wireName: 'used')
   int? get usedSpace;
@@ -32,8 +33,8 @@ abstract class PveNodesStorageModel
   @BuiltValueField(wireName: 'used_fraction')
   double? get usedPercent;
 
-  factory PveNodesStorageModel([void Function(PveNodesStorageModelBuilder)? updates]) =
+  factory PveNodesStorageModel(
+          [void Function(PveNodesStorageModelBuilder)? updates]) =
       _$PveNodesStorageModel;
   PveNodesStorageModel._();
-
 }
