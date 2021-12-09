@@ -5,7 +5,7 @@ part 'pve_access_user_token_model.g.dart';
 
 abstract class PveAccessUserTokenModel
     implements Built<PveAccessUserTokenModel, PveAccessUserTokenModelBuilder> {
-  String? get userid;
+  String get userid;
   DateTime? get expire;
 
   bool? get privsep;

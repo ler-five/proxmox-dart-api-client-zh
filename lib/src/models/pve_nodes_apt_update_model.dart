@@ -7,15 +7,15 @@ abstract class PveNodesAptUpdateModel
     implements Built<PveNodesAptUpdateModel, PveNodesAptUpdateModelBuilder> {
   // Fields
   @BuiltValueField(wireName: 'Title')
-  String? get title;
+  String get title;
   @BuiltValueField(wireName: 'Version')
-  String? get version;
+  String get version;
   @BuiltValueField(wireName: 'Section')
-  String? get section;
+  String get section;
   @BuiltValueField(wireName: 'Arch')
-  String? get arch;
+  String get arch;
   @BuiltValueField(wireName: 'Priority')
-  String? get priority;
+  String get priority;
   @BuiltValueField(wireName: 'OldVersion')
   String? get oldVersion;
   @BuiltValueField(wireName: 'Description')
@@ -23,9 +23,9 @@ abstract class PveNodesAptUpdateModel
   @BuiltValueField(wireName: 'ChangeLogUrl')
   String? get changeLogUrl;
   @BuiltValueField(wireName: 'Origin')
-  String? get origin;
+  String get origin;
   @BuiltValueField(wireName: 'Package')
-  String? get package;
+  String get package;
 
   PveNodesAptUpdateModel._();
 

@@ -7,18 +7,18 @@ part 'pve_node_status_model.g.dart';
 abstract class PveNodeStatusModel
     implements Built<PveNodeStatusModel, PveNodeStatusModelBuilder> {
   // Fields
-  PveNodeKSM? get ksm;
-  PveNodeRootFs? get rootfs;
-  bool? get idle;
-  BuiltList<String>? get loadavg;
-  PveNodeMemory? get memory;
-  String? get pveversion;
-  int? get uptime;
-  PveNodeCpuInfo? get cpuinfo;
-  PveNodeSwap? get swap;
-  double? get cpu;
-  String? get kversion;
-  double? get wait;
+  PveNodeKSM get ksm;
+  PveNodeRootFs get rootfs;
+  bool get idle;
+  BuiltList<String> get loadavg;
+  PveNodeMemory get memory;
+  String get pveversion;
+  int get uptime;
+  PveNodeCpuInfo get cpuinfo;
+  PveNodeSwap get swap;
+  double get cpu;
+  String get kversion;
+  double get wait;
 
   PveNodeStatusModel._();
 
@@ -32,11 +32,11 @@ abstract class PveNodeStatusModel
 
 abstract class PveNodeKSM implements Built<PveNodeKSM, PveNodeKSMBuilder> {
   // Fields
-  bool? get shared;
+  bool get shared;
 
   PveNodeKSM._();
 
-  factory PveNodeKSM([void Function(PveNodeKSMBuilder)? updates]) = _$PveNodeKSM;
+  factory PveNodeKSM([void Function(PveNodeKSMBuilder) updates]) = _$PveNodeKSM;
 
   static Serializer<PveNodeKSM> get serializer => _$pveNodeKSMSerializer;
 }
@@ -44,10 +44,10 @@ abstract class PveNodeKSM implements Built<PveNodeKSM, PveNodeKSMBuilder> {
 abstract class PveNodeRootFs
     implements Built<PveNodeRootFs, PveNodeRootFsBuilder> {
   // Fields
-  int? get avail;
-  int? get total;
-  int? get free;
-  int? get used;
+  int get avail;
+  int get total;
+  int get free;
+  int get used;
 
   PveNodeRootFs._();
 
@@ -60,9 +60,9 @@ abstract class PveNodeRootFs
 abstract class PveNodeMemory
     implements Built<PveNodeMemory, PveNodeMemoryBuilder> {
   // Fields
-  double? get total;
-  double? get free;
-  double? get used;
+  double get total;
+  double get free;
+  double get used;
 
   PveNodeMemory._();
 
@@ -76,13 +76,13 @@ abstract class PveNodeCpuInfo
     implements Built<PveNodeCpuInfo, PveNodeCpuInfoBuilder> {
   // Fields
   @BuiltValueField(wireName: 'user_hz')
-  int? get userHz;
-  int? get sockets;
-  int? get cpus;
-  String? get hvm;
-  String? get mhz;
-  String? get model;
-  String? get flags;
+  int get userHz;
+  int get sockets;
+  int get cpus;
+  String get hvm;
+  String get mhz;
+  String get model;
+  String get flags;
 
   PveNodeCpuInfo._();
 
@@ -95,9 +95,9 @@ abstract class PveNodeCpuInfo
 
 abstract class PveNodeSwap implements Built<PveNodeSwap, PveNodeSwapBuilder> {
   // Fields
-  double? get used;
-  double? get free;
-  double? get total;
+  double get used;
+  double get free;
+  double get total;
 
   PveNodeSwap._();
 

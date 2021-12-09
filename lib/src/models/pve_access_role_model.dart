@@ -6,8 +6,8 @@ part 'pve_access_role_model.g.dart';
 abstract class PveAccessRoleModel
     implements Built<PveAccessRoleModel, PveAccessRoleModelBuilder> {
   // Fields
-  String? get roleid;
-  String? get privs;
+  String get roleid;
+  String get privs;
   bool? get special;
 
   PveAccessRoleModel._();

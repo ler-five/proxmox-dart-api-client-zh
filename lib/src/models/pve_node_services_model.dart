@@ -6,10 +6,10 @@ part 'pve_node_services_model.g.dart';
 abstract class PveNodeServicesModel
     implements Built<PveNodeServicesModel, PveNodeServicesModelBuilder> {
   // Fields
-  String? get state;
-  String? get name;
-  String? get service;
-  String? get desc;
+  String get state;
+  String get name;
+  String get service;
+  String get desc;
   PveNodeServicesModel._();
 
   factory PveNodeServicesModel(

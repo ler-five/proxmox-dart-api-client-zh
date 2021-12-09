@@ -11,7 +11,7 @@ abstract class PveAccessUserModel
       _$pveAccessUserModelSerializer;
 
   // Fields
-  String? get userid;
+  String get userid;
   String? get comment;
   String? get email;
   bool? get enable;

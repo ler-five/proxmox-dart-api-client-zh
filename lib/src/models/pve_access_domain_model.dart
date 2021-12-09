@@ -6,7 +6,7 @@ part 'pve_access_domain_model.g.dart';
 abstract class PveAccessDomainModel
     implements Built<PveAccessDomainModel, PveAccessDomainModelBuilder> {
   // Fields
-  String? get realm;
+  String get realm;
   String? get comment;
   String? get tfa;
   PveAccessDomainModel._();

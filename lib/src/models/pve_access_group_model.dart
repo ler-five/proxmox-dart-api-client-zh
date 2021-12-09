@@ -6,7 +6,7 @@ part 'pve_access_group_model.g.dart';
 abstract class PveAccessGroupModel
     implements Built<PveAccessGroupModel, PveAccessGroupModelBuilder> {
   // Fields
-  String? get groupid;
+  String get groupid;
   String? get comment;
   String? get users;
 
