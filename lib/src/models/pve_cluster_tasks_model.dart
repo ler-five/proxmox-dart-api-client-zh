@@ -28,8 +28,8 @@ abstract class PveClusterTasksModel
 }
 
 class NodeTasksResponse {
-  final List<PveClusterTasksModel?>? tasks;
-  final int? total;
+  final List<PveClusterTasksModel>? tasks;
+  final int total;
 
-  NodeTasksResponse({this.tasks, this.total});
+  NodeTasksResponse({this.tasks, this.total = 0});
 }

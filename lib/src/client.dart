@@ -375,7 +375,7 @@ class ProxmoxApiClient extends http.BaseClient {
     await _postWithValidation(url, parameters);
   }
 
-  Future<NodeTasksResponse?> getNodeTasks(
+  Future<NodeTasksResponse> getNodeTasks(
     String targetNode, {
     String? guestId,
     bool errors = false,
@@ -402,7 +402,9 @@ class ProxmoxApiClient extends http.BaseClient {
       return serializers.deserializeWith(PveClusterTasksModel.serializer, f);
     });
     return NodeTasksResponse(
-        total: decoded['total'] ?? 0, tasks: data.toList());
+      total: decoded['total'] ?? 0,
+      tasks: data.whereType<PveClusterTasksModel>().toList(),
+    );
   }
 
   Future<PveTaskLogResponse?> getNodeTaskLog(
