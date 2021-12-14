@@ -10,6 +10,13 @@ abstract class PveNodeServicesModel
   String get name;
   String get service;
   String get desc;
+
+  @BuiltValueField(wireName: 'unit-state')
+  String? get unitState;
+
+  @BuiltValueField(wireName: 'active-state')
+  String? get activeState;
+
   PveNodeServicesModel._();
 
   factory PveNodeServicesModel(
