@@ -509,7 +509,7 @@ class ProxmoxApiClient extends http.BaseClient {
     final path = '/api2/json/nodes/$targetNode/lxc/$guestId/status/current';
     final response = await _getWithValidation(path, null);
     var data = json.decode(response.body)['data'];
-    //TODO: remove when fixed in API
+    //TODO: remove when fixed in *all* API versions that are still supported
     if (data['cpus'] is String) {
       data['cpus'] = num.tryParse(data['cpus']);
     }
