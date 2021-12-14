@@ -9,9 +9,10 @@ part 'pve_nodes_lxc_status_model.g.dart';
 abstract class PveNodesLxcStatusModel
     implements Built<PveNodesLxcStatusModel, PveNodesLxcStatusModelBuilder> {
   // Fields
+  String get vmid;
+  LxcStatusType get status;
+
   PveHAMangerServiceStatusModel? get ha;
-  LxcStatusType? get status;
-  String? get vmid;
   num? get cpus;
   String? get lock;
   int? get integer;
