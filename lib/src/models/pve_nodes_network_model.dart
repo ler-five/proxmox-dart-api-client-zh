@@ -30,7 +30,7 @@ abstract class PveNodeNetworkModel
   String? get method6;
   String? get netmask;
   int? get priority;
-  InterfaceType? get type;
+  InterfaceType get type;
   String? get comment;
 }
 
