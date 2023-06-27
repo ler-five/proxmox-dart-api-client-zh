@@ -25,7 +25,7 @@ Future<ProxmoxApiClient> authenticate(
 }) async {
   httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 
-  var body = {'username': username, 'password': password};
+  var body = {'username': username, 'password': password, 'new-format': '1'};
 
   try {
     var credentials = Credentials(apiBaseUrl, username);

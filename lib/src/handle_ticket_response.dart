@@ -2,6 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'package:proxmox_dart_api_client/src/extentions.dart';
+import 'package:proxmox_dart_api_client/src/tfa_challenge.dart';
+
+import 'dart:io';
+// import 'dart:developer' as developer;
 
 Credentials handleAccessTicketResponse(
     http.Response response, Credentials unauthenicatedCredentials) {
@@ -19,8 +23,11 @@ Credentials handleAccessTicketResponse(
   final time = DateTime.fromMillisecondsSinceEpoch(
       int.parse(ticketRegex.group(3)!, radix: 16) * 1000);
 
-  final tfa =
-      bodyJson['NeedTFA'] != null && bodyJson['NeedTFA'] == 1 ? true : false;
+  var tfa = null;
+  if (ticket.startsWith('PVE:!tfa!')) {
+    tfa = TfaChallenge.fromJson(
+        jsonDecode(Uri.decodeComponent(ticket.substring(9).split(':')[0])));
+  }
 
   return Credentials(
     unauthenicatedCredentials.apiBaseUrl,
@@ -52,6 +59,6 @@ Credentials handleTfaChallengeResponse(
     ticket: ticket,
     csrfToken: pendingTfaCredentials.csrfToken,
     expiration: time,
-    tfa: false,
+    tfa: null,
   );
 }

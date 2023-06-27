@@ -1,12 +1,12 @@
 import 'package:http/http.dart' as http;
 
+import 'package:proxmox_dart_api_client/src/tfa_challenge.dart';
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 import 'package:proxmox_dart_api_client/src/utils.dart'
     if (dart.library.html) 'utils_web.dart'
     if (dart.library.io) 'utils_native.dart';
 
 const String ticketPath = '/api2/json/access/ticket';
-const String tfaPath = '/api2/json/access/tfa';
 
 class Credentials {
   /// The URL of the authorization server
@@ -20,7 +20,7 @@ class Credentials {
 
   final DateTime? expiration;
 
-  bool tfa;
+  TfaChallenge? tfa;
 
   bool get canRefresh => ticket != null;
 
@@ -30,15 +30,13 @@ class Credentials {
 
   Uri get ticketUrl => apiBaseUrl.replace(path: ticketPath);
 
-  Uri get tfaUrl => apiBaseUrl.replace(path: tfaPath);
-
   Credentials(
     this.apiBaseUrl,
     this.username, {
     this.ticket,
     this.csrfToken,
     this.expiration,
-    this.tfa = false,
+    this.tfa = null,
   });
 
   Future<Credentials> refresh({http.Client? httpClient}) async {
@@ -59,13 +57,18 @@ class Credentials {
     return credentials;
   }
 
-  Future<Credentials> tfaChallenge(String code,
+  Future<Credentials> tfaChallenge(String kind, String code,
       {http.Client? httpClient}) async {
     httpClient ??= getCustomIOHttpClient();
 
-    final body = {'response': code};
+    final body = {
+      'username': username,
+      'password': kind + ':' + code,
+      'tfa-challenge': ticket,
+      'new-format': '1'
+    };
 
-    final response = await httpClient.post(tfaUrl, body: body);
+    final response = await httpClient.post(ticketUrl, body: body);
 
     final credentials = handleTfaChallengeResponse(response, this);
 
