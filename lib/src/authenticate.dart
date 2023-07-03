@@ -32,7 +32,7 @@ Future<ProxmoxApiClient> authenticate(
 
     var response = await httpClient
         .post(credentials.ticketUrl, body: body)
-        .timeout(Duration(seconds: 5));
+        .timeout(Duration(seconds: 25));
 
     credentials = handleAccessTicketResponse(response, credentials);
 
