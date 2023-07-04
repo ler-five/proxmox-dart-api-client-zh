@@ -27,6 +27,8 @@ Credentials handleAccessTicketResponse(
   if (ticket.startsWith('PVE:!tfa!')) {
     tfa = TfaChallenge.fromJson(
         jsonDecode(Uri.decodeComponent(ticket.substring(9).split(':')[0])));
+  } else if (bodyJson['NeedTFA'] != null && bodyJson['NeedTFA'] == 1) {
+    tfa = TfaChallenge.legacy();
   }
 
   return Credentials(

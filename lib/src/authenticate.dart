@@ -25,6 +25,7 @@ Future<ProxmoxApiClient> authenticate(
 }) async {
   httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 
+  // FIXME: this was product agnostic, but new-format isn't?
   var body = {'username': username, 'password': password, 'new-format': '1'};
 
   try {
@@ -33,6 +34,21 @@ Future<ProxmoxApiClient> authenticate(
     var response = await httpClient
         .post(credentials.ticketUrl, body: body)
         .timeout(Duration(seconds: 25));
+
+    // for backward compat with older products, e.g. PVE < 7.1, retry without 'new-format'
+    if (response.statusCode == 400) {
+      print("retrying for backward compat!");
+      final errors = jsonDecode(response.body)['errors'] ?? {};
+      if (errors.containsKey('new-format')) {
+        var body = {
+          'username': username,
+          'password': password,
+        };
+        response = await httpClient
+            .post(credentials.ticketUrl, body: body)
+            .timeout(Duration(seconds: 25));
+      }
+    }
 
     credentials = handleAccessTicketResponse(response, credentials);
 

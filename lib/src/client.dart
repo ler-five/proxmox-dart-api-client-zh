@@ -97,7 +97,8 @@ class ProxmoxApiClient extends http.BaseClient {
       throw StateError('No tfa challange expected');
     }
 
-    credentials = await credentials.tfaChallenge(kind, code, httpClient: this);
+    credentials = await credentials.tfaChallenge(kind, code,
+        httpClient: this, legacy: credentials.tfa!.legacyTfaPath);
 
     return this;
   }

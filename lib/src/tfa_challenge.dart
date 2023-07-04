@@ -7,11 +7,14 @@ class TfaChallenge {
 
   final bool yubico;
 
+  final bool legacyTfaPath;
+
   TfaChallenge({
     this.totp = false,
     List<int>? recovery = null,
     this.webauthn = null,
     this.yubico = false,
+    this.legacyTfaPath = false,
   }) : recovery = recovery ?? [];
 
   factory TfaChallenge.fromJson(Map<String, dynamic> json) {
@@ -20,6 +23,17 @@ class TfaChallenge {
       recovery: json['recovery']?.cast<int>(),
       webauthn: json['webauthn'],
       yubico: json['yubico'] ?? false,
+      legacyTfaPath: false,
+    );
+  }
+
+  factory TfaChallenge.legacy() {
+    return TfaChallenge(
+      totp: true,
+      recovery: null,
+      webauthn: null,
+      yubico: false,
+      legacyTfaPath: true,
     );
   }
 

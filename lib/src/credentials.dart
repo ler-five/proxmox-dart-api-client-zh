@@ -7,6 +7,7 @@ import 'package:proxmox_dart_api_client/src/utils.dart'
     if (dart.library.io) 'utils_native.dart';
 
 const String ticketPath = '/api2/json/access/ticket';
+const String tfaPath = '/api2/json/access/tfa';
 
 class Credentials {
   /// The URL of the authorization server
@@ -29,6 +30,8 @@ class Credentials {
       DateTime.now().isAfter(expiration!.add(Duration(hours: 1)));
 
   Uri get ticketUrl => apiBaseUrl.replace(path: ticketPath);
+
+  Uri get legacyTfaUrl => apiBaseUrl.replace(path: tfaPath);
 
   Credentials(
     this.apiBaseUrl,
@@ -58,17 +61,22 @@ class Credentials {
   }
 
   Future<Credentials> tfaChallenge(String kind, String code,
-      {http.Client? httpClient}) async {
+      {http.Client? httpClient, bool legacy = false}) async {
     httpClient ??= getCustomIOHttpClient();
 
-    final body = {
+    var tfaUrl = ticketUrl;
+    var body = {
       'username': username,
       'password': kind + ':' + code,
       'tfa-challenge': ticket,
-      'new-format': '1'
+      'new-format': '1',
     };
 
-    final response = await httpClient.post(ticketUrl, body: body);
+    if (legacy) {
+      tfaUrl = legacyTfaUrl;
+      body = {'response': code};
+    }
+    final response = await httpClient.post(tfaUrl, body: body);
 
     final credentials = handleTfaChallengeResponse(response, this);
 
