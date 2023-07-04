@@ -4,9 +4,6 @@ import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'package:proxmox_dart_api_client/src/extentions.dart';
 import 'package:proxmox_dart_api_client/src/tfa_challenge.dart';
 
-import 'dart:io';
-// import 'dart:developer' as developer;
-
 Credentials handleAccessTicketResponse(
     http.Response response, Credentials unauthenicatedCredentials) {
   response.validate(false);
