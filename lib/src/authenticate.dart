@@ -72,7 +72,7 @@ Future<List<PveAccessDomainModel?>> accessDomains(
   final path = '/api2/json/access/domains';
   final response = await httpClient
       .get(apiBaseUrl.replace(path: path))
-      .timeout(Duration(seconds: 5));
+      .timeout(Duration(seconds: 25));
   var data = (json.decode(response.body)['data'] as List).map((f) {
     return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
   });
