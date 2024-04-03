@@ -30,7 +30,7 @@ class ProxmoxApiClient extends http.BaseClient {
     Map<String, String>? queryParameters,
   ]) async {
     if (!path.startsWith('/api2/json')) {
-      path = '/api2/json' + path;
+      path = '/api2/json$path';
     }
     final baseUrl = credentials.apiBaseUrl;
     queryParameters?.removeWhere((key, value) => value.isEmpty);
@@ -45,7 +45,7 @@ class ProxmoxApiClient extends http.BaseClient {
     Map<String, String>? parameters,
   ]) async {
     if (!path.startsWith('/api2/json')) {
-      path = '/api2/json' + path;
+      path = '/api2/json$path';
     }
     final baseUrl = credentials.apiBaseUrl;
     parameters?.removeWhere((key, value) => value.isEmpty);
@@ -59,7 +59,7 @@ class ProxmoxApiClient extends http.BaseClient {
     Map<String, String>? parameters,
   ]) async {
     if (!path.startsWith('/api2/json')) {
-      path = '/api2/json' + path;
+      path = '/api2/json$path';
     }
     final baseUrl = credentials.apiBaseUrl;
     parameters?.removeWhere((key, value) => value.isEmpty);
@@ -114,7 +114,7 @@ class ProxmoxApiClient extends http.BaseClient {
       String path, Map<String, dynamic>? queryParameters,
       {bool extensiveResponseValidation = false}) async {
     if (!path.startsWith('/api2/json')) {
-      path = '/api2/json' + path;
+      path = '/api2/json$path';
     }
     final baseUrl = credentials.apiBaseUrl;
 
@@ -134,7 +134,7 @@ class ProxmoxApiClient extends http.BaseClient {
       String path, Map<String, dynamic>? queryParameters,
       {bool extensiveResponseValidation = false}) async {
     if (!path.startsWith('/api2/json')) {
-      path = '/api2/json' + path;
+      path = '/api2/json$path';
     }
     final baseUrl = credentials.apiBaseUrl;
 
@@ -150,7 +150,7 @@ class ProxmoxApiClient extends http.BaseClient {
       String path, Map<String, dynamic> queryParameters,
       {bool extensiveResponseValidation = false}) async {
     if (!path.startsWith('/api2/json')) {
-      path = '/api2/json' + path;
+      path = '/api2/json$path';
     }
     final baseUrl = credentials.apiBaseUrl;
 

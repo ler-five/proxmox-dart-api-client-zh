@@ -67,7 +67,7 @@ class Credentials {
     var tfaUrl = ticketUrl;
     var body = {
       'username': username,
-      'password': kind + ':' + code,
+      'password': '$kind:$code',
       'tfa-challenge': ticket,
       'new-format': '1',
     };

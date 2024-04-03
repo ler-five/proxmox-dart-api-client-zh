@@ -47,9 +47,9 @@ abstract class PveNodesModel
         return '';
       }
 
-      return ((memoryUsage! * 100) / memoryCount!).toStringAsFixed(1) + ' %';
+      return '${((memoryUsage! * 100) / memoryCount!).toStringAsFixed(1)} %';
     }
-    return (memoryUsage! * 100).toStringAsFixed(1) + ' %';
+    return '${(memoryUsage! * 100).toStringAsFixed(1)} %';
   }
 
   String renderCpuUsage() {
@@ -57,9 +57,6 @@ abstract class PveNodesModel
       return '';
     }
 
-    return (cpuUsage! * 100).toStringAsFixed(1) +
-        '% of ' +
-        cpuCount.toString() +
-        (cpuCount! > 1 ? 'CPUs' : 'CPU');
+    return '${(cpuUsage! * 100).toStringAsFixed(1)}% of $cpuCount${cpuCount! > 1 ? 'CPUs' : 'CPU'}';
   }
 }
