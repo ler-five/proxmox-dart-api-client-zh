@@ -1,7 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
-import 'package:proxmox_dart_api_client/src/models/pve_ha_manger_service_status_model.dart';
 
 part 'pve_nodes_qemu_status_model.g.dart';
 
