@@ -39,7 +39,7 @@ class Credentials {
     this.ticket,
     this.csrfToken,
     this.expiration,
-    this.tfa = null,
+    this.tfa,
   });
 
   Future<Credentials> refresh({http.Client? httpClient}) async {

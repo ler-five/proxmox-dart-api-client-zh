@@ -11,8 +11,8 @@ class TfaChallenge {
 
   TfaChallenge({
     this.totp = false,
-    List<int>? recovery = null,
-    this.webauthn = null,
+    List<int>? recovery,
+    this.webauthn,
     this.yubico = false,
     this.legacyTfaPath = false,
   }) : recovery = recovery ?? [];

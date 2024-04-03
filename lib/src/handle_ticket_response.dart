@@ -20,7 +20,7 @@ Credentials handleAccessTicketResponse(
   final time = DateTime.fromMillisecondsSinceEpoch(
       int.parse(ticketRegex.group(3)!, radix: 16) * 1000);
 
-  var tfa = null;
+  TfaChallenge? tfa;
   if (ticket.startsWith('PVE:!tfa!')) {
     tfa = TfaChallenge.fromJson(
         jsonDecode(Uri.decodeComponent(ticket.substring(9).split(':')[0])));
