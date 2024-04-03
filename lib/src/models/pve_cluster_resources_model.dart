@@ -79,7 +79,7 @@ class PveClusterResourceType extends EnumClass {
   static const PveClusterResourceType node = _$node;
   static const PveClusterResourceType sdn = _$sdn;
 
-  const PveClusterResourceType._(String name) : super(name);
+  const PveClusterResourceType._(super.name);
 
   static BuiltSet<PveClusterResourceType> get values => _$pcrtValues;
   static PveClusterResourceType valueOf(String name) => _$pcrtValueOf(name);
@@ -95,7 +95,7 @@ class PveClusterResourceAction extends EnumClass {
   static const PveClusterResourceAction reset = _$reset;
   static const PveClusterResourceAction hibernate = _$hibernate;
 
-  const PveClusterResourceAction._(String name) : super(name);
+  const PveClusterResourceAction._(super.name);
 
   static BuiltSet<PveClusterResourceAction> get values =>
       _$pveClusterResourceActionValues;
@@ -111,7 +111,7 @@ class PveResourceStatusType extends EnumClass {
   static const PveResourceStatusType suspended = _$suspended;
   static const PveResourceStatusType unkown = _$unkown;
 
-  const PveResourceStatusType._(String name) : super(name);
+  const PveResourceStatusType._(super.name);
 
   static BuiltSet<PveResourceStatusType> get values => _$pqsTValues;
   static PveResourceStatusType valueOf(String name) => _$pqsTValueOf(name);

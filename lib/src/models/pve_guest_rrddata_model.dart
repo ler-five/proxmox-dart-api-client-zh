@@ -54,7 +54,7 @@ class PveRRDTimeframeType extends EnumClass {
   static const PveRRDTimeframeType month = _$month;
   static const PveRRDTimeframeType year = _$year;
 
-  const PveRRDTimeframeType._(String name) : super(name);
+  const PveRRDTimeframeType._(super.name);
 
   static BuiltSet<PveRRDTimeframeType> get values => _$prrdTValues;
   static PveRRDTimeframeType valueOf(String name) => _$prrdTValueOf(name);

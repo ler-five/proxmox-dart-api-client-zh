@@ -52,7 +52,7 @@ class InterfaceType extends EnumClass {
   @BuiltValueEnumConst(wireName: 'OVSIntPort')
   static const InterfaceType ovsIntPort = _$ovsIntPort;
 
-  const InterfaceType._(String name) : super(name);
+  const InterfaceType._(super.name);
 
   static BuiltSet<InterfaceType> get values => _$interfaceTypeValues;
   static InterfaceType valueOf(String name) => _$interfaceTypeValueOf(name);

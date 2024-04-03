@@ -107,7 +107,7 @@ class ProcessorArch extends EnumClass {
   static const ProcessorArch x86_64 = _$x86_64;
   static const ProcessorArch aarch64 = _$aarch64;
 
-  const ProcessorArch._(String name) : super(name);
+  const ProcessorArch._(super.name);
 
   static BuiltSet<ProcessorArch> get values => _$paValues;
   static ProcessorArch valueOf(String name) => _$paValueOf(name);
@@ -120,7 +120,7 @@ class Bios extends EnumClass {
   static const Bios seabios = _$seabios;
   static const Bios ovmf = _$ovmf;
 
-  const Bios._(String name) : super(name);
+  const Bios._(super.name);
 
   static BuiltSet<Bios> get values => _$biValues;
   static Bios valueOf(String name) => _$biValueOf(name);
@@ -144,7 +144,7 @@ class OSType extends EnumClass {
   static const OSType l26 = _$l26;
   static const OSType solaris = _$solaris;
 
-  const OSType._(String name) : super(name);
+  const OSType._(super.name);
 
   static BuiltSet<OSType> get values => _$osValues;
   static OSType valueOf(String name) => _$osValueOf(name);
@@ -186,7 +186,7 @@ class ScsiControllerModel extends EnumClass {
   static const ScsiControllerModel megasas = _$megasas;
   static const ScsiControllerModel pvscsi = _$pvscsi;
 
-  const ScsiControllerModel._(String name) : super(name);
+  const ScsiControllerModel._(super.name);
 
   static BuiltSet<ScsiControllerModel> get values => _$scValues;
   static ScsiControllerModel valueOf(String name) => _$scValueOf(name);
@@ -199,7 +199,7 @@ class CdType extends EnumClass {
   static const CdType cdrom = _$cdrom;
   static const CdType none = _$none;
 
-  const CdType._(String name) : super(name);
+  const CdType._(super.name);
 
   static BuiltSet<CdType> get values => _$values;
   static CdType valueOf(String name) => _$valueOf(name);
@@ -213,7 +213,7 @@ class Hugepages extends EnumClass {
   @BuiltValueEnumConst(wireName: '1024')
   static const Hugepages h1024 = _$h1024;
 
-  const Hugepages._(String name) : super(name);
+  const Hugepages._(super.name);
 
   static BuiltSet<Hugepages> get values => _$hugepagesValues;
   static Hugepages valueOf(String name) => _$hugepagesValueOf(name);
@@ -234,7 +234,7 @@ class LockType extends EnumClass {
   static const LockType suspending = _$suspending;
   static const LockType suspended = _$suspended;
 
-  const LockType._(String name) : super(name);
+  const LockType._(super.name);
 
   static BuiltSet<LockType> get values => _$lockTypeValues;
   static LockType valueOf(String name) => _$lockTypeValueOf(name);

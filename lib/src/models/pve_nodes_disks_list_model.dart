@@ -45,7 +45,7 @@ class PveNodesDiskListType extends EnumClass {
   @BuiltValueEnumConst(wireName: 'journal_disks')
   static const PveNodesDiskListType journalDisks = _$journalDisks;
 
-  const PveNodesDiskListType._(String name) : super(name);
+  const PveNodesDiskListType._(super.name);
 
   static BuiltSet<PveNodesDiskListType> get values => _$values;
   static PveNodesDiskListType valueOf(String name) => _$valueOf(name);

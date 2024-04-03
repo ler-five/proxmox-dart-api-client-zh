@@ -87,7 +87,7 @@ class PveTaskLogStatusType extends EnumClass {
   static const PveTaskLogStatusType running = _$running;
   static const PveTaskLogStatusType stopped = _$stopped;
 
-  const PveTaskLogStatusType._(String name) : super(name);
+  const PveTaskLogStatusType._(super.name);
 
   static BuiltSet<PveTaskLogStatusType> get values => _$values;
   static PveTaskLogStatusType valueOf(String name) => _$valueOf(name);

@@ -60,7 +60,7 @@ class LxcStatusType extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const LxcStatusType undefined = _$undefined;
 
-  const LxcStatusType._(String name) : super(name);
+  const LxcStatusType._(super.name);
 
   static BuiltSet<LxcStatusType> get values => _$values;
   static LxcStatusType valueOf(String name) => _$valueOf(name);

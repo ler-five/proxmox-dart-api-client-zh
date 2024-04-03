@@ -82,7 +82,7 @@ class LxcProcessorArch extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const LxcProcessorArch undefined = _$pundefined;
 
-  const LxcProcessorArch._(String name) : super(name);
+  const LxcProcessorArch._(super.name);
 
   static BuiltSet<LxcProcessorArch> get values => _$paValues;
   static LxcProcessorArch valueOf(String name) => _$paValueOf(name);
@@ -99,7 +99,7 @@ class LxcConsoleMode extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const LxcConsoleMode undefined = _$cundefined;
 
-  const LxcConsoleMode._(String name) : super(name);
+  const LxcConsoleMode._(super.name);
 
   static BuiltSet<LxcConsoleMode> get values => _$cvalues;
   static LxcConsoleMode valueOf(String name) => _$cvalueOf(name);
@@ -124,7 +124,7 @@ class LxcLockType extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const LxcLockType undefined = _$lundefined;
 
-  const LxcLockType._(String name) : super(name);
+  const LxcLockType._(super.name);
 
   static BuiltSet<LxcLockType> get values => _$lvalues;
   static LxcLockType valueOf(String name) => _$lvalueOf(name);
@@ -145,7 +145,7 @@ class LxcOsType extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const LxcOsType unmanaged = _$unmanaged;
 
-  const LxcOsType._(String name) : super(name);
+  const LxcOsType._(super.name);
 
   static BuiltSet<LxcOsType> get values => _$ovalues;
   static LxcOsType valueOf(String name) => _$ovalueOf(name);

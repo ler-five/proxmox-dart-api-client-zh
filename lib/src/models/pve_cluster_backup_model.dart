@@ -11,7 +11,7 @@ class PveVZDumpCompressionType extends EnumClass {
   static const PveVZDumpCompressionType gzip = _$gzip;
   static const PveVZDumpCompressionType zstd = _$zstd;
 
-  const PveVZDumpCompressionType._(String name) : super(name);
+  const PveVZDumpCompressionType._(super.name);
 
   static BuiltSet<PveVZDumpCompressionType> get values =>
       _$enumNamePveVZDumpCompressionTypeValues;
@@ -26,7 +26,7 @@ class PveVZDumpModeType extends EnumClass {
   static const PveVZDumpModeType suspend = _$suspend;
   static const PveVZDumpModeType stop = _$stop;
 
-  const PveVZDumpModeType._(String name) : super(name);
+  const PveVZDumpModeType._(super.name);
 
   static BuiltSet<PveVZDumpModeType> get values => _$pveVZDumpModeTypeValues;
   static PveVZDumpModeType valueOf(String name) =>

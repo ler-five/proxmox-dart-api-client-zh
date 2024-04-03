@@ -40,7 +40,7 @@ class PveStorageContentType extends EnumClass {
   @BuiltValueEnumConst(fallback: true)
   static const PveStorageContentType unknown = _$unknown;
 
-  const PveStorageContentType._(String name) : super(name);
+  const PveStorageContentType._(super.name);
 
   static BuiltSet<PveStorageContentType> get values => _$psctValues;
   static PveStorageContentType valueOf(String name) => _$psctValueOf(name);
