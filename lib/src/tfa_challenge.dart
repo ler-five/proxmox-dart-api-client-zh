@@ -38,7 +38,7 @@ class TfaChallenge {
   }
 
   bool hasRecovery() {
-    return recovery?.any((e) => e != null) ?? false;
+    return recovery.any((e) => e != null);
   }
 
   Iterable<String> kinds() sync* {
