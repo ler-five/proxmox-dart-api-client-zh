@@ -23,7 +23,8 @@ class PveDateTimeFromEpoch implements PrimitiveSerializer<DateTime> {
   DateTime deserialize(Serializers serializers, Object serialized,
       {FullType specifiedType = FullType.unspecified}) {
     var microsecondsSinceEpoch = serialized as int;
-    return DateTime.fromMillisecondsSinceEpoch((microsecondsSinceEpoch*1000).round(),
+    return DateTime.fromMillisecondsSinceEpoch(
+        (microsecondsSinceEpoch * 1000).round(),
         isUtc: false);
   }
 }

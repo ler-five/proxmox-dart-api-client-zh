@@ -16,7 +16,7 @@ abstract class PveNodesQemuMigrate
   @BuiltValueField(wireName: 'allowed_nodes')
   BuiltSet<String>? get allowedNodes;
   @BuiltValueField(wireName: 'not_allowed_nodes')
-  BuiltMap<String,JsonObject>? get notAllowedNodes;
+  BuiltMap<String, JsonObject>? get notAllowedNodes;
 
   PveNodesQemuMigrate._();
 

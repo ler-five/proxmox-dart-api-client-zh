@@ -65,8 +65,10 @@ abstract class PveNodesLxcConfigModel
     List<String?> net = matchEnumJsonFields('net', 10, map);
     List<String?> unused = matchEnumJsonFields('unused', 256, map);
 
-    return rebuild(
-        (b) => b..mp.replace(mp)..unused.replace(unused)..net.replace(net));
+    return rebuild((b) => b
+      ..mp.replace(mp)
+      ..unused.replace(unused)
+      ..net.replace(net));
   }
 }
 
