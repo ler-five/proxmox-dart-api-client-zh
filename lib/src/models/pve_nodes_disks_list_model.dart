@@ -42,7 +42,7 @@ abstract class PveNodesDisksListModel
 
 class PveNodesDiskListType extends EnumClass {
   static const PveNodesDiskListType unused = _$unused;
-  @BuiltValueEnum(wireName: 'journal_disks')
+  @BuiltValueEnumConst(wireName: 'journal_disks')
   static const PveNodesDiskListType journalDisks = _$journalDisks;
 
   const PveNodesDiskListType._(String name) : super(name);
