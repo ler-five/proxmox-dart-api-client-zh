@@ -226,6 +226,7 @@ class LockType extends EnumClass {
   static const LockType backup = _$backup;
   static const LockType clone = _$clone;
   static const LockType create = _$create;
+  static const LockType import = _$import;
   static const LockType migrate = _$migrate;
   static const LockType rollback = _$rollback;
   static const LockType snapshot = _$snapshot;
