@@ -22,7 +22,7 @@ abstract class PveNodesDisksListModel
   String? get wwn;
   JsonObject? get wearout;
 
-  String get wearout_percentage {
+  String get wearoutPercentage {
     try {
       return "${(100 - double.parse(wearout.toString()))}%";
     } catch (e) {
