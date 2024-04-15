@@ -366,7 +366,9 @@ class ProxmoxApiClient extends http.BaseClient {
             '/api2/json/nodes/$targetNode/$type/$guestId/status/${action.name}';
         break;
       case 'node':
-        url = '/api2/json/nodes/$targetNode/status/?command=${action.name}';
+        parameters ??= {};
+        parameters["command"] = action.name;
+        url = '/api2/json/nodes/$targetNode/status';
         break;
       default:
         throw ArgumentError.value(
