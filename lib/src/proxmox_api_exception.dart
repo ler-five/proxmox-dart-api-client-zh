@@ -7,6 +7,6 @@ class ProxmoxApiException implements Exception {
 
   @override
   String toString() {
-    return '$message -> $details';
+    return details != null ? '$message -> $details' : message;
   }
 }
