@@ -94,7 +94,7 @@ class ProxmoxApiClient extends http.BaseClient {
 
   Future<ProxmoxApiClient> finishTfaChallenge(String kind, String code) async {
     if (credentials.tfa == null) {
-      throw StateError('No tfa challange expected');
+      throw StateError('No tfa challenge expected');
     }
 
     credentials = await credentials.tfaChallenge(kind, code,

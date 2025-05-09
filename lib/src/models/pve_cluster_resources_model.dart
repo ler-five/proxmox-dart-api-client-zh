@@ -69,7 +69,7 @@ abstract class PveClusterResourcesModel
       return PveResourceStatusType.stopped;
     }
 
-    return PveResourceStatusType.unkown;
+    return PveResourceStatusType.unknown;
   }
 }
 
@@ -109,7 +109,7 @@ class PveResourceStatusType extends EnumClass {
   static const PveResourceStatusType paused = _$paused;
   static const PveResourceStatusType suspending = _$suspending;
   static const PveResourceStatusType suspended = _$suspended;
-  static const PveResourceStatusType unkown = _$unkown;
+  static const PveResourceStatusType unknown = _$unknown;
 
   const PveResourceStatusType._(super.name);
 

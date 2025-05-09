@@ -1,11 +1,12 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/src/credentials.dart';
 import 'package:proxmox_dart_api_client/src/extentions.dart';
 import 'package:proxmox_dart_api_client/src/tfa_challenge.dart';
 
 Credentials handleAccessTicketResponse(
-    http.Response response, Credentials unauthenicatedCredentials) {
+    http.Response response, Credentials unauthenticatedCredentials) {
   response.validate(false);
 
   final bodyJson = jsonDecode(response.body)['data'];
@@ -29,8 +30,8 @@ Credentials handleAccessTicketResponse(
   }
 
   return Credentials(
-    unauthenicatedCredentials.apiBaseUrl,
-    unauthenicatedCredentials.username,
+    unauthenticatedCredentials.apiBaseUrl,
+    unauthenticatedCredentials.username,
     ticket: ticket,
     csrfToken: csrfToken,
     expiration: time,
