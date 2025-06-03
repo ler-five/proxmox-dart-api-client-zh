@@ -42,6 +42,8 @@ abstract class PveQemuStatusModel
           return PveResourceStatusType.running;
         case 'paused':
           return PveResourceStatusType.paused;
+        case 'prelaunch':
+          return PveResourceStatusType.prelaunch;
         default:
           if (lock == 'suspending') {
             return PveResourceStatusType.suspending;

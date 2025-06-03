@@ -69,6 +69,8 @@ abstract class PveClusterResourcesModel
       return PveResourceStatusType.stopped;
     }
 
+    if(status == 'prelaunch') return PveResourceStatusType.prelaunch;
+
     return PveResourceStatusType.unknown;
   }
 }
@@ -110,6 +112,7 @@ class PveResourceStatusType extends EnumClass {
   static const PveResourceStatusType suspending = _$suspending;
   static const PveResourceStatusType suspended = _$suspended;
   static const PveResourceStatusType unknown = _$unknown;
+  static const PveResourceStatusType prelaunch = _$prelaunch;
 
   const PveResourceStatusType._(super.name);
 
