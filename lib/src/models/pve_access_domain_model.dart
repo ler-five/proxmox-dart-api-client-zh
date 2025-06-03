@@ -9,6 +9,11 @@ abstract class PveAccessDomainModel
   String get realm;
   String? get comment;
   String? get tfa;
+  @BuiltValueField(wireName: 'default')
+  int? get defaultValue;
+
+  bool get isDefaultRealm => defaultValue == 1;
+
   PveAccessDomainModel._();
 
   factory PveAccessDomainModel(
