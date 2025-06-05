@@ -71,6 +71,8 @@ abstract class PveClusterResourcesModel
 
     if(status == 'prelaunch') return PveResourceStatusType.prelaunch;
 
+    if (status == 'paused') return PveResourceStatusType.paused;
+
     return PveResourceStatusType.unknown;
   }
 }
