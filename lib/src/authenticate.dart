@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
@@ -56,6 +57,11 @@ Future<ProxmoxApiClient> authenticate(
   } on TimeoutException catch (_) {
     throw ProxmoxApiException(
         'Authentication takes unusually long, check network connection', 408);
+  } on http.ClientException catch (e) {
+    if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
+      throw HandshakeException(e.message);
+    }
+    rethrow;
   }
 }
 
@@ -64,14 +70,21 @@ Future<List<PveAccessDomainModel?>> accessDomains(
   bool validateSSL, {
   http.Client? httpClient,
 }) async {
-  httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
+  try {
+    httpClient ??= getCustomIOHttpClient(validateSSL: validateSSL);
 
-  final path = '/api2/json/access/domains';
-  final response = await httpClient
-      .get(apiBaseUrl.replace(path: path))
-      .timeout(Duration(seconds: 25));
-  var data = (json.decode(response.body)['data'] as List).map((f) {
-    return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
-  });
-  return data.toList();
+    final path = '/api2/json/access/domains';
+    final response = await httpClient
+        .get(apiBaseUrl.replace(path: path))
+        .timeout(Duration(seconds: 25));
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
+    });
+    return data.toList();
+  } on http.ClientException catch (e) {
+    if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
+      throw HandshakeException(e.message);
+    }
+    rethrow;
+  }
 }
