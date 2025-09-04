@@ -1,9 +1,21 @@
+import 'package:cronet_http/cronet_http.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as http_io;
 import 'dart:io';
 
 http.Client getCustomIOHttpClient({bool validateSSL = true}) {
   var ioClient = HttpClient();
+
+  if (Platform.isAndroid && validateSSL) {
+    final engine = CronetEngine.build(
+      cacheMaxSize: 1024 * 1024,
+      cacheMode: CacheMode.memory,
+    );
+    return CronetClient.fromCronetEngine(
+      engine,
+      closeEngine: true,
+    );
+  }
 
   if (!validateSSL) {
     ioClient.badCertificateCallback =
