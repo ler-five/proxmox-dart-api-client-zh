@@ -1,4 +1,5 @@
 import 'package:cronet_http/cronet_http.dart';
+import 'package:cupertino_http/cupertino_http.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart' as http_io;
 import 'dart:io';
@@ -6,15 +7,22 @@ import 'dart:io';
 http.Client getCustomIOHttpClient({bool validateSSL = true}) {
   var ioClient = HttpClient();
 
+  const cacheMaxSizeInBytes = 1024 * 1024;
   if (Platform.isAndroid && validateSSL) {
     final engine = CronetEngine.build(
-      cacheMaxSize: 1024 * 1024,
+      cacheMaxSize: cacheMaxSizeInBytes,
       cacheMode: CacheMode.memory,
     );
     return CronetClient.fromCronetEngine(
       engine,
       closeEngine: true,
     );
+  }
+
+  if (Platform.isIOS && validateSSL) {
+    final config = URLSessionConfiguration.ephemeralSessionConfiguration()
+      ..cache = URLCache.withCapacity(memoryCapacity: cacheMaxSizeInBytes);
+    return CupertinoClient.fromSessionConfiguration(config);
   }
 
   if (!validateSSL) {
