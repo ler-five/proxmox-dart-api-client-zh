@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cupertino_http/cupertino_http.dart';
 import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 import 'package:proxmox_dart_api_client/src/models/serializers.dart';
-
 
 /// Returns an authenticated client to work with if successful.
 ///
@@ -62,6 +62,12 @@ Future<ProxmoxApiClient> authenticate(
       throw HandshakeException(e.message);
     }
     rethrow;
+  } on NSErrorClientException catch (e) {
+    // Treat untrusted server certificate (-1202) as a handshake failure.
+    if (e.error.code == -1202) {
+      throw HandshakeException(e.message);
+    }
+    rethrow;
   }
 }
 
@@ -83,6 +89,12 @@ Future<List<PveAccessDomainModel?>> accessDomains(
     return data.toList();
   } on http.ClientException catch (e) {
     if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
+      throw HandshakeException(e.message);
+    }
+    rethrow;
+  } on NSErrorClientException catch (e) {
+    // Treat untrusted server certificate (-1202) as a handshake failure.
+    if (e.error.code == -1202) {
       throw HandshakeException(e.message);
     }
     rethrow;
