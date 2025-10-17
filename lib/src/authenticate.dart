@@ -57,14 +57,14 @@ Future<ProxmoxApiClient> authenticate(
   } on TimeoutException catch (_) {
     throw ProxmoxApiException(
         'Authentication takes unusually long, check network connection', 408);
-  } on http.ClientException catch (e) {
-    if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
-      throw HandshakeException(e.message);
-    }
-    rethrow;
   } on NSErrorClientException catch (e) {
     // Treat untrusted server certificate (-1202) as a handshake failure.
     if (e.error.code == -1202) {
+      throw HandshakeException(e.message);
+    }
+    rethrow;
+  } on http.ClientException catch (e) {
+    if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
       throw HandshakeException(e.message);
     }
     rethrow;
@@ -87,14 +87,14 @@ Future<List<PveAccessDomainModel?>> accessDomains(
       return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
     });
     return data.toList();
-  } on http.ClientException catch (e) {
-    if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
-      throw HandshakeException(e.message);
-    }
-    rethrow;
   } on NSErrorClientException catch (e) {
     // Treat untrusted server certificate (-1202) as a handshake failure.
     if (e.error.code == -1202) {
+      throw HandshakeException(e.message);
+    }
+    rethrow;
+  } on http.ClientException catch (e) {
+    if (e.message.contains('net::ERR_CERT_AUTHORITY_INVALID')) {
       throw HandshakeException(e.message);
     }
     rethrow;
