@@ -1,7 +1,5 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
-library proxmox_dart_api_client;
+/// Proxmox Dart API client.
+library;
 
 export 'src/client.dart';
 export 'src/authenticate.dart';

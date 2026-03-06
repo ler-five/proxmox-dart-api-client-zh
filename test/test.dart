@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 import 'package:test/test.dart';
 
-Matcher throwsProxmoxApiException(message, statusCode) =>
+Matcher throwsProxmoxApiException(String message, int statusCode) =>
     throwsA(isA<ProxmoxApiException>()
         .having((e) => e.message, 'message ', message)
         .having((e) => e.statusCode, 'http status code', statusCode));
@@ -20,16 +20,14 @@ void main() {
 
     test('fail >= 400', () {
       var response = http.Response('', 400);
-      expect(
-          () => response.validate(false),
-          throwsProxmoxApiException(
-              'Request failed with status 400', equals(400)));
+      expect(() => response.validate(false),
+          throwsProxmoxApiException('Request failed with status 400', 400));
     });
 
     test('fail >= 400 with reason phrase', () {
       var response = http.Response('', 400, reasonPhrase: 'this did not work');
       expect(() => response.validate(false),
-          throwsProxmoxApiException('400: this did not work', equals(400)));
+          throwsProxmoxApiException('400: this did not work', 400));
     });
 
     test('valid credentials extraction', () {

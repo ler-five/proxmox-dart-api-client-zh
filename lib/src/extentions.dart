@@ -10,7 +10,8 @@ extension ResponseValidation on http.Response {
     if (reasonPhrase != null) {
       message = '$statusCode: $reasonPhrase';
     }
-    var decodedErrors;
+
+    dynamic decodedErrors;
 
     if (extensive) {
       try {
