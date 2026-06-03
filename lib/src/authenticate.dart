@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:proxmox_dart_api_client/proxmox_dart_api_client.dart';
 import 'package:proxmox_dart_api_client/src/handle_ticket_response.dart';
 import 'package:proxmox_dart_api_client/src/models/serializers.dart';
+import 'package:objective_c/objective_c.dart';
 
 /// Returns an authenticated client to work with if successful.
 ///
