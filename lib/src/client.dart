@@ -161,6 +161,21 @@ class ProxmoxApiClient extends http.BaseClient {
     return (await delete(url)).validate(extensiveResponseValidation);
   }
 
+  Future<http.Response> _putWithValidation(
+      String path, Map<String, dynamic> queryParameters,
+      {bool extensiveResponseValidation = false}) async {
+    if (!path.startsWith('/api2/json')) {
+      path = '/api2/json$path';
+    }
+    final baseUrl = credentials.apiBaseUrl;
+
+    queryParameters.removeWhere((key, value) => value == null);
+
+    var url = baseUrl.replace(path: path, queryParameters: queryParameters);
+
+    return (await put(url)).validate(extensiveResponseValidation);
+  }
+
   Future<String?> getNextFreeID({String? id}) async {
     final path = '/api2/json/cluster/nextid';
     var queryParameters = {'vmid': id};
@@ -679,6 +694,132 @@ class ProxmoxApiClient extends http.BaseClient {
     var data = (json.decode(response.body)['data'] as List).map((f) {
       return serializers.deserializeWith(PveAccessDomainModel.serializer, f);
     });
+
     return data.whereType<PveAccessDomainModel>().toList();
+  }
+
+  /// Raw guest config map (keys like net0, scsi0, rootfs preserved).
+  Future<Map<String, dynamic>> getGuestConfigRaw(
+    String targetNode,
+    String type,
+    String guestId,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/$type/$guestId/config';
+    final response = await _getWithValidation(path, null);
+    return (json.decode(response.body)['data'] as Map).cast<String, dynamic>();
+  }
+
+  /// List snapshots of a qemu/lxc guest.
+  Future<List<PveGuestSnapshotModel>> getGuestSnapshots(
+    String targetNode,
+    String type,
+    String guestId,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/$type/$guestId/snapshot';
+    final response = await _getWithValidation(path, null);
+    var data = (json.decode(response.body)['data'] as List).map((f) {
+      return PveGuestSnapshotModel.fromJson(f as Map<String, dynamic>);
+    });
+    return data.toList();
+  }
+
+  /// Create a snapshot. Returns the task UPID.
+  Future<String?> createGuestSnapshot(
+    String targetNode,
+    String type,
+    String guestId,
+    String snapname, {
+    String? description,
+    bool vmstate = false,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/$type/$guestId/snapshot';
+    var parameters = {
+      'snapname': snapname,
+      'description': description,
+      'vmstate': vmstate ? '1' : null,
+    };
+    final response = await _postWithValidation(path, parameters);
+    return json.decode(response.body)['data'];
+  }
+
+  /// Rollback to a snapshot. Returns the task UPID.
+  Future<String?> rollbackGuestSnapshot(
+    String targetNode,
+    String type,
+    String guestId,
+    String snapname,
+  ) async {
+    final path =
+        '/api2/json/nodes/$targetNode/$type/$guestId/snapshot/$snapname/rollback';
+    final response = await _postWithValidation(path, null);
+    return json.decode(response.body)['data'];
+  }
+
+  /// Delete a snapshot. Returns the task UPID.
+  Future<String?> deleteGuestSnapshot(
+    String targetNode,
+    String type,
+    String guestId,
+    String snapname,
+  ) async {
+    final path =
+        '/api2/json/nodes/$targetNode/$type/$guestId/snapshot/$snapname';
+    final response = await _deleteWithValidation(path, {});
+    return json.decode(response.body)['data'];
+  }
+
+  /// Update qemu guest config, e.g. {'cores': '4', 'memory': '8192'}.
+  Future<void> setQemuConfig(
+    String targetNode,
+    String guestId,
+    Map<String, String> parameters,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/qemu/$guestId/config';
+    await _putWithValidation(path, parameters);
+  }
+
+  /// Update lxc guest config, e.g. {'cores': '4', 'memory': '2048'}.
+  Future<void> setLxcConfig(
+    String targetNode,
+    String guestId,
+    Map<String, String> parameters,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/lxc/$guestId/config';
+    await _putWithValidation(path, parameters);
+  }
+
+  /// Resize a guest disk. [disk] e.g. 'scsi0' (qemu) or 'rootfs' (lxc),
+  /// [size] e.g. '+10G'. Returns the task UPID when the backend runs a task.
+  Future<String?> resizeGuestDisk(
+    String targetNode,
+    String type,
+    String guestId,
+    String disk,
+    String size,
+  ) async {
+    final path = '/api2/json/nodes/$targetNode/$type/$guestId/resize';
+    var parameters = {'disk': disk, 'size': size};
+    final response = await _putWithValidation(path, parameters);
+    return json.decode(response.body)['data'];
+  }
+
+  /// Restore a guest from a vzdump archive. Returns the task UPID.
+  Future<String?> restoreGuest(
+    String targetNode,
+    String type,
+    String guestId,
+    String archive, {
+    bool force = true,
+    bool start = false,
+  }) async {
+    final path = '/api2/json/nodes/$targetNode/$type';
+    var parameters = {
+      'vmid': guestId,
+      'archive': archive,
+      'force': force ? '1' : '0',
+      'start': start ? '1' : '0',
+    };
+    final response = await _postWithValidation(path, parameters);
+    return json.decode(response.body)['data'];
   }
 }
